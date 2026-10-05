@@ -38,7 +38,7 @@
     var log = document.getElementById('demoLog');
     var foot = document.getElementById('demoFoot');
     var tabs = Array.prototype.slice.call(document.querySelectorAll('.demo__tab'));
-    if (!log || !foot || !tabs.length) return;
+    if (!log || !foot) return;
 
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var SCENARIOS = {
@@ -227,7 +227,7 @@
     if (atBottom) current = document.getElementById('contact') || current;
 
     // 固定メニューにない区間は、直前の項目を現在地とする
-    var map = { worries: 'top', about: 'top', systems: 'line', support: 'usecase', flow: 'usecase', faq: 'usecase', company: 'usecase' };
+    var map = { worries: 'top', about: 'top', usecase: 'top', change: 'support', systems: 'line', flow: 'line', faq: 'line', company: 'line', top: 'none', parent: 'features' };
     links.forEach(function (a) {
       var id = a.getAttribute('href').slice(1);
       var inBnav = !!a.closest('.bnav');

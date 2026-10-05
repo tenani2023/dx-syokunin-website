@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>俺の事務員｜LINEで見積書・請求書を作成｜DX職人</title>
+<meta name="description" content="LINEのトークで内容を送ると、見積書・請求書を作成。台帳への記録からPDFでの受け取りまで、スマホだけで行えます。一人親方・個人事業主の方に向けた、DX職人のシステムです。">
+<meta name="theme-color" content="#0b1f3f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="俺の事務員｜LINEで見積書・請求書を作成｜DX職人">
+<meta property="og:description" content="仕事終わりの事務作業を、いつものLINEのトークで。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2306c755'/%3E%3Cpath d='M7.5 21V11h3.5a5 5 0 0 1 0 10H7.5zM19 11l5.5 10m0-10L19 21' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" class="icon-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-helmet" viewBox="0 0 24 24"><path d="M5 15v-1.5a7 7 0 0 1 14 0V15"/><path d="M10 6.8V5h4v1.8M10 6.8V11M14 6.8V11"/><path d="M3 15h18v2.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V19a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V9.5"/><path d="M10 20v-5.5h4V20"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 12a7.5 7.5 0 0 1-11 6.6L4 20l1.4-4.6A7.5 7.5 0 1 1 20 12z"/><path d="M9 11h6M9 14h4"/></symbol>
+    <symbol id="i-learn" viewBox="0 0 24 24"><path d="M2.5 9 12 4.5 21.5 9 12 13.5z"/><path d="M6.5 11.2v4.6c1.5 1.5 3.3 2.2 5.5 2.2s4-.7 5.5-2.2v-4.6"/><path d="M21.5 9v5"/></symbol>
+    <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1.5"/><rect x="14" y="14" width="7" height="6" rx="1.5"/><path d="M10 7h4.5a3 3 0 0 1 3 3v4M14 17H9.5a3 3 0 0 1-3-3v-4"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3 19a6 6 0 0 1 12 0"/><circle cx="17" cy="9.5" r="2.3"/><path d="M17.5 14.2A4.5 4.5 0 0 1 21 18.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.3 12.3 2.5 2.5 4.9-5.3"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5 13.8 9a2 2 0 0 0 1.2 1.2l5.5 1.8-5.5 1.8a2 2 0 0 0-1.2 1.2L12 20.5 10.2 15A2 2 0 0 0 9 13.8L3.5 12 9 10.2A2 2 0 0 0 10.2 9z"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 5 5L11 20a2.1 2.1 0 0 1-3-3z"/><path d="M14.5 6.5 17 4l3 3-2.5 2.5"/></symbol>
+    <symbol id="i-step" viewBox="0 0 24 24"><path d="M4 19h4v-4h4v-4h4V7h4"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.3-7.5-10A4.3 4.3 0 0 1 12 8a4.3 4.3 0 0 1 7.5 2.5c0 5.7-7.5 10-7.5 10z"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M13.5 5H19v5.5M19 5l-8 8"/><path d="M17 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h4"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 17.5h2"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M20.5 3.5 10 14"/><path d="M20.5 3.5 14 20.5l-4-6.5-6.5-4z"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8.5 3v4M15.5 3v4"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4.5L16.5 4a2.1 2.1 0 0 1 3 3L8 18.5z"/><path d="M14.5 6l3 3"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">本文へ移動</a>
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a class="logo" href="../" aria-label="DX職人 トップへ">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M7.5 21V11h3.5a5 5 0 0 1 0 10H7.5zM19 11l5.5 10m0-10L19 21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="logo__text">DX職人</span>
+    </a>
+
+    <nav class="gnav" id="gnav" aria-label="メインメニュー">
+      <ul class="gnav__list">
+        <li><a href="../#about">サービスについて</a></li>
+        <li><a href="../#usecase">活用例</a></li>
+        <li><a href="../#support">AI研修・支援</a></li>
+        <li><a href="../#systems" class="is-current">システム</a></li>
+        <li><a href="../#flow">流れ・費用</a></li>
+        <li><a href="../#faq">よくある質問</a></li>
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a class="btn btn--primary btn--sm" href="#contact">相談する</a>
+      <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="gnav" aria-label="メニューを開く">
+        <svg class="icon icon--open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon--close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ファーストビュー -->
+<section class="hero hero--sub" id="top">
+  <div class="container">
+    <nav class="crumb" aria-label="現在の位置">
+      <ol>
+        <li><a href="../">DX職人</a></li>
+        <li><a href="../#systems">システム</a></li>
+        <li aria-current="page">俺の事務員</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <p class="hero__label">DX職人のシステム｜一人親方・個人事業主の方へ</p>
+      <p class="hero__product">俺の事務員</p>
+      <h1 class="hero__title hero__title--sub"><span>LINEで、</span><span>見積書・請求書を作成。</span></h1>
+      <p class="hero__lead"><span>仕事終わりの事務作業を、</span><span>いつものトークで。</span></p>
+      <p class="hero__desc"><span>見積書・請求書の作成から、台帳への記録、</span><span>PDFでの受け取りまで。</span><span>スマホだけで行えます。</span></p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="https://lin.ee/UvzcAXw" target="_blank" rel="noopener">LINEで無料相談する<svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+        <a class="btn btn--ghost btn--lg" href="#how">使い方を見る</a>
+      </div>
+      <p class="hero__note">「俺の事務員」のLINE公式アカウントが開きます。</p>
+    </div>
+    <div class="demo" id="demo">
+      <p class="demo__lead"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>下の画面で、実際にさわってみてください</p>
+      <div class="phone">
+        <div class="phone__screen">
+          <div class="phone__head">
+            <span class="phone__avatar" aria-hidden="true">俺</span>
+            <span class="phone__name">俺の事務員</span>
+            <span class="phone__tag">デモ</span>
+          </div>
+          <div class="phone__log" id="demoLog" role="log" aria-live="polite" aria-label="トークの内容" tabindex="0">
+            <p class="msg msg--me">サンプル様邸の外壁塗装、見積書をお願い。足場一式15万、塗装一式48万。</p>
+            <p class="msg msg--bot">見積書の下書きを作りました。合計は630,000円(税別)です。内容をご確認ください。</p>
+            <p class="msg msg--me">内容OK。PDFで送って。</p>
+            <p class="msg msg--bot">PDFをお届けしました。台帳にも記録しています。</p>
+          </div>
+          <div class="phone__foot" id="demoFoot"></div>
+        </div>
+      </div>
+      <p class="demo__note">※ 操作のイメージをお伝えするためのデモです。実際のLINEには送信されません。名前や金額は架空のものです。</p>
+    </div>
+  </div>
+</section>
+
+<!-- お悩み -->
+<section class="section" id="worries" aria-labelledby="worries-title">
+  <div class="container">
+    <div class="section__head">
+      <h2 class="section__title" id="worries-title"><span>こんなこと、</span><span>ありませんか。</span></h2>
+      <p class="section__lead">現場のあとに待っている事務作業。その手間を、LINEで軽くします。</p>
+    </div>
+    <ul class="cards cards--4">
+      <li class="card">
+        <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-helmet"/></svg></span>
+        <h3 class="card__title"><span class="ph">仕事終わりの</span><span class="ph">事務作業がつらい</span></h3>
+        <p class="card__text">現場から帰って、そこから書類づくり。</p>
+      </li>
+      <li class="card">
+        <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-phone"/></svg></span>
+        <h3 class="card__title"><span class="ph">パソコンを開く</span><span class="ph">時間がない</span></h3>
+        <p class="card__text">できればスマホだけで済ませたい。</p>
+      </li>
+      <li class="card">
+        <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-team"/></svg></span>
+        <h3 class="card__title"><span class="ph">事務員を雇う</span><span class="ph">余裕がない</span></h3>
+        <p class="card__text">一人で現場も事務も回している。</p>
+      </li>
+      <li class="card">
+        <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-doc"/></svg></span>
+        <h3 class="card__title"><span class="ph">請求書を作るのが</span><span class="ph">面倒</span></h3>
+        <p class="card__text">毎回、同じような内容を入力している。</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 使い方 -->
+<section class="section section--tint" id="how" aria-labelledby="how-title">
+  <div class="container">
+    <div class="section__head">
+      <p class="section__kicker">使い方</p>
+      <h2 class="section__title" id="how-title"><span>LINEだけで、</span><span>送付まで完了。</span></h2>
+      <p class="section__lead">いつものトークで頼むだけ。4つの流れで書類が届きます。</p>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <span class="step__num" aria-hidden="true">1</span>
+        <h3 class="step__title">LINEで依頼</h3>
+        <p class="step__text">トークで内容を送ります。写真や資料の添付もできます。</p>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">2</span>
+        <h3 class="step__title">書類を作成</h3>
+        <p class="step__text">AIが内容を読み取り、見積書・請求書を作成します。</p>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">3</span>
+        <h3 class="step__title">台帳に記録</h3>
+        <p class="step__text">つくった書類は、スプレッドシートの台帳に自動で残ります。</p>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">4</span>
+        <h3 class="step__title">PDFで受け取る</h3>
+        <p class="step__text">PDFがLINEに届きます。確認して、そのまま取引先へ送れます。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 特長 -->
+<section class="section" id="features" aria-labelledby="features-title">
+  <div class="container">
+    <div class="section__head">
+      <p class="section__kicker">特長</p>
+      <h2 class="section__title" id="features-title">「俺の事務員」の4つの特長</h2>
+    </div>
+    <ul class="points points--grid">
+      <li class="point">
+        <span class="point__icon" aria-hidden="true"><svg class="icon"><use href="#i-phone"/></svg></span>
+        <div>
+          <h3 class="point__title">スマホだけで使える</h3>
+          <p class="point__text">作成、確認、送付までLINEのトークで行えます。パソコンは必要ありません。</p>
+        </div>
+      </li>
+      <li class="point">
+        <span class="point__icon" aria-hidden="true"><svg class="icon"><use href="#i-doc"/></svg></span>
+        <div>
+          <h3 class="point__title">いまの請求書の書式に対応</h3>
+          <p class="point__text">お使いの請求書のデザインを、そのまま使えます。取引先に渡す書類の見た目は変わりません。</p>
+        </div>
+      </li>
+      <li class="point">
+        <span class="point__icon" aria-hidden="true"><svg class="icon"><use href="#i-table"/></svg></span>
+        <div>
+          <h3 class="point__title">台帳への記入も自動</h3>
+          <p class="point__text">つくった書類は一覧に記録。進み具合や入金の状況も、あとから確認できます。</p>
+        </div>
+      </li>
+      <li class="point">
+        <span class="point__icon" aria-hidden="true"><svg class="icon"><use href="#i-hand"/></svg></span>
+        <div>
+          <h3 class="point__title">事務の時間を、本業へ</h3>
+          <p class="point__text">仕事終わりの書類づくりを減らし、現場やお客様に向き合う時間をつくります。</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="sample ledger">
+      <div class="sample__bar"><span class="sample__name">台帳のイメージ</span><span class="sample__tag">説明用サンプル</span></div>
+      <div class="ledger__scroll" tabindex="0" role="region" aria-label="台帳のイメージ">
+        <table class="stable">
+          <thead><tr><th scope="col">日付</th><th scope="col">宛先</th><th scope="col">書類</th><th scope="col" class="num">金額(税別)</th><th scope="col">状況</th></tr></thead>
+          <tbody>
+            <tr><td>6/3</td><td>サンプル様</td><td>見積書</td><td class="num">630,000円</td><td>送付済み</td></tr>
+            <tr><td>6/10</td><td>例示工務店</td><td>請求書</td><td class="num">280,000円</td><td>入金待ち</td></tr>
+            <tr><td>6/14</td><td>見本建設</td><td>請求書</td><td class="num">145,000円</td><td>入金済み</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="sample__check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>つくった書類は、内容を確認してから取引先へ送ります。</span></p>
+    </div>
+    <p class="note">※ 画面は説明用のサンプルです。宛先・金額などは架空のものです。</p>
+  </div>
+</section>
+
+<!-- DX職人とのつながり -->
+<section class="section section--tint" id="parent" aria-labelledby="parent-title">
+  <div class="container container--narrow">
+    <div class="parent">
+      <p class="section__kicker">DX職人について</p>
+      <h2 class="parent__title" id="parent-title"><span class="ph">「俺の事務員」は、</span><span class="ph">DX職人がご提供するシステムです。</span></h2>
+      <p class="parent__text">DX職人は、建設・不動産の仕事を題材にしたAI研修を中心に、日々の業務でAIを使えるようになるまで支援するサービスです。見積書・請求書以外の業務や、社内でのAI活用もご相談いただけます。</p>
+      <div class="parent__links">
+        <a class="btn btn--outline" href="../#support">AI研修・支援の内容を見る</a>
+        <a class="btn btn--outline" href="../#systems">システム一覧に戻る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 相談 -->
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="container container--narrow contact__inner">
+    <h2 class="contact__title" id="contact-title"><span>まずはLINEで、</span><span>お気軽にご相談ください。</span></h2>
+    <p class="contact__text">導入のご相談やご質問を、トークで受け付けています。</p>
+    <a class="btn btn--white btn--lg" href="https://lin.ee/UvzcAXw" target="_blank" rel="noopener">
+      LINEで無料相談する
+      <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+    </a>
+    <p class="contact__note"><span class="ph">「俺の事務員」のLINE公式アカウントが開きます。</span></p>
+    <p class="contact__note"><span class="ph">利用規約や運営者情報は、</span><span class="ph"><a href="https://line-jimuin.link/" target="_blank" rel="noopener">「俺の事務員」公式サイト(line-jimuin.link)</a>を</span><span class="ph">ご確認ください。</span></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <p class="footer__logo">DX職人</p>
+      <p class="footer__sub">建設・不動産のためのDX・AI活用支援</p>
+    </div>
+    <nav class="footer__nav" aria-label="フッターメニュー">
+      <ul>
+        <li><a href="../#about">サービスについて</a></li>
+        <li><a href="../#usecase">活用例</a></li>
+        <li><a href="../#change">できるようになること</a></li>
+        <li><a href="../#support">AI研修・支援</a></li>
+        <li><a href="../#systems">システム</a></li>
+        <li><a href="../#flow">導入の流れ・費用</a></li>
+        <li><a href="../#faq">よくある質問</a></li>
+        <li><a href="../#company">運営会社</a></li>
+      </ul>
+    </nav>
+    <div class="footer__systems">
+      <p class="footer__label">システム</p>
+      <p><a class="footer__link" href="./" aria-current="page">俺の事務員</a></p>
+    </div>
+    <div class="footer__company">
+      <p class="footer__label">運営会社</p>
+      <p class="footer__name">センワソリューションズ株式会社</p>
+      <address>大阪府大阪市中央区北浜3-6-22<br>淀屋橋ステーションワン10F</address>
+      <p><a class="footer__link" href="https://senwa-solutions.com" target="_blank" rel="noopener">会社HP(senwa-solutions.com)<svg class="icon" aria-hidden="true"><use href="../#i-external"/></svg></a></p>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p><small>© センワソリューションズ株式会社</small></p>
+    <p class="footer__credit"><small>写真：Pexels</small></p>
+  </div>
+</footer>
+
+<!-- スマホ用 固定メニュー -->
+<nav class="bnav" id="bnav" aria-label="クイックメニュー">
+  <a href="../"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span>DX職人</span></a>
+  <a href="#how" data-spy="how"><svg class="icon" aria-hidden="true"><use href="#i-step"/></svg><span>使い方</span></a>
+  <a href="#features" data-spy="features"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>特長</span></a>
+  <a href="#contact" data-spy="contact"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><span>相談</span></a>
+</nav>
+
+<script src="../script.js" defer></script>
+</body>
+</html>
