@@ -33,6 +33,154 @@
     select(tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0], false);
   });
 
+  /* ---------- LINEのトークのデモ ---------- */
+  (function () {
+    var log = document.getElementById('demoLog');
+    var foot = document.getElementById('demoFoot');
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.demo__tab'));
+    if (!log || !foot || !tabs.length) return;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var SCENARIOS = {
+      estimate: {
+        hello: 'こんにちは。つくりたい書類の内容を、トークで送ってください。',
+        steps: [
+          { me: 'サンプル様邸の外壁塗装、見積書をお願い。足場一式15万、塗装一式48万。',
+            bot: '見積書の下書きを作りました。内容をご確認ください。',
+            card: { title: '御見積書(下書き)', rows: [['宛先', 'サンプル様'], ['件名', '外壁塗装工事'], ['足場一式', '150,000円'], ['塗装一式', '480,000円'], ['合計(税別)', '630,000円']] } },
+          { me: '内容OK。PDFで送って。',
+            bot: 'PDFをお届けしました。台帳にも記録しています。',
+            file: '御見積書_サンプル様.pdf' }
+        ]
+      },
+      report: {
+        hello: 'お疲れさまです。今日の現場のことを、メモのまま送ってください。',
+        steps: [
+          { me: 'A邸の基礎。配筋検査OK、午後から型枠。雨で30分中断。',
+            bot: '日報の下書きを作りました。',
+            card: { title: '作業日報(下書き)', rows: [['現場', 'A邸 新築工事'], ['作業', '配筋検査(合格)、型枠の設置'], ['特記', '降雨で約30分中断']] } },
+          { me: '明日9時から生コン、も入れておいて。',
+            bot: '「明日の予定：9時から生コンクリート打設」を追記しました。内容を確認して、問題なければ提出してください。' }
+        ]
+      },
+      estate: {
+        hello: 'こんにちは。紹介したい物件の特徴を、トークで送ってください。',
+        steps: [
+          { me: 'サンプルハイツ203、2LDK南向き、駅徒歩8分、宅配ボックスあり。紹介文つくって。',
+            bot: '紹介文の下書きです。',
+            card: { title: '物件紹介文(下書き)', text: '南向きで日当たりのよい2LDKです。駅から徒歩8分。宅配ボックス付きで、不在時の荷物の受け取りにも対応できます。' } },
+          { me: 'もう少し短くして。',
+            bot: '短くしました。',
+            card: { title: '物件紹介文(下書き)', text: '駅徒歩8分、南向きの2LDK。宅配ボックス付きです。' } }
+        ]
+      }
+    };
+
+    var current = null, index = 0, timer = null;
+
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+    function icon(id) {
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', 'icon');
+      svg.setAttribute('aria-hidden', 'true');
+      var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+      use.setAttribute('href', '#' + id);
+      svg.appendChild(use);
+      return svg;
+    }
+    function add(node) {
+      log.appendChild(node);
+      log.scrollTop = log.scrollHeight;
+    }
+    function botMessage(step) {
+      var m = el('div', 'msg msg--bot');
+      m.appendChild(el('p', null, step.bot));
+      if (step.card) {
+        var c = el('div', 'msg__card');
+        c.appendChild(el('p', 'msg__card-title', step.card.title));
+        (step.card.rows || []).forEach(function (r) {
+          var row = el('p', 'msg__card-row');
+          row.appendChild(el('span', null, r[0]));
+          row.appendChild(el('span', null, r[1]));
+          c.appendChild(row);
+        });
+        if (step.card.text) c.appendChild(el('p', 'msg__card-text', step.card.text));
+        m.appendChild(c);
+      }
+      if (step.file) {
+        var f = el('p', 'msg__file');
+        f.appendChild(icon('i-doc'));
+        f.appendChild(el('span', null, step.file));
+        m.appendChild(f);
+      }
+      return m;
+    }
+    function showSuggest() {
+      foot.textContent = '';
+      var step = current.steps[index];
+      var btn;
+      if (!step) {
+        btn = el('button', 'suggest suggest--again', 'もう一度ためす');
+        btn.type = 'button';
+        btn.addEventListener('click', function () { start(current, true); });
+        foot.appendChild(btn);
+        return btn;
+      }
+      foot.appendChild(el('p', 'phone__foot-label', 'タップして送信'));
+      btn = el('button', 'suggest');
+      btn.type = 'button';
+      btn.appendChild(el('span', 'suggest__text', step.me));
+      var ic = el('span', 'suggest__icon');
+      ic.appendChild(icon('i-send'));
+      btn.appendChild(ic);
+      btn.addEventListener('click', send);
+      foot.appendChild(btn);
+      return btn;
+    }
+    function send() {
+      var step = current.steps[index];
+      var hadFocus = foot.contains(document.activeElement);
+      foot.textContent = '';
+      add(el('p', 'msg msg--me', step.me));
+      var typing = el('p', 'msg msg--bot');
+      var dots = el('span', 'typing');
+      dots.setAttribute('aria-hidden', 'true');
+      dots.appendChild(el('i')); dots.appendChild(el('i')); dots.appendChild(el('i'));
+      typing.appendChild(dots);
+      if (!reduce) add(typing);
+      timer = window.setTimeout(function () {
+        if (typing.parentNode) log.removeChild(typing);
+        add(botMessage(step));
+        index += 1;
+        var next = showSuggest();
+        log.scrollTop = log.scrollHeight;
+        if (hadFocus) next.focus({ preventScroll: true });
+      }, reduce ? 0 : 900);
+    }
+    function start(scenario, focus) {
+      window.clearTimeout(timer);
+      current = scenario; index = 0;
+      log.textContent = '';
+      add(el('p', 'msg msg--hint', '下のメッセージをタップすると送信できます'));
+      add(el('p', 'msg msg--bot', scenario.hello));
+      var btn = showSuggest();
+      if (focus) btn.focus({ preventScroll: true });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.setAttribute('aria-pressed', t === tab ? 'true' : 'false'); });
+        start(SCENARIOS[tab.getAttribute('data-demo')], false);
+      });
+    });
+    start(SCENARIOS.estimate, false);
+  })();
+
   /* ---------- スマホ用メニュー ---------- */
   var menuBtn = document.getElementById('menuBtn');
   var gnav = document.getElementById('gnav');
@@ -79,7 +227,7 @@
     if (atBottom) current = document.getElementById('contact') || current;
 
     // 固定メニューにない区間は、直前の項目を現在地とする
-    var map = { worries: 'top', about: 'top', flow: 'support', faq: 'support' };
+    var map = { worries: 'top', about: 'top', systems: 'line', support: 'usecase', flow: 'usecase', faq: 'usecase', company: 'usecase' };
     links.forEach(function (a) {
       var id = a.getAttribute('href').slice(1);
       var inBnav = !!a.closest('.bnav');
