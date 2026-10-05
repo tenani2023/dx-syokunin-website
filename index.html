@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DX職人｜建設・不動産のためのDX・AI活用支援</title>
+<meta name="description" content="見積書も、現場報告も、物件対応も。DX職人は、建設・不動産のいつもの仕事から始めるDX・AI活用支援サービスです。AIに詳しくなくてもご相談いただけます。">
+<meta name="theme-color" content="#0b1f3f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DX職人｜建設・不動産のためのDX・AI活用支援">
+<meta property="og:description" content="現場の技に、AIの力を。いつもの仕事から始める、DX・AI活用支援。">
+<meta property="og:image" content="assets/hero.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d5fd6'/%3E%3Cpath d='M7.5 21V11h3.5a5 5 0 0 1 0 10H7.5zM19 11l5.5 10m0-10L19 21' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 共通アイコン(線画) -->
+<svg xmlns="http://www.w3.org/2000/svg" class="icon-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-helmet" viewBox="0 0 24 24"><path d="M5 15v-1.5a7 7 0 0 1 14 0V15"/><path d="M10 6.8V5h4v1.8M10 6.8V11M14 6.8V11"/><path d="M3 15h18v2.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V19a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V9.5"/><path d="M10 20v-5.5h4V20"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 12a7.5 7.5 0 0 1-11 6.6L4 20l1.4-4.6A7.5 7.5 0 1 1 20 12z"/><path d="M9 11h6M9 14h4"/></symbol>
+    <symbol id="i-learn" viewBox="0 0 24 24"><path d="M2.5 9 12 4.5 21.5 9 12 13.5z"/><path d="M6.5 11.2v4.6c1.5 1.5 3.3 2.2 5.5 2.2s4-.7 5.5-2.2v-4.6"/><path d="M21.5 9v5"/></symbol>
+    <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1.5"/><rect x="14" y="14" width="7" height="6" rx="1.5"/><path d="M10 7h4.5a3 3 0 0 1 3 3v4M14 17H9.5a3 3 0 0 1-3-3v-4"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3 19a6 6 0 0 1 12 0"/><circle cx="17" cy="9.5" r="2.3"/><path d="M17.5 14.2A4.5 4.5 0 0 1 21 18.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.3 12.3 2.5 2.5 4.9-5.3"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5 13.8 9a2 2 0 0 0 1.2 1.2l5.5 1.8-5.5 1.8a2 2 0 0 0-1.2 1.2L12 20.5 10.2 15A2 2 0 0 0 9 13.8L3.5 12 9 10.2A2 2 0 0 0 10.2 9z"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 5 5L11 20a2.1 2.1 0 0 1-3-3z"/><path d="M14.5 6.5 17 4l3 3-2.5 2.5"/></symbol>
+    <symbol id="i-step" viewBox="0 0 24 24"><path d="M4 19h4v-4h4v-4h4V7h4"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.3-7.5-10A4.3 4.3 0 0 1 12 8a4.3 4.3 0 0 1 7.5 2.5c0 5.7-7.5 10-7.5 10z"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M13.5 5H19v5.5M19 5l-8 8"/><path d="M17 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h4"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">本文へ移動</a>
+
+<!-- ① ヘッダー -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a class="logo" href="#top" aria-label="DX職人 トップへ">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M7.5 21V11h3.5a5 5 0 0 1 0 10H7.5zM19 11l5.5 10m0-10L19 21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="logo__text">DX職人</span>
+    </a>
+
+    <nav class="gnav" id="gnav" aria-label="メインメニュー">
+      <ul class="gnav__list">
+        <li><a href="#about">サービスについて</a></li>
+        <li><a href="#usecase">活用例</a></li>
+        <li><a href="#support">支援内容</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a class="btn btn--primary btn--sm" href="#contact">相談する</a>
+      <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="gnav" aria-label="メニューを開く">
+        <svg class="icon icon--open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon--close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ② ファーストビュー -->
+<section class="hero" id="top">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <p class="hero__label">建設・不動産のためのDX・AI活用支援</p>
+      <h1 class="hero__title"><span>現場の技に、</span><span>AIの力を。</span></h1>
+      <p class="hero__lead"><span>書類に追われる毎日を、</span><span>本業に向き合える毎日へ。</span></p>
+      <p class="hero__desc"><span>見積書も、現場報告も、物件対応も。</span><span>いつもの仕事から始める、</span><span>DX・AI活用支援。</span></p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="#contact">まずは相談してみる</a>
+        <a class="btn btn--ghost btn--lg" href="#usecase">活用例を見る</a>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <img src="assets/hero.jpg" width="1400" height="933" alt="図面とパソコンを見ながら打ち合わせをする二人の担当者" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<!-- ③ よくある困りごと -->
+<section class="section" id="worries" aria-labelledby="worries-title">
+  <div class="container">
+    <div class="section__head">
+      <h2 class="section__title" id="worries-title"><span>こんな手間、</span><span>ありませんか。</span></h2>
+      <p class="section__lead">毎日の仕事のなかにある「少し面倒」な作業。<br class="pc-only">その手間は、AIで軽くできるかもしれません。</p>
+    </div>
+    <ul class="cards cards--3">
+      <li class="card">
+        <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-doc"/></svg></span>
+        <h3 class="card__title"><span class="ph">見積書や請求書の内容を、</span><span class="ph">何度も打ち直している</span></h3>
+        <p class="card__text">届いた書類を見ながら、同じ内容を別の表や台帳に入力し直す。その作業を、読み取りと整理から軽くできます。</p>
+      </li>
+      <li class="card">
+        <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-helmet"/></svg></span>
+        <h3 class="card__title"><span class="ph">現場から戻った後に、</span><span class="ph">日報や報告書を作っている</span></h3>
+        <p class="card__text">現場で残したメモをもとに、下書きを先に用意。事務所に戻ってからは、確認と手直しが中心になります。</p>
+      </li>
+      <li class="card">
+        <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-chat"/></svg></span>
+        <h3 class="card__title"><span class="ph">物件の紹介文や</span><span class="ph">お客様への返信を、</span><span class="ph">毎回考えている</span></h3>
+        <p class="card__text">ゼロから書き始めるのではなく、たたき台を見て整えるところから。文章に向き合う時間を短くできます。</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ④ DX職人とは -->
+<section class="section section--tint" id="about" aria-labelledby="about-title">
+  <div class="container about">
+    <div class="about__intro">
+      <p class="section__kicker">サービスについて</p>
+      <h2 class="section__title" id="about-title">DX職人とは</h2>
+      <p class="section__lead">建設・不動産の仕事に合わせて、AIの使い方を一緒に考え、日々の業務で使えるようになるまで支援するサービスです。</p>
+      <div class="about__photo">
+        <img src="assets/site.jpg" width="1000" height="667" loading="lazy" alt="現場でノートパソコンの図面を確認する担当者">
+      </div>
+    </div>
+    <ul class="points">
+      <li class="point">
+        <span class="point__icon" aria-hidden="true"><svg class="icon"><use href="#i-tool"/></svg></span>
+        <div>
+          <h3 class="point__title">実務に合わせた支援</h3>
+          <p class="point__text">見積、現場報告、物件対応など、建設・不動産の実際の業務をもとに進めます。</p>
+        </div>
+      </li>
+      <li class="point">
+        <span class="point__icon" aria-hidden="true"><svg class="icon"><use href="#i-hand"/></svg></span>
+        <div>
+          <h3 class="point__title">いまの進め方も大切に</h3>
+          <p class="point__text">これまでのやり方を否定せず、続けたい部分は残したまま、負担の大きいところを見直します。</p>
+        </div>
+      </li>
+      <li class="point">
+        <span class="point__icon" aria-hidden="true"><svg class="icon"><use href="#i-step"/></svg></span>
+        <div>
+          <h3 class="point__title">一つの業務から始める</h3>
+          <p class="point__text">すべてを一度に変える必要はありません。まずは身近な一つの作業から試します。</p>
+        </div>
+      </li>
+      <li class="point">
+        <span class="point__icon" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
+        <div>
+          <h3 class="point__title">「仕事で使える」がゴール</h3>
+          <p class="point__text">AIを導入すること自体ではなく、日々の仕事で無理なく使えることを目指します。</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ⑤ 業種別の活用例 -->
+<section class="section" id="usecase" aria-labelledby="usecase-title">
+  <div class="container">
+    <div class="section__head">
+      <p class="section__kicker">活用例</p>
+      <h2 class="section__title" id="usecase-title"><span>いつもの仕事で、</span><span>こう使えます。</span></h2>
+      <p class="section__lead"><span class="ph">業種を選ぶと、</span><span class="ph">仕事の場面ごとの使い方を</span><span class="ph">ご覧いただけます。</span></p>
+    </div>
+
+    <ol class="flow3" aria-label="基本の流れ">
+      <li><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg><span class="flow3__t"><span class="ph">書類やメモを</span><span class="ph">用意</span></span></li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg><span class="flow3__t"><span class="ph">AIで整理・</span><span class="ph">下書き</span></span></li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="flow3__t"><span class="ph">人が確認して</span><span class="ph">仕上げ</span></span></li>
+    </ol>
+
+    <div class="tabs" data-tabs>
+      <div class="tabs__list" role="tablist" aria-label="業種の切り替え">
+        <button class="tabs__tab" type="button" role="tab" id="tab-build" aria-controls="panel-build" aria-selected="true">
+          <svg class="icon" aria-hidden="true"><use href="#i-helmet"/></svg>建設・建築業
+        </button>
+        <button class="tabs__tab" type="button" role="tab" id="tab-estate" aria-controls="panel-estate" aria-selected="false">
+          <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>不動産業
+        </button>
+      </div>
+
+      <!-- 建設・建築業 -->
+      <div class="tabs__panel" role="tabpanel" id="panel-build" aria-labelledby="tab-build" tabindex="0">
+        <h3 class="sr-only">建設・建築業の活用例</h3>
+        <div class="uc" data-tabs>
+          <div class="uc__list" role="tablist" aria-label="建設・建築業の活用場面" aria-orientation="vertical">
+            <button class="uc__item" type="button" role="tab" id="uc-b1" aria-controls="ucp-b1" aria-selected="true">
+              <strong>見積書・請求書の整理</strong>
+              <span>必要な情報を読み取り、一覧にまとめる</span>
+            </button>
+            <button class="uc__item" type="button" role="tab" id="uc-b2" aria-controls="ucp-b2" aria-selected="false">
+              <strong>日報の下書き</strong>
+              <span>現場のメモから、日報のたたき台を作る</span>
+            </button>
+            <button class="uc__item" type="button" role="tab" id="uc-b3" aria-controls="ucp-b3" aria-selected="false">
+              <strong>打ち合わせ記録の整理</strong>
+              <span>決定事項と対応項目を分けてまとめる</span>
+            </button>
+          </div>
+
+          <div class="uc__panels">
+            <div class="sample" role="tabpanel" id="ucp-b1" aria-labelledby="uc-b1" tabindex="0">
+              <div class="sample__bar"><span class="sample__name">見積書・請求書の整理</span><span class="sample__tag">説明用サンプル</span></div>
+              <div class="sample__body">
+                <div class="sample__col">
+                  <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>もとの書類</p>
+                  <div class="paper">
+                    <p class="paper__title">御請求書</p>
+                    <p>サンプル建材株式会社(架空)</p>
+                    <p>木材一式 ／ 4月10日</p>
+                    <p>ご請求金額　128,000円</p>
+                  </div>
+                  <p class="paper__more">ほか、形式の違う書類 2件</p>
+                </div>
+                <div class="sample__col">
+                  <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが整理した一覧</p>
+                  <table class="stable">
+                    <thead><tr><th scope="col">取引先</th><th scope="col">内容</th><th scope="col" class="num">金額</th></tr></thead>
+                    <tbody>
+                      <tr><td>サンプル建材</td><td>木材一式</td><td class="num">128,000円</td></tr>
+                      <tr><td>例示設備工業</td><td>給排水部材</td><td class="num">64,500円</td></tr>
+                      <tr><td>見本塗装店</td><td>外壁塗装</td><td class="num">210,000円</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <p class="sample__check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><span class="ph">担当者が書類と見比べて</span><span class="ph">確認してから、</span><span class="ph">台帳に反映します。</span></span></p>
+            </div>
+
+            <div class="sample" role="tabpanel" id="ucp-b2" aria-labelledby="uc-b2" tabindex="0">
+              <div class="sample__bar"><span class="sample__name">日報の下書き</span><span class="sample__tag">説明用サンプル</span></div>
+              <div class="sample__body">
+                <div class="sample__col">
+                  <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>現場のメモ</p>
+                  <div class="paper paper--memo">
+                    <p>A邸 基礎</p>
+                    <p>配筋検査OK、午後から型枠</p>
+                    <p>雨で30分中断</p>
+                    <p>明日 生コン 9時</p>
+                  </div>
+                </div>
+                <div class="sample__col">
+                  <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが作った下書き</p>
+                  <dl class="sdl">
+                    <div><dt>現場</dt><dd>A邸 新築工事(基礎)</dd></div>
+                    <div><dt>作業内容</dt><dd>配筋検査を実施し、合格。午後から型枠の設置を開始。</dd></div>
+                    <div><dt>特記事項</dt><dd>降雨のため、作業を約30分中断。</dd></div>
+                    <div><dt>明日の予定</dt><dd>9時から生コンクリート打設。</dd></div>
+                  </dl>
+                </div>
+              </div>
+              <p class="sample__check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><span class="ph">現場の担当者が内容を確認し、</span><span class="ph">手直ししてから</span><span class="ph">提出します。</span></span></p>
+            </div>
+
+            <div class="sample" role="tabpanel" id="ucp-b3" aria-labelledby="uc-b3" tabindex="0">
+              <div class="sample__bar"><span class="sample__name">打ち合わせ記録の整理</span><span class="sample__tag">説明用サンプル</span></div>
+              <div class="sample__body">
+                <div class="sample__col">
+                  <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>打ち合わせの記録</p>
+                  <div class="paper paper--memo">
+                    <p>施主様と打ち合わせ</p>
+                    <p>キッチンは対面式に決定</p>
+                    <p>床材は来週までにサンプル確認</p>
+                    <p>外構の見積もりを再提出</p>
+                  </div>
+                </div>
+                <div class="sample__col">
+                  <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが整理した内容</p>
+                  <dl class="sdl">
+                    <div><dt>決定事項</dt><dd>キッチンは対面式とする。</dd></div>
+                    <div><dt>対応項目</dt><dd>床材サンプルを用意する(来週まで)。</dd></div>
+                    <div><dt>対応項目</dt><dd>外構の見積もりを再提出する。</dd></div>
+                  </dl>
+                </div>
+              </div>
+              <p class="sample__check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><span class="ph">出席者が抜けや誤りを</span><span class="ph">確認してから、</span><span class="ph">関係者に共有します。</span></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 不動産業 -->
+      <div class="tabs__panel" role="tabpanel" id="panel-estate" aria-labelledby="tab-estate" tabindex="0">
+        <h3 class="sr-only">不動産業の活用例</h3>
+        <div class="uc" data-tabs>
+          <div class="uc__list" role="tablist" aria-label="不動産業の活用場面" aria-orientation="vertical">
+            <button class="uc__item" type="button" role="tab" id="uc-e1" aria-controls="ucp-e1" aria-selected="true">
+              <strong>物件情報の整理</strong>
+              <span>物件資料から基本情報を取り出す</span>
+            </button>
+            <button class="uc__item" type="button" role="tab" id="uc-e2" aria-controls="ucp-e2" aria-selected="false">
+              <strong>物件紹介文の下書き</strong>
+              <span>特徴をもとに、紹介文のたたき台を作る</span>
+            </button>
+            <button class="uc__item" type="button" role="tab" id="uc-e3" aria-controls="ucp-e3" aria-selected="false">
+              <strong>問い合わせへの返信案</strong>
+              <span>お客様への返信文の案を用意する</span>
+            </button>
+            <button class="uc__item" type="button" role="tab" id="uc-e4" aria-controls="ucp-e4" aria-selected="false">
+              <strong>修繕・管理記録の整理</strong>
+              <span>対応の記録を見やすくまとめる</span>
+            </button>
+          </div>
+
+          <div class="uc__panels">
+            <div class="sample" role="tabpanel" id="ucp-e1" aria-labelledby="uc-e1" tabindex="0">
+              <div class="sample__bar"><span class="sample__name">物件情報の整理</span><span class="sample__tag">説明用サンプル</span></div>
+              <div class="sample__body">
+                <div class="sample__col">
+                  <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>物件資料</p>
+                  <div class="paper">
+                    <p class="paper__title">物件概要</p>
+                    <p>サンプルハイツ 203号室(架空)</p>
+                    <p>2LDK・南向き・駅から徒歩8分</p>
+                    <p>エアコン、宅配ボックスあり</p>
+                  </div>
+                </div>
+                <div class="sample__col">
+                  <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが整理した基本情報</p>
+                  <dl class="sdl">
+                    <div><dt>物件名</dt><dd>サンプルハイツ 203号室</dd></div>
+                    <div><dt>間取り</dt><dd>2LDK</dd></div>
+                    <div><dt>向き・交通</dt><dd>南向き／駅から徒歩8分</dd></div>
+                    <div><dt>設備</dt><dd>エアコン、宅配ボックス</dd></div>
+                  </dl>
+                </div>
+              </div>
+              <p class="sample__check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><span class="ph">担当者が資料と照らし合わせて</span><span class="ph">確認してから、</span><span class="ph">登録します。</span></span></p>
+            </div>
+
+            <div class="sample" role="tabpanel" id="ucp-e2" aria-labelledby="uc-e2" tabindex="0">
+              <div class="sample__bar"><span class="sample__name">物件紹介文の下書き</span><span class="sample__tag">説明用サンプル</span></div>
+              <div class="sample__body">
+                <div class="sample__col">
+                  <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>物件の特徴メモ</p>
+                  <div class="paper paper--memo">
+                    <p>2LDK、南向き</p>
+                    <p>駅から徒歩8分</p>
+                    <p>近くに公園とスーパー</p>
+                    <p>宅配ボックスあり</p>
+                  </div>
+                </div>
+                <div class="sample__col">
+                  <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが作った下書き</p>
+                  <div class="draft">
+                    <p>南向きで日当たりのよい2LDKです。駅から徒歩8分、近くには公園とスーパーがあり、毎日の暮らしに便利な環境です。宅配ボックス付きで、不在時の荷物の受け取りにも対応できます。</p>
+                  </div>
+                </div>
+              </div>
+              <p class="sample__check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><span class="ph">担当者が事実と表現を確認し、</span><span class="ph">整えてから</span><span class="ph">掲載します。</span></span></p>
+            </div>
+
+            <div class="sample" role="tabpanel" id="ucp-e3" aria-labelledby="uc-e3" tabindex="0">
+              <div class="sample__bar"><span class="sample__name">問い合わせへの返信案</span><span class="sample__tag">説明用サンプル</span></div>
+              <div class="sample__body">
+                <div class="sample__col">
+                  <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>お客様からの問い合わせ</p>
+                  <div class="paper paper--memo">
+                    <p>203号室を見学したいです。</p>
+                    <p>今週の土曜日は可能でしょうか。</p>
+                    <p>駐車場の有無も知りたいです。</p>
+                  </div>
+                </div>
+                <div class="sample__col">
+                  <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが作った返信案</p>
+                  <div class="draft">
+                    <p>お問い合わせありがとうございます。203号室のご見学について、土曜日のご案内が可能か確認のうえ、あらためてご連絡いたします。駐車場につきましても、あわせてご案内いたします。</p>
+                  </div>
+                </div>
+              </div>
+              <p class="sample__check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><span class="ph">担当者が日程や内容を確認し、</span><span class="ph">書き足してから</span><span class="ph">送信します。</span></span></p>
+            </div>
+
+            <div class="sample" role="tabpanel" id="ucp-e4" aria-labelledby="uc-e4" tabindex="0">
+              <div class="sample__bar"><span class="sample__name">修繕・管理記録の整理</span><span class="sample__tag">説明用サンプル</span></div>
+              <div class="sample__body">
+                <div class="sample__col">
+                  <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>対応のメモ</p>
+                  <div class="paper paper--memo">
+                    <p>5/8 203号室 給湯器の不調</p>
+                    <p>業者に連絡、5/10 訪問予定</p>
+                    <p>5/9 105号室 網戸の交換 完了</p>
+                  </div>
+                </div>
+                <div class="sample__col">
+                  <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが整理した記録</p>
+                  <table class="stable">
+                    <thead><tr><th scope="col">部屋</th><th scope="col">内容</th><th scope="col">状況</th></tr></thead>
+                    <tbody>
+                      <tr><td>203号室</td><td>給湯器の不調</td><td>5/10 訪問予定</td></tr>
+                      <tr><td>105号室</td><td>網戸の交換</td><td>完了</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <p class="sample__check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><span class="ph">担当者が内容を確認してから、</span><span class="ph">管理記録として</span><span class="ph">保存します。</span></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="note">※ 画面はすべて説明用のサンプルです。実在するシステムの画面や導入実績ではありません。会社名・物件名・金額などは架空のものです。AIが作った内容は、必ず人が確認してから使います。</p>
+  </div>
+</section>
+
+<!-- ⑥ 3つの支援内容 -->
+<section class="section section--tint" id="support" aria-labelledby="support-title">
+  <div class="container">
+    <div class="section__head">
+      <p class="section__kicker">支援内容</p>
+      <h2 class="section__title" id="support-title">3つの支援内容</h2>
+      <p class="section__lead">学ぶ、整える、続ける。必要なところからお選びいただけます。</p>
+    </div>
+    <ul class="cards cards--3">
+      <li class="card card--support">
+        <div class="card__top">
+          <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-learn"/></svg></span>
+          <span class="card__badge">学ぶ</span>
+        </div>
+        <h3 class="card__title card__title--lg">AI実践研修</h3>
+        <p class="card__text">いつもの仕事を題材に、AIの使い方を学びます。</p>
+        <ul class="card__list">
+          <li>自社の書類や業務を例にする</li>
+          <li>実際に手を動かして試す</li>
+        </ul>
+      </li>
+      <li class="card card--support">
+        <div class="card__top">
+          <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-flow"/></svg></span>
+          <span class="card__badge">整える</span>
+        </div>
+        <h3 class="card__title card__title--lg">業務の仕組み化</h3>
+        <p class="card__text">仕事の流れを整理し、繰り返す作業を減らす方法を考えます。</p>
+        <ul class="card__list">
+          <li>情報の受け取りから共有までを見直す</li>
+          <li>入力や確認の手順を整理する</li>
+        </ul>
+      </li>
+      <li class="card card--support">
+        <div class="card__top">
+          <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-team"/></svg></span>
+          <span class="card__badge">続ける</span>
+        </div>
+        <h3 class="card__title card__title--lg">活用・定着支援</h3>
+        <p class="card__text">チームで使い続けられるよう、導入後も支援します。</p>
+        <ul class="card__list">
+          <li>導入後の疑問にお答えする</li>
+          <li>使いにくいところを見直す</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ⑦ 導入の流れ・費用 -->
+<section class="section" id="flow" aria-labelledby="flow-title">
+  <div class="container">
+    <div class="section__head">
+      <h2 class="section__title" id="flow-title">導入の流れ・費用</h2>
+      <p class="section__lead">お話を伺うところから始め、実際の業務で試しながら進めます。</p>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <span class="step__num" aria-hidden="true">1</span>
+        <h3 class="step__title">お話を伺う</h3>
+        <p class="step__text">いまの仕事の進め方や、手間に感じていることをお聞かせください。</p>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">2</span>
+        <h3 class="step__title">進め方・費用をご提案</h3>
+        <p class="step__text">伺った内容をもとに、支援の進め方とお見積もりをご提案します。</p>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">3</span>
+        <h3 class="step__title">実際の業務で試す</h3>
+        <p class="step__text">まずは一つの業務から。普段の仕事のなかで使ってみます。</p>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">4</span>
+        <h3 class="step__title">使い方を整える</h3>
+        <p class="step__text">試してわかったことをもとに、続けやすい使い方に整えます。</p>
+      </li>
+    </ol>
+    <div class="price">
+      <h3 class="price__title">費用について</h3>
+      <p class="price__text">支援内容に合わせて個別にお見積もりします。<br class="pc-only">ご相談の内容を伺ったうえで、進め方とあわせてご提案します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ よくある質問 -->
+<section class="section section--tint" id="faq" aria-labelledby="faq-title">
+  <div class="container container--narrow">
+    <div class="section__head">
+      <h2 class="section__title" id="faq-title">よくある質問</h2>
+    </div>
+    <div class="faq">
+      <details class="faq__item">
+        <summary><span class="faq__q"><span class="ph">AIに詳しくなくても</span><span class="ph">相談できますか？</span></span><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq__a"><p>はい、ご相談いただけます。専門的な知識は必要ありません。「この作業に時間がかかっている」といった、普段のお仕事のお話から伺います。</p></div>
+      </details>
+      <details class="faq__item">
+        <summary><span class="faq__q"><span class="ph">建設業と不動産業で</span><span class="ph">支援内容は変わりますか？</span></span><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq__a"><p>はい。業種や会社ごとに扱う書類や仕事の流れが異なるため、それぞれの業務に合わせて内容を考えます。</p></div>
+      </details>
+      <details class="faq__item">
+        <summary><span class="faq__q"><span class="ph">いま使っているExcelや</span><span class="ph">システムは活かせますか？</span></span><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq__a"><p>いまお使いのものを前提に、進め方を考えます。どのように活かせるかは、現在の使い方を伺ったうえでご相談させてください。</p></div>
+      </details>
+      <details class="faq__item">
+        <summary><span class="faq__q"><span class="ph">顧客情報や図面の扱いは</span><span class="ph">どうなりますか？</span></span><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq__a"><p>どの情報をどのように扱うかは、ご相談の際に確認し、事前に取り決めたうえで進めます。AIに入力してよい情報と、避けたほうがよい情報の整理もあわせて考えます。</p></div>
+      </details>
+      <details class="faq__item">
+        <summary><span class="faq__q"><span class="ph">研修だけ、</span><span class="ph">業務の見直しだけでも</span><span class="ph">相談できますか？</span></span><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq__a"><p>はい、どちらか一つからでもご相談いただけます。ご状況を伺い、必要な支援を一緒に考えます。</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ⑨ 相談エリア -->
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="container container--narrow contact__inner">
+    <h2 class="contact__title" id="contact-title"><span>「この作業、もっと楽に</span><span>ならないかな。」</span><br><span>そのお話から、</span><span>始めましょう。</span></h2>
+    <p class="contact__text">まとまっていなくても大丈夫です。<br>ご相談は、運営会社のサイトで受け付けています。</p>
+    <a class="btn btn--white btn--lg" href="https://senwa-solutions.com" target="_blank" rel="noopener">
+      運営会社のサイトへ
+      <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+    </a>
+    <p class="contact__note"><span class="ph">センワソリューションズ株式会社のサイト</span><span class="ph">(senwa-solutions.com)へ</span><span class="ph">移動します。</span></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <p class="footer__logo">DX職人</p>
+      <p class="footer__sub">建設・不動産のためのDX・AI活用支援</p>
+    </div>
+    <nav class="footer__nav" aria-label="フッターメニュー">
+      <ul>
+        <li><a href="#about">サービスについて</a></li>
+        <li><a href="#usecase">活用例</a></li>
+        <li><a href="#support">支援内容</a></li>
+        <li><a href="#flow">導入の流れ・費用</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+      </ul>
+    </nav>
+    <div class="footer__company">
+      <p class="footer__label">運営会社</p>
+      <p class="footer__name">センワソリューションズ株式会社</p>
+      <address>大阪府大阪市中央区北浜3-6-22<br>淀屋橋ステーションワン10F</address>
+      <p><a class="footer__link" href="https://senwa-solutions.com" target="_blank" rel="noopener">会社HP(senwa-solutions.com)<svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></p>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p><small>© センワソリューションズ株式会社</small></p>
+    <p class="footer__credit"><small>写真：Pexels</small></p>
+  </div>
+</footer>
+
+<!-- スマホ用 固定メニュー -->
+<nav class="bnav" id="bnav" aria-label="クイックメニュー">
+  <a href="#top" data-spy="top"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span>トップ</span></a>
+  <a href="#usecase" data-spy="usecase"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><span>活用例</span></a>
+  <a href="#support" data-spy="support"><svg class="icon" aria-hidden="true"><use href="#i-learn"/></svg><span>支援内容</span></a>
+  <a href="#contact" data-spy="contact"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><span>相談</span></a>
+</nav>
+
+<script src="script.js" defer></script>
+</body>
+</html>
