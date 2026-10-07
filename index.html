@@ -13,7 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2306c755'/%3E%3Cpath d='M7.5 21V11h3.5a5 5 0 0 1 0 10H7.5zM19 11l5.5 10m0-10L19 21' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@700&family=Zen+Kurenaido&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Zen+Kurenaido&display=swap">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -139,7 +139,7 @@
 </section>
 
 <!-- ③ よくある困りごと -->
-<section class="section section--paper" id="worries" aria-labelledby="worries-title">
+<section class="section section--tint" id="worries" aria-labelledby="worries-title">
   <div class="container">
     <div class="section__head">
       <h2 class="section__title" id="worries-title"><span>こんな手間、</span><span>ありませんか。</span></h2>
@@ -615,26 +615,32 @@
     </ul>
 
     <div class="program">
-      <h3 class="program__title">AI実践研修の進め方</h3>
-      <p class="program__lead">自社の書類や記録をそのまま教材にして、手を動かしながら進めます。</p>
+      <div class="band-num">
+        <div class="band-num__text">
+          <h3 class="program__title">AI実践研修の進め方</h3>
+          <p class="program__lead">自社の書類や記録をそのまま教材にして、手を動かしながら進めます。</p>
+        </div>
+        <div class="band-num__nums" aria-hidden="true">
+          <span class="step__num">1</span>
+          <span class="step__num">2</span>
+          <span class="step__num">3</span>
+          <span class="step__num">4</span>
+        </div>
+      </div>
       <ol class="steps">
         <li class="step">
-          <span class="step__num" aria-hidden="true">1</span>
           <h4 class="step__title">課題を見つける</h4>
           <p class="step__text">いまの仕事の流れを書き出し、どの作業から見直すかを決めます。</p>
         </li>
         <li class="step">
-          <span class="step__num" aria-hidden="true">2</span>
           <h4 class="step__title">AIの使い方を学ぶ</h4>
           <p class="step__text">自社の書類を題材に、情報の整理や下書きづくりを実際に試します。</p>
         </li>
         <li class="step">
-          <span class="step__num" aria-hidden="true">3</span>
           <h4 class="step__title">仕組みにする</h4>
           <p class="step__text">うまくいった使い方を、手順やひな形として残します。</p>
         </li>
         <li class="step">
-          <span class="step__num" aria-hidden="true">4</span>
           <h4 class="step__title">チームで使う</h4>
           <p class="step__text">情報の扱い方やルールを決め、みんなが使える形に整えます。</p>
         </li>
@@ -785,9 +791,11 @@
         <p class="step__text">試してわかったことをもとに、続けやすい使い方に整えます。</p>
       </li>
     </ol>
-    <div class="price">
-      <h3 class="price__title">費用について</h3>
-      <p class="price__text">支援内容に合わせて個別にお見積もりします。<br class="pc-only">ご相談の内容を伺ったうえで、進め方とあわせてご提案します。</p>
+    <div class="price band-num band-num--yen">
+      <div class="band-num__text">
+        <h3 class="price__title">費用について</h3>
+        <p class="price__text">支援内容に合わせて個別にお見積もりします。<br class="pc-only">ご相談の内容を伺ったうえで、進め方とあわせてご提案します。</p>
+      </div>
     </div>
   </div>
 </section>
