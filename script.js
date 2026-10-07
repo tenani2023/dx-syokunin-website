@@ -202,14 +202,14 @@
       if (!entry) { entry = { p: parent, n: 0 }; counts.push(entry); }
       el.style.setProperty('--d', Math.min(entry.n, 5) * 0.08 + 's');
       entry.n += 1;
-      el.classList.add('rv');
+      el.classList.add('reveal');
     });
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
     items.forEach(function (el) { io.observe(el); });
   })();
 

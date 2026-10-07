@@ -9,11 +9,11 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="DX職人｜建設・不動産のためのDX・AI活用支援">
 <meta property="og:description" content="現場の技に、AIの力を。いつもの仕事から始める、DX・AI活用支援。">
-<meta property="og:image" content="assets/hero.jpg">
+<meta property="og:image" content="assets/site.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2306c755'/%3E%3Cpath d='M7.5 21V11h3.5a5 5 0 0 1 0 10H7.5zM19 11l5.5 10m0-10L19 21' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@700&family=Zen+Kurenaido&display=swap">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -55,10 +55,7 @@
 <header class="header" id="header">
   <div class="container header__inner">
     <a class="logo" href="#top" aria-label="DX職人 トップへ">
-      <span class="logo__mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32"><path d="M7.5 21V11h3.5a5 5 0 0 1 0 10H7.5zM19 11l5.5 10m0-10L19 21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-      <span class="logo__text">DX職人</span>
+      <span class="logo__text"><span class="logo__dx">DX</span>職人</span>
     </a>
 
     <nav class="gnav" id="gnav" aria-label="メインメニュー">
@@ -98,12 +95,15 @@
       </div>
     </div>
     <div class="hero__visual">
-      <img src="assets/hero.jpg" width="1400" height="933" alt="図面とパソコンを見ながら打ち合わせをする二人の担当者" fetchpriority="high">
-      <div class="hero__chat" aria-hidden="true">
-        <p class="hero__chat-head"><span class="hero__chat-dot"></span>LINEのトーク(イメージ)</p>
-        <p class="msg msg--me">見積書をお願い</p>
-        <p class="msg msg--bot">下書きを作りました。</p>
-        <p class="hero__chat-file"><svg class="icon"><use href="#i-doc"/></svg>御見積書(下書き)</p>
+      <div class="phone phone--hero" aria-hidden="true">
+        <div class="phone__screen">
+          <div class="phone__head hero__chat-head"><span class="hero__chat-dot"></span>LINEのトーク(イメージ)</div>
+          <div class="phone__log hero__chat">
+            <p class="msg msg--me">見積書をお願い</p>
+            <p class="msg msg--bot">下書きを作りました。</p>
+            <p class="msg msg--bot hero__chat-file"><svg class="icon"><use href="#i-doc"/></svg>御見積書(下書き)</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -139,13 +139,13 @@
 </section>
 
 <!-- ③ よくある困りごと -->
-<section class="section" id="worries" aria-labelledby="worries-title">
+<section class="section section--paper" id="worries" aria-labelledby="worries-title">
   <div class="container">
     <div class="section__head">
       <h2 class="section__title" id="worries-title"><span>こんな手間、</span><span>ありませんか。</span></h2>
       <p class="section__lead">毎日の仕事のなかにある「少し面倒」な作業。<br class="pc-only">その手間は、AIで軽くできるかもしれません。</p>
     </div>
-    <ul class="cards cards--3">
+    <ol class="worries">
       <li class="card">
         <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-doc"/></svg></span>
         <h3 class="card__title"><span class="ph">見積書や請求書の内容を、</span><span class="ph">何度も打ち直している</span></h3>
@@ -161,7 +161,7 @@
         <h3 class="card__title"><span class="ph">物件の紹介文や</span><span class="ph">お客様への返信を、</span><span class="ph">毎回考えている</span></h3>
         <p class="card__text">ゼロから書き始めるのではなく、たたき台を見て整えるところから。文章に向き合う時間を短くできます。</p>
       </li>
-    </ul>
+    </ol>
   </div>
 </section>
 
@@ -288,9 +288,9 @@
             <div class="sample" role="tabpanel" id="ucp-b1" aria-labelledby="uc-b1" tabindex="0">
               <div class="sample__bar"><span class="sample__name">見積書・請求書の整理</span><span class="sample__tag">説明用サンプル</span></div>
               <div class="sample__body">
-                <div class="sample__col">
+                <div class="sample__col sample__col--src">
                   <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>もとの書類</p>
-                  <div class="paper">
+                  <div class="paper paper--invoice">
                     <p class="paper__title">御請求書</p>
                     <p>サンプル建材株式会社(架空)</p>
                     <p>木材一式 ／ 4月10日</p>
@@ -298,7 +298,8 @@
                   </div>
                   <p class="paper__more">ほか、形式の違う書類 2件</p>
                 </div>
-                <div class="sample__col">
+                <span class="sample__arrow" aria-hidden="true"><svg class="icon"><use href="#i-next"/></svg></span>
+                <div class="sample__col sample__col--ai">
                   <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが整理した一覧</p>
                   <table class="stable">
                     <thead><tr><th scope="col">取引先</th><th scope="col">内容</th><th scope="col" class="num">金額</th></tr></thead>
@@ -316,7 +317,7 @@
             <div class="sample" role="tabpanel" id="ucp-b2" aria-labelledby="uc-b2" tabindex="0">
               <div class="sample__bar"><span class="sample__name">日報の下書き</span><span class="sample__tag">説明用サンプル</span></div>
               <div class="sample__body">
-                <div class="sample__col">
+                <div class="sample__col sample__col--src">
                   <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>現場のメモ</p>
                   <div class="paper paper--memo">
                     <p>A邸 基礎</p>
@@ -325,7 +326,8 @@
                     <p>明日 生コン 9時</p>
                   </div>
                 </div>
-                <div class="sample__col">
+                <span class="sample__arrow" aria-hidden="true"><svg class="icon"><use href="#i-next"/></svg></span>
+                <div class="sample__col sample__col--ai">
                   <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが作った下書き</p>
                   <dl class="sdl">
                     <div><dt>現場</dt><dd>A邸 新築工事(基礎)</dd></div>
@@ -341,7 +343,7 @@
             <div class="sample" role="tabpanel" id="ucp-b3" aria-labelledby="uc-b3" tabindex="0">
               <div class="sample__bar"><span class="sample__name">打ち合わせ記録の整理</span><span class="sample__tag">説明用サンプル</span></div>
               <div class="sample__body">
-                <div class="sample__col">
+                <div class="sample__col sample__col--src">
                   <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>打ち合わせの記録</p>
                   <div class="paper paper--memo">
                     <p>施主様と打ち合わせ</p>
@@ -350,7 +352,8 @@
                     <p>外構の見積もりを再提出</p>
                   </div>
                 </div>
-                <div class="sample__col">
+                <span class="sample__arrow" aria-hidden="true"><svg class="icon"><use href="#i-next"/></svg></span>
+                <div class="sample__col sample__col--ai">
                   <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが整理した内容</p>
                   <dl class="sdl">
                     <div><dt>決定事項</dt><dd>キッチンは対面式とする。</dd></div>
@@ -392,16 +395,17 @@
             <div class="sample" role="tabpanel" id="ucp-e1" aria-labelledby="uc-e1" tabindex="0">
               <div class="sample__bar"><span class="sample__name">物件情報の整理</span><span class="sample__tag">説明用サンプル</span></div>
               <div class="sample__body">
-                <div class="sample__col">
+                <div class="sample__col sample__col--src">
                   <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>物件資料</p>
-                  <div class="paper">
+                  <div class="paper paper--estate">
                     <p class="paper__title">物件概要</p>
                     <p>サンプルハイツ 203号室(架空)</p>
                     <p>2LDK・南向き・駅から徒歩8分</p>
                     <p>エアコン、宅配ボックスあり</p>
                   </div>
                 </div>
-                <div class="sample__col">
+                <span class="sample__arrow" aria-hidden="true"><svg class="icon"><use href="#i-next"/></svg></span>
+                <div class="sample__col sample__col--ai">
                   <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが整理した基本情報</p>
                   <dl class="sdl">
                     <div><dt>物件名</dt><dd>サンプルハイツ 203号室</dd></div>
@@ -417,7 +421,7 @@
             <div class="sample" role="tabpanel" id="ucp-e2" aria-labelledby="uc-e2" tabindex="0">
               <div class="sample__bar"><span class="sample__name">物件紹介文の下書き</span><span class="sample__tag">説明用サンプル</span></div>
               <div class="sample__body">
-                <div class="sample__col">
+                <div class="sample__col sample__col--src">
                   <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>物件の特徴メモ</p>
                   <div class="paper paper--memo">
                     <p>2LDK、南向き</p>
@@ -426,7 +430,8 @@
                     <p>宅配ボックスあり</p>
                   </div>
                 </div>
-                <div class="sample__col">
+                <span class="sample__arrow" aria-hidden="true"><svg class="icon"><use href="#i-next"/></svg></span>
+                <div class="sample__col sample__col--ai">
                   <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが作った下書き</p>
                   <div class="draft">
                     <p>南向きで日当たりのよい2LDKです。駅から徒歩8分、近くには公園とスーパーがあり、毎日の暮らしに便利な環境です。宅配ボックス付きで、不在時の荷物の受け取りにも対応できます。</p>
@@ -439,7 +444,7 @@
             <div class="sample" role="tabpanel" id="ucp-e3" aria-labelledby="uc-e3" tabindex="0">
               <div class="sample__bar"><span class="sample__name">問い合わせへの返信案</span><span class="sample__tag">説明用サンプル</span></div>
               <div class="sample__body">
-                <div class="sample__col">
+                <div class="sample__col sample__col--src">
                   <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>お客様からの問い合わせ</p>
                   <div class="paper paper--memo">
                     <p>203号室を見学したいです。</p>
@@ -447,7 +452,8 @@
                     <p>駐車場の有無も知りたいです。</p>
                   </div>
                 </div>
-                <div class="sample__col">
+                <span class="sample__arrow" aria-hidden="true"><svg class="icon"><use href="#i-next"/></svg></span>
+                <div class="sample__col sample__col--ai">
                   <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが作った返信案</p>
                   <div class="draft">
                     <p>お問い合わせありがとうございます。203号室のご見学について、土曜日のご案内が可能か確認のうえ、あらためてご連絡いたします。駐車場につきましても、あわせてご案内いたします。</p>
@@ -460,7 +466,7 @@
             <div class="sample" role="tabpanel" id="ucp-e4" aria-labelledby="uc-e4" tabindex="0">
               <div class="sample__bar"><span class="sample__name">修繕・管理記録の整理</span><span class="sample__tag">説明用サンプル</span></div>
               <div class="sample__body">
-                <div class="sample__col">
+                <div class="sample__col sample__col--src">
                   <p class="sample__label"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>対応のメモ</p>
                   <div class="paper paper--memo">
                     <p>5/8 203号室 給湯器の不調</p>
@@ -468,7 +474,8 @@
                     <p>5/9 105号室 網戸の交換 完了</p>
                   </div>
                 </div>
-                <div class="sample__col">
+                <span class="sample__arrow" aria-hidden="true"><svg class="icon"><use href="#i-next"/></svg></span>
+                <div class="sample__col sample__col--ai">
                   <p class="sample__label sample__label--ai"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>AIが整理した記録</p>
                   <table class="stable">
                     <thead><tr><th scope="col">部屋</th><th scope="col">内容</th><th scope="col">状況</th></tr></thead>
@@ -716,7 +723,7 @@
           <li>いま使っている請求書の書式に対応</li>
           <li>つくった書類は一覧に自動で記録</li>
         </ul>
-        <a class="btn btn--primary btn--lg" href="https://line-jimuin.link/" target="_blank" rel="noopener">
+        <a class="btn btn--line btn--lg" href="https://line-jimuin.link/" target="_blank" rel="noopener">
           俺の事務員を詳しく見る
           <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
         </a>
