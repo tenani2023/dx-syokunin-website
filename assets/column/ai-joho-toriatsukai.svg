@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="AIに入力してよい情報">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#11294f"/><stop offset="1" stop-color="#0b1f3f"/></linearGradient>
+<pattern id="p" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern></defs>
+<rect width="1200" height="675" fill="url(#g)"/><rect width="1200" height="675" fill="url(#p)"/>
+<circle cx="1040" cy="120" r="260" fill="#fff" fill-opacity=".04"/>
+<rect x="72" y="72" width="156" height="40" rx="20" fill="#06c755"/><text x="150" y="99" font-family="Helvetica Neue,Arial,Hiragino Kaku Gothic ProN,sans-serif" font-size="20" font-weight="700" fill="#061329" text-anchor="middle">情報の扱い</text>
+<g transform="translate(72 220) scale(9)" fill="none" stroke="#06c755" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M9 12l2 2 4-4"/></g>
+<text x="72" y="540" font-family="Helvetica Neue,Arial,Hiragino Kaku Gothic ProN,sans-serif" font-size="44" font-weight="700" fill="#fff">AIに入力してよい情報</text>
+<text x="72" y="596" font-family="Helvetica Neue,Arial,sans-serif" font-size="18" letter-spacing="4" fill="#9fb0c9">DX職人 COLUMN</text>
+</svg>

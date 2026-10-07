@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="助成金の計画届">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#11294f"/><stop offset="1" stop-color="#0b1f3f"/></linearGradient>
+<pattern id="p" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern></defs>
+<rect width="1200" height="675" fill="url(#g)"/><rect width="1200" height="675" fill="url(#p)"/>
+<circle cx="1040" cy="120" r="260" fill="#fff" fill-opacity=".04"/>
+<rect x="72" y="72" width="156" height="40" rx="20" fill="#06c755"/><text x="150" y="99" font-family="Helvetica Neue,Arial,Hiragino Kaku Gothic ProN,sans-serif" font-size="20" font-weight="700" fill="#061329" text-anchor="middle">助成金</text>
+<g transform="translate(72 220) scale(9)" fill="none" stroke="#06c755" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/><path d="M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></g>
+<text x="72" y="540" font-family="Helvetica Neue,Arial,Hiragino Kaku Gothic ProN,sans-serif" font-size="44" font-weight="700" fill="#fff">助成金の計画届</text>
+<text x="72" y="596" font-family="Helvetica Neue,Arial,sans-serif" font-size="18" letter-spacing="4" fill="#9fb0c9">DX職人 COLUMN</text>
+</svg>

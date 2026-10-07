@@ -775,3 +775,10 @@ body { padding-bottom: 76px; }
   .nav a { padding: 0 12px; font-size: 12.5px; }
 }
 .cta.is-disabled { background: var(--line); color: var(--muted); cursor: default; pointer-events: none; }
+
+/* ロゴ画像 */
+.brand__img { display: block; height: 44px; width: auto; }
+.site-footer__logo { display: block; height: 56px; width: auto; }
+@media (min-width: 1001px) { .brand__img { height: 56px; } }
+@media (max-width: 1000px) { .brand__img { height: 40px; } }
+.post-card__img img, .post__hero img { object-position: 50% 50%; }
