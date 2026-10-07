@@ -629,3 +629,13 @@ body { padding-bottom: 76px; }
 @media (min-width: 1001px) {
   .hero::before { right: 14px; bottom: 14px; width: 39%; height: 52%; border-radius: 36px; opacity: 1; }
 }
+
+/* 注意書き・注記・連絡先 */
+.caution { margin-top: 20px; padding: 18px 22px; background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--green); border-radius: 12px; }
+.caution ul { display: grid; gap: 6px; }
+.caution li { position: relative; padding-left: 16px; font-size: 13px; line-height: 1.8; font-weight: 700; color: var(--ink); }
+.caution li::before { content: ""; position: absolute; left: 2px; top: .75em; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+.subsidy-links { display: grid; gap: 6px; }
+.subsidy-links a { font-size: 12px; font-weight: 700; }
+.program-note { margin-top: 20px; }
+.contact__mail a { color: var(--deep); text-decoration: underline; text-underline-offset: 4px; }
