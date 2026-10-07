@@ -181,6 +181,46 @@
     start(SCENARIOS.estimate, false);
   })();
 
+  /* ---------- スクロールで現れる ---------- */
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var groups = [
+      '.section__head', '.statement__inner', '.band__inner', '.keys__list > li', '.cards > li', '.points > li',
+      '.map__title', '.map__grid > div', '.flow3', '.tabs', '.tasks__title', '.tasks__list > li', '.steps > li',
+      '.program__title', '.program__lead', '.price', '.faq__item', '.change__row', '.line__text', '.demo',
+      '.product', '.company > div', '.contact__inner > *', '.note'
+    ];
+    var items = Array.prototype.slice.call(document.querySelectorAll(groups.join(',')));
+    if (!items.length) return;
+    if (reduce || !('IntersectionObserver' in window)) return;
+
+    // 同じ親の中では順に少しずらす
+    var counts = [];
+    items.forEach(function (el) {
+      var parent = el.parentNode, entry = null;
+      for (var i = 0; i < counts.length; i++) if (counts[i].p === parent) entry = counts[i];
+      if (!entry) { entry = { p: parent, n: 0 }; counts.push(entry); }
+      el.style.setProperty('--d', Math.min(entry.n, 5) * 0.08 + 's');
+      entry.n += 1;
+      el.classList.add('rv');
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+
+  /* ---------- ヘッダーの影 ---------- */
+  var header = document.getElementById('header');
+  if (header) {
+    var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
   /* ---------- スマホ用メニュー ---------- */
   var menuBtn = document.getElementById('menuBtn');
   var gnav = document.getElementById('gnav');

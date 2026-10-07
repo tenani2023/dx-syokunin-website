@@ -11,7 +11,11 @@
 <meta property="og:description" content="現場の技に、AIの力を。いつもの仕事から始める、DX・AI活用支援。">
 <meta property="og:image" content="assets/hero.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2306c755'/%3E%3Cpath d='M7.5 21V11h3.5a5 5 0 0 1 0 10H7.5zM19 11l5.5 10m0-10L19 21' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
@@ -161,6 +165,15 @@
   </div>
 </section>
 
+<!-- 考え方 -->
+<section class="statement" aria-labelledby="statement-title">
+  <div class="container statement__inner">
+    <p class="statement__kicker">DX職人の考え方</p>
+    <h2 class="statement__title" id="statement-title"><span class="ph">AIを入れることが、</span><span class="ph">目的ではありません。</span><br><span class="ph">いつもの仕事が、</span><span class="ph">少し楽になること。</span></h2>
+    <p class="statement__text">研修も、システムも、そのための手段です。見積書、日報、物件の紹介文。毎日くり返している作業のひとつから、一緒に見直します。</p>
+  </div>
+</section>
+
 <!-- ④ DX職人とは -->
 <section class="section section--tint" id="about" aria-labelledby="about-title">
   <div class="container about">
@@ -168,9 +181,6 @@
       <p class="section__kicker">サービスについて</p>
       <h2 class="section__title" id="about-title">DX職人とは</h2>
       <p class="section__lead">建設・不動産の仕事を題材にしたAI研修を中心に、日々の業務で使えるようになるまで支援するサービスです。</p>
-      <div class="about__photo">
-        <img src="assets/site.jpg" width="1000" height="667" loading="lazy" alt="現場でノートパソコンの図面を確認する担当者">
-      </div>
     </div>
     <ul class="points">
       <li class="point">
@@ -494,10 +504,18 @@
   </div>
 </section>
 
+<!-- 写真の帯 -->
+<section class="band" aria-label="現場の写真">
+  <img class="band__img" src="assets/site.jpg" width="1000" height="667" loading="lazy" alt="現場でノートパソコンの図面を確認する担当者">
+  <div class="container band__inner">
+    <p class="band__text"><span class="ph">現場の言葉で、</span><span class="ph">AIの使い方を考える。</span></p>
+  </div>
+</section>
+
 <!-- できるようになること -->
 <section class="section section--tint" id="change" aria-labelledby="change-title">
   <div class="container">
-    <div class="section__head">
+    <div class="section__head section__head--left">
       <p class="section__kicker">研修でできるようになること</p>
       <h2 class="section__title" id="change-title"><span>「AIを知っている」から、</span><span>「仕事で使える」へ。</span></h2>
       <p class="section__lead"><span class="ph">目指すのは、受講した方が</span><span class="ph">自分の仕事を自分で楽にできる状態です。</span></p>
@@ -544,22 +562,23 @@
 <!-- ⑥ 3つの支援内容 -->
 <section class="section" id="support" aria-labelledby="support-title">
   <div class="container">
-    <div class="section__head">
+    <div class="section__head section__head--left">
       <p class="section__kicker">AI研修・支援</p>
       <h2 class="section__title" id="support-title">3つの支援内容</h2>
       <p class="section__lead"><span class="ph">中心は、いつもの仕事を題材にしたAI実践研修。</span><span class="ph">学ぶ、整える、続けるの順に支援します。</span></p>
     </div>
-    <ul class="cards cards--3">
-      <li class="card card--support">
+    <ul class="cards cards--support">
+      <li class="card card--support card--featured">
         <div class="card__top">
           <span class="card__icon" aria-hidden="true"><svg class="icon"><use href="#i-learn"/></svg></span>
           <span class="card__badge">学ぶ</span>
         </div>
         <h3 class="card__title card__title--lg">AI実践研修</h3>
-        <p class="card__text">いつもの仕事を題材に、AIの使い方を学びます。</p>
+        <p class="card__text">いつもの仕事を題材に、AIの使い方を学びます。座学ではなく、自社の見積書や日報をその場で扱いながら、「明日から使える」ところまで持っていきます。</p>
         <ul class="card__list">
           <li>自社の書類や業務を例にする</li>
           <li>実際に手を動かして試す</li>
+          <li>うまくいった使い方を手順として残す</li>
         </ul>
       </li>
       <li class="card card--support">
@@ -733,7 +752,7 @@
 <!-- ⑦ 導入の流れ・費用 -->
 <section class="section" id="flow" aria-labelledby="flow-title">
   <div class="container">
-    <div class="section__head">
+    <div class="section__head section__head--left">
       <h2 class="section__title" id="flow-title">導入の流れ・費用</h2>
       <p class="section__lead">お話を伺うところから始め、実際の業務で試しながら進めます。</p>
     </div>
