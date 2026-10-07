@@ -495,92 +495,95 @@
 <!-- 13. subsidy(5名想定の試算) -->
 <section class="section subsidy" id="subsidy" aria-labelledby="subsidy-title">
   <div class="wrap">
-    <p class="section-label">TRAINING COST &amp; SUPPORT</p>
-    <h2 id="subsidy-title"><span class="ph">経費助成後、1人あたり</span><br><span class="accent ph">約20万円（税抜）の試算。</span></h2>
-    <p class="subsidy-intro">人材開発支援助成金　事業展開等リスキリング支援コース</p>
-    <span class="tag">中小企業・従業員5名・全12時間の試算例</span>
-    <p class="intro">5名で総額250万円（税抜）の研修を受講し、対象となる事業外訓練として経費助成の要件を満たす場合の目安です。表示金額はすべて税抜です。</p>
-
-    <div class="subsidy-highlight">
-      <span>経費助成後の1人あたり</span>
-      <strong>約20<small>万円</small></strong>
-      <p>5名合計の負担額 100万円 ÷ 5名／表示金額は税抜</p>
-    </div>
-
-    <div class="subsidy-metrics">
-      <article>
-        <span>経費助成後の金額</span>
-        <strong>100<small>万円</small></strong>
-        <p>研修費250万円 − 経費助成150万円（5名合計・賃金助成を含めない場合／税抜）</p>
-      </article>
-      <article>
-        <span>助成される金額の目安</span>
-        <strong>150<small>万円</small></strong>
-        <p>研修費250万円 × 経費助成率75％＝187.5万円のところ、1名あたり上限30万円 × 5名＝150万円が適用／税抜</p>
-      </article>
-      <article class="metric-total">
-        <span>実際の受講料</span>
-        <strong>250<small>万円</small></strong>
-        <p>5名分・全12時間の税抜総額（1名あたり50万円）</p>
-      </article>
-    </div>
-
-    <div class="subsidy-bar" aria-label="経費助成の割合">
-      <div class="subsidy-bar__track"><span class="subsidy-bar__fill" style="width:60%"></span></div>
-      <div class="subsidy-bar__legend"><span>経費助成 <strong>60%</strong>（上限適用後）</span><span>経費助成後の負担 <strong>40%</strong></span></div>
-      <p class="fine">中小企業の経費助成率は75％ですが、12時間の訓練に適用される1名あたり上限30万円を超えるため、上限額で計算しています。1名あたり受講料50万円に対し、経費助成は30万円、負担は20万円となります。人数別の配分・端数処理により確定額は異なります。</p>
-    </div>
-
-    <div class="wage">
+    <div class="subsidy-head">
       <div>
-        <span class="payment-label">賃金助成も対象になる場合</span>
+        <p class="section-label">TRAINING COST &amp; SUPPORT</p>
+        <h2 id="subsidy-title"><span class="ph">経費助成後、1人あたり</span><br><span class="accent ph">約20万円（税抜）の試算。</span></h2>
+        <p class="subsidy-intro">人材開発支援助成金　事業展開等リスキリング支援コース</p>
+        <span class="tag">中小企業・従業員5名・全12時間の試算例</span>
+        <p class="intro">5名で総額250万円（税抜）の研修を受講し、対象となる事業外訓練として経費助成の要件を満たす場合の目安です。表示金額はすべて税抜です。</p>
+      </div>
+      <div class="ring-card" aria-label="経費助成の割合">
+        <div class="ring" style="--pct:60"><div class="ring__inner"><strong>60<small>%</small></strong><span>経費助成<br>(上限適用後)</span></div></div>
+        <ul class="ring__legend">
+          <li><i class="ring__dot ring__dot--green"></i>経費助成 150万円</li>
+          <li><i class="ring__dot ring__dot--navy"></i>企業の負担 100万円</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger__row">
+        <span class="ledger__label">実際の受講料</span>
+        <span class="ledger__note">1名あたり50万円 × 5名・全12時間／税抜</span>
+        <strong class="ledger__amount">250<small>万円</small></strong>
+      </div>
+      <div class="ledger__op"><span>−</span></div>
+      <div class="ledger__row">
+        <span class="ledger__label">助成される金額の目安</span>
+        <span class="ledger__note">経費助成率75％＝187.5万円のところ、1名あたり上限30万円 × 5名が適用</span>
+        <strong class="ledger__amount">150<small>万円</small></strong>
+      </div>
+      <div class="ledger__op"><span>=</span></div>
+      <div class="ledger__row">
+        <span class="ledger__label">経費助成後の金額</span>
+        <span class="ledger__note">5名合計・賃金助成を含めない場合</span>
+        <strong class="ledger__amount">100<small>万円</small></strong>
+      </div>
+      <div class="ledger__op"><span>÷ 5名</span></div>
+      <div class="ledger__row ledger__row--total">
+        <span class="ledger__label">経費助成後の1人あたり</span>
+        <span class="ledger__note">100万円 ÷ 5名／表示金額は税抜</span>
+        <strong class="ledger__amount">約20<small>万円</small></strong>
+      </div>
+    </div>
+    <p class="fine">中小企業の経費助成率は75％ですが、12時間の訓練に適用される1名あたり上限30万円を超えるため、上限額で計算しています。1名あたり受講料50万円に対し、経費助成は30万円、負担は20万円となります。人数別の配分・端数処理により確定額は異なります。</p>
+
+    <div class="subsidy-grid">
+      <article class="scard">
+        <span class="scard__label">賃金助成も対象になる場合</span>
         <h3>追加で <strong>6万円</strong> の助成見込み</h3>
         <p class="fine">1,000円 × 12時間 × 5名。所定労働時間内に賃金を支払い、全員が対象の12時間を受講する対面・同時双方向の研修を想定しています。eラーニング等には賃金助成がありません。</p>
-      </div>
-      <dl class="wage__sum">
-        <div><dt>経費助成＋賃金助成の合計</dt><dd>156万円</dd></div>
-        <div><dt>税抜受講料 − 助成金合計（参考差額）</dt><dd>94万円</dd></div>
-      </dl>
-    </div>
-
-    <div class="payment-summary">
-      <div>
-        <span class="payment-label">お支払い条件の確認事項</span>
+        <dl class="scard__sum">
+          <div><dt>経費助成＋賃金助成の合計</dt><dd>156万円</dd></div>
+          <div><dt>税抜受講料 − 助成金合計（参考差額）</dt><dd>94万円</dd></div>
+        </dl>
+      </article>
+      <article class="scard scard--pay">
+        <span class="scard__label">お支払い条件の確認事項</span>
         <h3>ご契約後、研修費を全額先払い</h3>
-      </div>
-      <div class="payment-total">
-        <strong>250<span>万円（税抜）</span></strong>
-        <p>5名・全12時間／消費税は請求時に加算</p>
-      </div>
-      <p class="payment-timing">助成金は研修後の申請・審査を経て支給されます。最初に受講企業で研修費全額をご用意いただきます。支払い期限は契約時に確認します。</p>
+        <p class="scard__big">250<small>万円（税抜）</small></p>
+        <p class="fine">5名・全12時間／消費税は請求時に加算</p>
+        <p class="scard__text">助成金は研修後の申請・審査を経て支給されます。最初に受講企業で研修費全額をご用意いただきます。支払い期限は契約時に確認します。</p>
+      </article>
     </div>
 
     <div class="subsidy-notes">
       <h3>ご契約から助成金支給までの流れ</h3>
       <p>金額・期限・手続きの担当を、事前に確認してから進めます。</p>
-      <ol class="payment-steps">
+      <ol class="route">
         <li>
-          <span class="payment-owner">DX職人・受講企業</span>
+          <span class="route__owner">DX職人・受講企業</span>
           <strong>内容と条件を確認して、ご契約</strong>
           <p>研修内容・受講人数・実施日程・総額・支払期限を確認します。助成金を利用する場合は、計画届の提出期限に間に合う日程と準備状況も事前に確認します。</p>
         </li>
         <li>
-          <span class="payment-owner">受講企業からDX職人へ</span>
+          <span class="route__owner">受講企業からDX職人へ</span>
           <strong>研修費250万円（税抜）を全額先払い</strong>
           <p>5名・全12時間の研修費総額です。助成金を差し引いた金額ではなく、研修費全額に消費税を加えた金額のお支払いとなります。</p>
         </li>
         <li>
-          <span class="payment-owner">DX職人がご案内・受講企業が提出</span>
+          <span class="route__owner">DX職人がご案内・受講企業が提出</span>
           <strong>入金確認後、速やかに計画届の提出準備</strong>
           <p>必要書類を整え、申請事業主である受講企業が管轄の労働局へ職業訓練実施計画届を提出します。提出期間は原則、研修開始日の6か月前から1か月前までです。</p>
         </li>
         <li>
-          <span class="payment-owner">DX職人・受講企業</span>
+          <span class="route__owner">DX職人・受講企業</span>
           <strong>全12時間の研修を実施</strong>
           <p>合意したカリキュラムに沿って研修を実施。研修後も、実務への活用を支援します。</p>
         </li>
         <li>
-          <span class="payment-owner">受講企業が申請・労働局が審査</span>
+          <span class="route__owner">受講企業が申請・労働局が審査</span>
           <strong>研修終了後に支給申請。審査後に助成金支給</strong>
           <p>受講企業が所定の期限内に支給申請を行います。助成金は審査・支給決定後に受講企業へ支給されます。支給の可否・金額・時期は審査によって決まります。</p>
         </li>
