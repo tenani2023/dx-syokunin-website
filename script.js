@@ -97,6 +97,48 @@
     items.forEach(function (el) { io.observe(el); });
   })();
 
+  /* ---------- 問い合わせフォーム(メールアプリで作成) ---------- */
+  (function () {
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+    var err = document.getElementById('formError');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        err.hidden = false;
+        var first = form.querySelector(':invalid');
+        if (first) first.focus();
+        return;
+      }
+      err.hidden = true;
+      var v = function (n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
+      var checked = function (n) {
+        return Array.prototype.map.call(form.querySelectorAll('[name="' + n + '"]:checked'), function (el) { return el.value; }).join('、');
+      };
+      var lines = [
+        '【DX職人 お問い合わせ】', '',
+        '会社名：' + v('会社名'),
+        'お名前：' + v('お名前'),
+        'メールアドレス：' + v('メールアドレス'),
+        '電話番号：' + (v('電話番号') || '(未記入)'),
+        '業種：' + checked('業種'),
+        'ご相談内容：' + (checked('ご相談内容') || '(未選択)'), '',
+        '楽にしたい作業、気になっていること：', v('内容') || '(未記入)', ''
+      ];
+      var subject = encodeURIComponent('【DX職人】ご相談（' + v('会社名') + '）');
+      var body = encodeURIComponent(lines.join('\n'));
+      window.location.href = 'mailto:info@senwa-solutions.com?subject=' + subject + '&body=' + body;
+    });
+    // LINEのURLが未設定の間は「準備中」表示
+    var lineUrl = window.DX_LINE_URL || '';
+    document.querySelectorAll('a[href="LINE_URL_PLACEHOLDER"]').forEach(function (a) {
+      if (lineUrl) { a.href = lineUrl; return; }
+      a.removeAttribute('href'); a.removeAttribute('target');
+      if (a.classList.contains('cta')) { a.classList.add('is-disabled'); a.textContent = 'LINE公式アカウントは準備中です'; }
+      else { a.textContent = 'LINE公式アカウント(準備中)'; }
+    });
+  })();
+
   /* ---------- LINEのトークのデモ ---------- */
   (function () {
     var log = document.getElementById('demoLog');
