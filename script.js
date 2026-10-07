@@ -1,37 +1,101 @@
 (function () {
   'use strict';
 
-  /* ---------- タブ(業種の切り替え・活用場面の切り替え) ---------- */
-  document.querySelectorAll('[data-tabs]').forEach(function (root) {
-    var list = root.querySelector('[role="tablist"]');
-    if (!list) return;
-    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function select(tab, focus) {
-      tabs.forEach(function (t) {
-        var on = t === tab;
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-        t.tabIndex = on ? 0 : -1;
-        var panel = document.getElementById(t.getAttribute('aria-controls'));
-        if (panel) panel.hidden = !on;
-      });
-      if (focus) tab.focus();
-    }
+  /* ---------- スマホ用メニュー ---------- */
+  var menuBtn = document.getElementById('menuBtn');
+  var nav = document.getElementById('nav');
 
-    tabs.forEach(function (tab, i) {
-      tab.addEventListener('click', function () { select(tab, false); });
-      tab.addEventListener('keydown', function (e) {
-        var next = null;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = tabs[(i + 1) % tabs.length];
-        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = tabs[(i - 1 + tabs.length) % tabs.length];
-        else if (e.key === 'Home') next = tabs[0];
-        else if (e.key === 'End') next = tabs[tabs.length - 1];
-        if (next) { e.preventDefault(); select(next, true); }
-      });
+  function setMenu(open) {
+    nav.classList.toggle('is-open', open);
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+  }
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener('click', function () {
+      setMenu(menuBtn.getAttribute('aria-expanded') !== 'true');
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setMenu(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+        setMenu(false);
+        menuBtn.focus();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.site-header')) setMenu(false);
+    });
+  }
+
+  /* ---------- 現在地(ナビ) ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  var ticking = false;
+
+  function updateCurrent() {
+    ticking = false;
+    var line = window.innerHeight * 0.4;
+    var current = null;
+    targets.forEach(function (s) {
+      if (s && s.getBoundingClientRect().top <= line) current = s;
+    });
+    links.forEach(function (a, i) {
+      if (targets[i] === current && current) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  }
+
+  /* ---------- モバイル固定CTA(相談エリアでは隠す) ---------- */
+  var mobileCta = document.getElementById('mobileCta');
+  var contact = document.getElementById('contact');
+
+  function updateDock() {
+    if (!mobileCta || !contact) return;
+    var r = contact.getBoundingClientRect();
+    var visible = r.top < window.innerHeight && r.bottom > 0;
+    mobileCta.classList.toggle('is-hidden', visible);
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(function () { updateCurrent(); updateDock(); }); }
+  }, { passive: true });
+  window.addEventListener('resize', function () { updateCurrent(); updateDock(); });
+  updateCurrent();
+  updateDock();
+
+  /* ---------- スクロールで現れる ---------- */
+  (function () {
+    var groups = [
+      '.section-label', '.section h2', '.section > .wrap > .intro', '.stat', '.player',
+      '.challenge-card', '.calc-card', '.change-row', '.feature-grid article', '.feature-list li',
+      '.product-card', '.system-more .card', '.case-card', '.program-list article', '.program-after',
+      '.consultation-card', '.timeline article', '.price-note', '.subsidy-highlight', '.subsidy-metrics article',
+      '.company-card', '.faq-list', '.contact > .wrap > *'
+    ];
+    var items = Array.prototype.slice.call(document.querySelectorAll(groups.join(',')));
+    if (!items.length || reduce || !('IntersectionObserver' in window)) return;
+
+    var counts = [];
+    items.forEach(function (el) {
+      var parent = el.parentNode, entry = null;
+      for (var i = 0; i < counts.length; i++) if (counts[i].p === parent) entry = counts[i];
+      if (!entry) { entry = { p: parent, n: 0 }; counts.push(entry); }
+      el.style.setProperty('--d', Math.min(entry.n, 5) * 0.08 + 's');
+      entry.n += 1;
+      el.classList.add('reveal');
     });
 
-    select(tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0], false);
-  });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  })();
 
   /* ---------- LINEのトークのデモ ---------- */
   (function () {
@@ -40,7 +104,6 @@
     var tabs = Array.prototype.slice.call(document.querySelectorAll('.demo__tab'));
     if (!log || !foot) return;
 
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var SCENARIOS = {
       estimate: {
         hello: 'こんにちは。つくりたい書類の内容を、トークで送ってください。',
@@ -114,7 +177,7 @@
       }
       if (step.file) {
         var f = el('p', 'msg__file');
-        f.appendChild(icon('i-doc'));
+        f.appendChild(icon('i-file-text'));
         f.appendChild(el('span', null, step.file));
         m.appendChild(f);
       }
@@ -180,106 +243,4 @@
     });
     start(SCENARIOS.estimate, false);
   })();
-
-  /* ---------- スクロールで現れる ---------- */
-  (function () {
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var groups = [
-      '.section__head', '.statement__inner', '.band__inner', '.keys__list > li', '.cards > li', '.points > li',
-      '.map__title', '.map__grid > div', '.flow3', '.tabs', '.tasks__title', '.tasks__list > li', '.steps > li',
-      '.program__title', '.program__lead', '.price', '.faq__item', '.change__row', '.line__text', '.demo',
-      '.product', '.company > div', '.contact__inner > *', '.note'
-    ];
-    var items = Array.prototype.slice.call(document.querySelectorAll(groups.join(',')));
-    if (!items.length) return;
-    if (reduce || !('IntersectionObserver' in window)) return;
-
-    // 同じ親の中では順に少しずらす
-    var counts = [];
-    items.forEach(function (el) {
-      var parent = el.parentNode, entry = null;
-      for (var i = 0; i < counts.length; i++) if (counts[i].p === parent) entry = counts[i];
-      if (!entry) { entry = { p: parent, n: 0 }; counts.push(entry); }
-      el.style.setProperty('--d', Math.min(entry.n, 5) * 0.08 + 's');
-      entry.n += 1;
-      el.classList.add('reveal');
-    });
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
-    items.forEach(function (el) { io.observe(el); });
-  })();
-
-  /* ---------- ヘッダーの影 ---------- */
-  var header = document.getElementById('header');
-  if (header) {
-    var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  /* ---------- スマホ用メニュー ---------- */
-  var menuBtn = document.getElementById('menuBtn');
-  var gnav = document.getElementById('gnav');
-
-  function setMenu(open) {
-    gnav.classList.toggle('is-open', open);
-    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    menuBtn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
-  }
-
-  if (menuBtn && gnav) {
-    menuBtn.addEventListener('click', function () {
-      setMenu(menuBtn.getAttribute('aria-expanded') !== 'true');
-    });
-    gnav.addEventListener('click', function (e) {
-      if (e.target.closest('a')) setMenu(false);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
-        setMenu(false);
-        menuBtn.focus();
-      }
-    });
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('.header')) setMenu(false);
-    });
-  }
-
-  /* ---------- 現在地の表示(ヘッダー・スマホ固定メニュー) ---------- */
-  var links = Array.prototype.slice.call(
-    document.querySelectorAll('.gnav a[href^="#"], .bnav a[href^="#"]')
-  );
-  var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
-  var ticking = false;
-
-  function updateCurrent() {
-    ticking = false;
-    var line = window.innerHeight * 0.4;
-    var current = sections[0];
-    sections.forEach(function (s) {
-      if (s.getBoundingClientRect().top <= line) current = s;
-    });
-    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
-    if (atBottom) current = document.getElementById('contact') || current;
-
-    // 固定メニューにない区間は、直前の項目を現在地とする
-    var map = { worries: 'top', about: 'top', usecase: 'top', change: 'support', systems: 'line', flow: 'line', faq: 'line', company: 'line', top: 'none', parent: 'features' };
-    links.forEach(function (a) {
-      var id = a.getAttribute('href').slice(1);
-      var inBnav = !!a.closest('.bnav');
-      var on = id === current.id || (inBnav && map[current.id] === id);
-      a.classList.toggle('is-current', on);
-      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
-    });
-  }
-
-  window.addEventListener('scroll', function () {
-    if (!ticking) { ticking = true; window.requestAnimationFrame(updateCurrent); }
-  }, { passive: true });
-  window.addEventListener('resize', updateCurrent);
-  updateCurrent();
 })();
