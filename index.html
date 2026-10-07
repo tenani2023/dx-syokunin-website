@@ -55,16 +55,20 @@
 <!-- ヘッダー -->
 <header class="site-header" id="header">
   <a class="brand" href="#top" aria-label="DX職人 トップへ">
-    <span class="brand__mark"><span class="brand__dx">DX</span>職人</span>
-    <span class="brand__sub">建設・不動産向けDX・AI活用支援</span>
+    <span class="brand__logo" aria-hidden="true">DX</span>
+    <span class="brand__text">
+      <span class="brand__mark"><span class="brand__dx">DX</span>職人</span>
+      <span class="brand__sub">建設・不動産向けDX・AI活用支援</span>
+    </span>
   </a>
   <nav class="nav" id="nav" aria-label="メインメニュー">
-    <a href="#change">できるようになること</a>
+    <a href="#change">DX職人でできること</a>
     <a href="#program">研修内容</a>
     <a href="#subsidy">費用・助成金</a>
+    <a href="#system">システム提供</a>
     <a href="#faq">よくある質問</a>
   </nav>
-  <a class="cta small" href="#contact">フォームで相談する</a>
+  <a class="cta small" href="#contact">フォームで相談する<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
   <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
     <svg class="icon icon--open" aria-hidden="true"><use href="#i-menu"/></svg>
     <svg class="icon icon--close" aria-hidden="true"><use href="#i-x"/></svg>
@@ -102,17 +106,17 @@
     <div class="stat">
       <span class="stat__label">HANDS-ON</span>
       <p class="stat__value"><strong>自社の仕事</strong><span>が教材</span></p>
-      <p class="stat__desc">見積、現場報告、物件対応。建設・不動産の実務を題材にします。</p>
+      <p class="stat__desc">見積、現場報告、物件対応。建設・不動産の実務を題材にします。<a class="stat__link" href="#change">DX職人でできること</a></p>
     </div>
     <div class="stat">
       <span class="stat__label">MADE FOR YOU</span>
       <p class="stat__value"><strong>LINE</strong><span>で使える</span></p>
-      <p class="stat__desc">「俺の事務員」など、いつものトークで使える道具をご用意。</p>
+      <p class="stat__desc">「俺の事務員」など、いつものトークで使える道具をご用意。<a class="stat__link" href="#system">システム提供を見る</a></p>
     </div>
     <div class="stat">
       <span class="stat__label">FOLLOW-UP</span>
       <p class="stat__value"><strong>研修後</strong><span>も支援</span></p>
-      <p class="stat__desc">使い方を学ぶところから、職場で続けられるまで支えます。</p>
+      <p class="stat__desc">使い方を学ぶところから、職場で続けられるまで支えます。<a class="stat__link" href="#program">研修内容を見る</a></p>
     </div>
   </div>
 </section>
@@ -277,59 +281,6 @@
         <h3>研修後の定着支援</h3>
         <p>チームで使い続けられるよう、導入後も支援します。導入後の疑問にお答えし、使いにくいところを見直します。</p>
         <span class="feature-tag">活用・定着支援</span>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- 8. system -->
-<section class="section system" id="system" aria-labelledby="system-title">
-  <div class="wrap">
-    <p class="section-label">SYSTEM</p>
-    <h2 id="system-title"><span class="ph">いつものLINEから、</span><br><span class="accent ph">システムにさわれる。</span></h2>
-    <div class="system-layout">
-      <div>
-        <p class="intro">研修とあわせて、仕事で使う道具もご提供しています。DX職人のシステムは、毎日使っているLINEのトークから使えるので、新しいアプリや難しい画面を覚える必要はありません。</p>
-        <ul class="feature-list">
-          <li>
-            <span class="feature-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg></span>
-            <div><h3>トークで頼める</h3><p>文章や写真を送るだけ。現場からでも、移動中でも使えます。</p></div>
-          </li>
-          <li>
-            <span class="feature-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-pencil"/></svg></span>
-            <div><h3>つくるのも、直すのもLINEで</h3><p>届いた下書きを見て、「ここを直して」と返せます。</p></div>
-          </li>
-          <li>
-            <span class="feature-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-table"/></svg></span>
-            <div><h3>記録は一覧に残る</h3><p>つくった内容は台帳に残り、あとから確認できます。</p></div>
-          </li>
-        </ul>
-      </div>
-      <article class="product-card">
-        <span class="product-card__tag">見積書・請求書</span>
-        <h3 class="product-card__name">俺の事務員</h3>
-        <p class="product-card__catch"><span class="ph">LINEのトークだけで、</span><span class="ph">見積書・請求書を作成。</span></p>
-        <p class="product-card__text">トークで内容を送ると、見積書・請求書を作成。台帳への記録から、PDFでの受け取りまでLINEで行えます。一人親方や個人事業主の方に向けたシステムです。</p>
-        <ul class="check-list">
-          <li><svg class="icon" aria-hidden="true"><use href="#i-circle-check"/></svg>スマホだけで使える(パソコン不要)</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-circle-check"/></svg>いま使っている請求書の書式に対応</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-circle-check"/></svg>つくった書類は一覧に自動で記録</li>
-        </ul>
-        <a class="cta" href="https://line-jimuin.link/" target="_blank" rel="noopener">俺の事務員を詳しく見る<svg class="icon" aria-hidden="true"><use href="#i-external-link"/></svg></a>
-        <p class="fine">「俺の事務員」のサイト(line-jimuin.link)が開きます。</p>
-      </article>
-    </div>
-    <div class="system-more">
-      <article class="card">
-        <svg class="icon icon--24 card__icon" aria-hidden="true"><use href="#i-wrench"/></svg>
-        <h3>御社の業務に合わせたシステム</h3>
-        <p>日報、物件対応、問い合わせへの返信など。業務に合わせて、LINEから使える仕組みをつくります。</p>
-        <a class="text-link" href="#contact">相談してみる<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-      </article>
-      <article class="card card--soon">
-        <svg class="icon icon--24 card__icon" aria-hidden="true"><use href="#i-plus"/></svg>
-        <h3>新しいシステムを準備中</h3>
-        <p>建設・不動産の仕事に役立つシステムを、順次このページでご案内します。</p>
       </article>
     </div>
   </div>
@@ -528,9 +479,9 @@
     </div>
     <div class="price-note">
       <div>
-        <span>費用について</span>
-        <h3>支援内容に合わせて個別にお見積もり</h3>
-        <p>ご相談の内容を伺ったうえで、進め方とあわせてご提案します。研修だけ、業務の見直しだけでもご相談いただけます。</p>
+        <span>研修費用</span>
+        <h3>1名あたり50万円<span class="price-tax">（税抜）</span></h3>
+        <p>全12時間。5名で受講する場合の料金例：総額250万円（税抜）。業務の仕組み化やシステムの提供は、支援内容に合わせて個別にお見積もりします。利用するAIサービス等の費用は別途確認します。</p>
       </div>
       <div>
         <span>助成金の活用</span>
@@ -541,55 +492,67 @@
   </div>
 </section>
 
-<!-- 13. subsidy(要確認) -->
+<!-- 13. subsidy(5名想定の試算) -->
 <section class="section subsidy" id="subsidy" aria-labelledby="subsidy-title">
   <div class="wrap">
     <p class="section-label">TRAINING COST &amp; SUPPORT</p>
-    <h2 id="subsidy-title"><span class="ph">経費助成後、1人あたり</span><br><span class="accent ph">約<span class="tbd">●</span>万円（税抜）の試算。</span></h2>
+    <h2 id="subsidy-title"><span class="ph">経費助成後、1人あたり</span><br><span class="accent ph">約20万円（税抜）の試算。</span></h2>
     <p class="subsidy-intro">人材開発支援助成金　事業展開等リスキリング支援コース</p>
-    <span class="tag">中小企業・従業員<span class="tbd">●</span>名・全<span class="tbd">●</span>時間の試算例</span>
-    <p class="intro"><span class="tbd">●</span>名で総額<span class="tbd">●</span>万円（税抜）の研修を受講し、対象となる事業外訓練として経費助成の要件を満たす場合の目安です。表示金額はすべて税抜です。</p>
+    <span class="tag">中小企業・従業員5名・全12時間の試算例</span>
+    <p class="intro">5名で総額250万円（税抜）の研修を受講し、対象となる事業外訓練として経費助成の要件を満たす場合の目安です。表示金額はすべて税抜です。</p>
 
     <div class="subsidy-highlight">
       <span>経費助成後の1人あたり</span>
-      <strong>約<span class="tbd">●</span><small>万円</small></strong>
-      <p><span class="tbd">●</span>名合計の負担額 約<span class="tbd">●</span>万円 ÷ <span class="tbd">●</span>名／表示金額は税抜</p>
+      <strong>約20<small>万円</small></strong>
+      <p>5名合計の負担額 100万円 ÷ 5名／表示金額は税抜</p>
     </div>
 
     <div class="subsidy-metrics">
       <article>
         <span>経費助成後の金額</span>
-        <strong>約<span class="tbd">●</span><small>万円</small></strong>
-        <p>研修費 − 経費助成額（<span class="tbd">●</span>名合計・賃金助成を含めない場合／税抜）</p>
+        <strong>100<small>万円</small></strong>
+        <p>研修費250万円 − 経費助成150万円（5名合計・賃金助成を含めない場合／税抜）</p>
       </article>
       <article>
         <span>助成される金額の目安</span>
-        <strong>約<span class="tbd">●</span><small>万円</small></strong>
-        <p>研修費<span class="tbd">●</span>万円 × 経費助成率<span class="tbd">●</span>％／税抜</p>
+        <strong>150<small>万円</small></strong>
+        <p>研修費250万円 × 経費助成率75％＝187.5万円のところ、1名あたり上限30万円 × 5名＝150万円が適用／税抜</p>
       </article>
       <article class="metric-total">
         <span>実際の受講料</span>
-        <strong><span class="tbd">●</span><small>万円</small></strong>
-        <p><span class="tbd">●</span>名分・全<span class="tbd">●</span>時間の税抜総額</p>
+        <strong>250<small>万円</small></strong>
+        <p>5名分・全12時間の税抜総額（1名あたり50万円）</p>
       </article>
     </div>
 
-    <div class="subsidy-bar" aria-label="経費助成率のイメージ">
-      <div class="subsidy-bar__track"><span class="subsidy-bar__fill" style="width:75%"></span></div>
-      <div class="subsidy-bar__legend"><span>経費助成 <strong><span class="tbd">●</span>%</strong></span><span>経費助成後の負担 <strong><span class="tbd">●</span>%</strong></span></div>
-      <p class="fine">中小企業の経費助成率<span class="tbd">●</span>％で計算します。人数別の配分・端数処理により確定額は異なります。1名あたりの上限額の範囲内かどうかも、あわせて確認します。</p>
+    <div class="subsidy-bar" aria-label="経費助成の割合">
+      <div class="subsidy-bar__track"><span class="subsidy-bar__fill" style="width:60%"></span></div>
+      <div class="subsidy-bar__legend"><span>経費助成 <strong>60%</strong>（上限適用後）</span><span>経費助成後の負担 <strong>40%</strong></span></div>
+      <p class="fine">中小企業の経費助成率は75％ですが、12時間の訓練に適用される1名あたり上限30万円を超えるため、上限額で計算しています。1名あたり受講料50万円に対し、経費助成は30万円、負担は20万円となります。人数別の配分・端数処理により確定額は異なります。</p>
+    </div>
+
+    <div class="wage">
+      <div>
+        <span class="payment-label">賃金助成も対象になる場合</span>
+        <h3>追加で <strong>6万円</strong> の助成見込み</h3>
+        <p class="fine">1,000円 × 12時間 × 5名。所定労働時間内に賃金を支払い、全員が対象の12時間を受講する対面・同時双方向の研修を想定しています。eラーニング等には賃金助成がありません。</p>
+      </div>
+      <dl class="wage__sum">
+        <div><dt>経費助成＋賃金助成の合計</dt><dd>156万円</dd></div>
+        <div><dt>税抜受講料 − 助成金合計（参考差額）</dt><dd>94万円</dd></div>
+      </dl>
     </div>
 
     <div class="payment-summary">
       <div>
         <span class="payment-label">お支払い条件の確認事項</span>
-        <h3>ご契約後の研修費のお支払い時期と方法</h3>
+        <h3>ご契約後、研修費を全額先払い</h3>
       </div>
       <div class="payment-total">
-        <strong><span class="tbd">●</span><span>万円（税抜）</span></strong>
-        <p><span class="tbd">●</span>名・全<span class="tbd">●</span>時間／消費税は請求時に加算</p>
+        <strong>250<span>万円（税抜）</span></strong>
+        <p>5名・全12時間／消費税は請求時に加算</p>
       </div>
-      <p class="payment-timing">助成金は研修後の申請・審査を経て支給されます。最初に受講企業で研修費をご用意いただく前提で、支払い時期と方法を事前に確認します。</p>
+      <p class="payment-timing">助成金は研修後の申請・審査を経て支給されます。最初に受講企業で研修費全額をご用意いただきます。支払い期限は契約時に確認します。</p>
     </div>
 
     <div class="subsidy-notes">
@@ -603,17 +566,17 @@
         </li>
         <li>
           <span class="payment-owner">受講企業からDX職人へ</span>
-          <strong>研修費のお支払い</strong>
-          <p>助成金を差し引いた金額ではなく、研修費全額に消費税を加えた金額のお支払いとなります。支払い時期は契約時に確認します。</p>
+          <strong>研修費250万円（税抜）を全額先払い</strong>
+          <p>5名・全12時間の研修費総額です。助成金を差し引いた金額ではなく、研修費全額に消費税を加えた金額のお支払いとなります。</p>
         </li>
         <li>
           <span class="payment-owner">DX職人がご案内・受講企業が提出</span>
-          <strong>計画届の提出準備</strong>
-          <p>必要書類を整え、申請事業主である受講企業が管轄の労働局へ職業訓練実施計画届を提出します。提出期間は、研修開始日の前に定められています。</p>
+          <strong>入金確認後、速やかに計画届の提出準備</strong>
+          <p>必要書類を整え、申請事業主である受講企業が管轄の労働局へ職業訓練実施計画届を提出します。提出期間は原則、研修開始日の6か月前から1か月前までです。</p>
         </li>
         <li>
           <span class="payment-owner">DX職人・受講企業</span>
-          <strong>研修を実施</strong>
+          <strong>全12時間の研修を実施</strong>
           <p>合意したカリキュラムに沿って研修を実施。研修後も、実務への活用を支援します。</p>
         </li>
         <li>
@@ -622,14 +585,67 @@
           <p>受講企業が所定の期限内に支給申請を行います。助成金は審査・支給決定後に受講企業へ支給されます。支給の可否・金額・時期は審査によって決まります。</p>
         </li>
       </ol>
-      <p>「最初のお支払い額」と「助成後の参考差額」は異なります。助成金は後払いであり、支給を保証するものではありません。</p>
+      <p>「最初のお支払い額」と「助成後の参考差額」は異なります。最初に研修費250万円（税抜）全額をお支払いいただきます。経費助成後の研修費負担は100万円（税抜）、賃金助成も含めた参考差額は94万円です。助成金は後払いであり、支給を保証するものではありません。</p>
       <p>上記の差額には、受講中に会社が支払う従業員の賃金、申請代行費用、AIサービス利用料等を含めていません。賃金助成は給与負担への支援であり、研修料金の値引きではありません。消費税の税務上の取扱いは別途確認が必要です。</p>
-      <p>雇用保険の被保険者であること、研修費全額が対象経費として認められること、所定の計画届・申請などの要件を満たす場合の試算です。研修内容・実施方法・企業規模等により金額は変わり、受給を保証するものではありません。</p>
+      <p>雇用保険の被保険者5名、5名分の税抜研修費250万円全額が対象経費として認められること、所定の計画届・申請などの要件を満たす場合の試算です。事業内訓練に該当する場合は対象経費の算定方法が異なります。研修内容・実施方法・企業規模等により金額は変わり、受給を保証するものではありません。</p>
       <p>職務に直接必要なAI活用を扱う研修が対象です。汎用的なプロンプトの作り方や概念理解だけの研修は対象外となるため、カリキュラムと適用可否は事前に確認します。</p>
-      <p class="subsidy-links"><span class="tbd">●</span>年<span class="tbd">●</span>月<span class="tbd">●</span>日確認／最新の制度に基づく試算に差し替え予定。
+      <p class="subsidy-links"><span class="tbd">●</span>年<span class="tbd">●</span>月<span class="tbd">●</span>日確認の制度資料に基づく試算（確認日は要更新）。
         <a href="https://www.mhlw.go.jp/content/11800000/001731978.pdf" target="_blank" rel="noopener">厚生労働省：制度詳細（PDF）<svg class="icon" aria-hidden="true"><use href="#i-file-down"/></svg></a>・
         <a href="https://www.mhlw.go.jp/content/11800000/001731966.pdf" target="_blank" rel="noopener">対象訓練の変更点（PDF）<svg class="icon" aria-hidden="true"><use href="#i-file-down"/></svg></a>
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- 13b. system -->
+<section class="section system" id="system" aria-labelledby="system-title">
+  <div class="wrap">
+    <p class="section-label">SYSTEM</p>
+    <h2 id="system-title"><span class="ph">いつものLINEから、</span><br><span class="accent ph">システムにさわれる。</span></h2>
+    <div class="system-layout">
+      <div>
+        <p class="intro">研修とあわせて、仕事で使う道具もご提供しています。DX職人のシステムは、毎日使っているLINEのトークから使えるので、新しいアプリや難しい画面を覚える必要はありません。</p>
+        <ul class="feature-list">
+          <li>
+            <span class="feature-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg></span>
+            <div><h3>トークで頼める</h3><p>文章や写真を送るだけ。現場からでも、移動中でも使えます。</p></div>
+          </li>
+          <li>
+            <span class="feature-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-pencil"/></svg></span>
+            <div><h3>つくるのも、直すのもLINEで</h3><p>届いた下書きを見て、「ここを直して」と返せます。</p></div>
+          </li>
+          <li>
+            <span class="feature-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-table"/></svg></span>
+            <div><h3>記録は一覧に残る</h3><p>つくった内容は台帳に残り、あとから確認できます。</p></div>
+          </li>
+        </ul>
+      </div>
+      <article class="product-card" id="ore-no-jimuin">
+        <span class="product-card__tag">見積書・請求書</span>
+        <h3 class="product-card__name">俺の事務員</h3>
+        <p class="product-card__catch"><span class="ph">LINEのトークだけで、</span><span class="ph">見積書・請求書を作成。</span></p>
+        <p class="product-card__text">トークで内容を送ると、見積書・請求書を作成。台帳への記録から、PDFでの受け取りまでLINEで行えます。一人親方や個人事業主の方に向けたシステムです。</p>
+        <ul class="check-list">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-circle-check"/></svg>スマホだけで使える(パソコン不要)</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-circle-check"/></svg>いま使っている請求書の書式に対応</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-circle-check"/></svg>つくった書類は一覧に自動で記録</li>
+        </ul>
+        <a class="cta" href="https://line-jimuin.link/" target="_blank" rel="noopener">俺の事務員を詳しく見る<svg class="icon" aria-hidden="true"><use href="#i-external-link"/></svg></a>
+        <p class="fine">「俺の事務員」のサイト(line-jimuin.link)が開きます。</p>
+      </article>
+    </div>
+    <div class="system-more">
+      <article class="card">
+        <svg class="icon icon--24 card__icon" aria-hidden="true"><use href="#i-wrench"/></svg>
+        <h3>御社の業務に合わせたシステム</h3>
+        <p>日報、物件対応、問い合わせへの返信など。業務に合わせて、LINEから使える仕組みをつくります。</p>
+        <a class="text-link" href="#contact">相談してみる<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      </article>
+      <article class="card card--soon">
+        <svg class="icon icon--24 card__icon" aria-hidden="true"><use href="#i-plus"/></svg>
+        <h3>新しいシステムを準備中</h3>
+        <p>建設・不動産の仕事に役立つシステムを、順次このページでご案内します。</p>
+      </article>
     </div>
   </div>
 </section>
