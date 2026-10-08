@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tenani2023.github.io/dx-syokunin-website/sitemap.xml
