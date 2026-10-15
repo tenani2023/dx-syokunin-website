@@ -10,16 +10,31 @@ LINE → VPS(このボット) → Claude(記事) → gpt-image(画像) → git p
 
 | 送る内容 | 動き |
 |---|---|
-| `IT導入補助金 LINE 見積` のようなテーマ | 記事+画像を作って公開。URLが返る |
-| `次` | `data/keywords.json` の未執筆テーマで1本公開 |
-| `候補` | 次に書くテーマを5つ表示 |
+| `候補` | Search Console・GA4・既存記事・キーワード表をもとに「次に書くべき4本」を理由付きで提案。**ボタン(クイックリプライ)をタップすると、その記事を作って公開** |
+| `下書き候補` | 同じ提案だが、タップすると下書きで作る |
+| ボタン「別の候補」 | 提案済みを除いて、もう4本 |
+| ボタン「自分で入力」 | テーマを文章で送る案内 |
+| `IT導入補助金 LINE 見積` のようなテーマ | その内容で記事+画像を作って公開 |
 | `下書き <テーマ>` | 公開せず下書き(noindex・一覧に出ない)で作る |
 | `公開 <slug>` | 下書きを公開 |
 | `削除 <slug>` | 記事と画像を削除 |
 | `一覧` | 最近の記事10本 |
 | `ヘルプ` | コマンド一覧 |
 
-1本あたり3〜6分。費用の目安は、文章(Claude)数十円、画像(gpt-image medium 7枚)で100円前後。
+候補には「改稿」も含まれます(表示は多いのに順位やCTRが伸びない記事を、同じURLのまま書き直す)。
+`SUGGEST_CRON`(既定: 毎週月曜8:00)に、登録ユーザー全員へ候補が自動で届きます。
+
+1本あたり3〜6分。費用の目安は、文章(Claude)数十円、画像(gpt-image medium 7枚)で100円前後。候補の提案は1回数十円。
+
+## Google 連携(候補の精度を上げる・記録を残す)
+
+無くても動きますが、つなぐと「実際に検索されている語」をもとに候補を選べます。
+
+1. **GA4**: プロパティを作り、測定ID(`G-…`)をリポジトリの `site.config.json` の `ga4` に入れて `npm run build`。プロパティID(数字)を `.env` の `GA4_PROPERTY_ID` に。
+2. **Search Console**: サイトのドメインをプロパティ登録(DNS で確認)。`.env` の `GSC_SITE_URL` は `sc-domain:example.jp` の形。
+3. **Google Cloud**: プロジェクトを作り、API ライブラリで **Google Search Console API / Google Analytics Data API / Google Sheets API** を有効化。サービスアカウントを作って JSON 鍵をダウンロードし、VPS の `bot/google-key.json` に置く(git には入らない)。`.env` の `GOOGLE_APPLICATION_CREDENTIALS=/srv/dx-syokunin-website/bot/google-key.json`。
+4. サービスアカウントのメールアドレスを、**Search Console のプロパティにユーザー追加(フル)**、**GA4 プロパティに閲覧者で追加**。
+5. **スプレッドシート**を新規作成し、同じメールアドレスに**編集者**で共有。URL の `/d/` と `/edit` の間の ID を `.env` の `SHEET_ID` に。タブ(記事・検索クエリ・候補・ログ)はボットが自動で作ります。
 
 ## VPSへの設置(Ubuntu想定)
 
