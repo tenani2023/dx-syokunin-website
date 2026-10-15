@@ -127,7 +127,7 @@
       ];
       var subject = encodeURIComponent('【DX職人】ご相談（' + v('会社名') + '）');
       var body = encodeURIComponent(lines.join('\n'));
-      window.location.href = 'mailto:info@senwa-solutions.com?subject=' + subject + '&body=' + body;
+      window.location.href = 'mailto:info@senwa-inc.com?subject=' + subject + '&body=' + body;
     });
     // LINEのURLが未設定の間は「準備中」表示
     var lineUrl = window.DX_LINE_URL || '';
