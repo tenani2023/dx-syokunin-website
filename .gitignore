@@ -6,3 +6,7 @@ _products/
 # Node
 node_modules/
 .env
+
+# Google サービスアカウント鍵
+bot/google-key.json
+*.json.key

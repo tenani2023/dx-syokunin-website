@@ -28,13 +28,27 @@ const Article = z.object({
 });
 
 /**
- * @param {string} theme ユーザーが送ったテーマ(キーワードや一言)
- * @param {{existingTitles: string[], today: string}} ctx
+ * @param {string|object} brief テーマの文字列、または企画(候補)オブジェクト
+ * @param {{existingTitles: string[], today: string, rewrite?: {slug:string, body:string, title:string}}} ctx
  */
-export async function generateArticle(theme, ctx) {
+export async function generateArticle(brief, ctx) {
+  const themeBlock = typeof brief === 'string'
+    ? [brief]
+    : [
+      brief.theme,
+      `- 狙う検索語: ${(brief.targetKeywords || []).join(', ')}`,
+      `- 検索意図: ${brief.searchIntent || ''}`,
+      `- 切り口: ${brief.angle || ''}`,
+      `- カテゴリ: ${brief.category || ''}`,
+    ];
+  const rewriteBlock = ctx.rewrite
+    ? [``, `# 改稿`, `これは既存記事「${ctx.rewrite.title}」(slug: ${ctx.rewrite.slug})の全面改稿です。URLとslugは変えません。`,
+      `狙う検索語で上位を取れるよう、構成と内容を作り直してください。使える部分は活かして構いません。`, `## 既存記事の本文`, ctx.rewrite.body]
+    : [];
   const user = [
     `# テーマ`,
-    theme,
+    ...themeBlock,
+    ...rewriteBlock,
     ``,
     `# 条件`,
     `- 今日の日付: ${ctx.today}`,

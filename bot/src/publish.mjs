@@ -28,14 +28,31 @@ export function listPosts() {
   }).sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
+/** 記事の中身(企画・改稿の材料に使う) */
+export function readPost(slug) {
+  const src = fs.readFileSync(path.join(POSTS, `${slug}.md`), 'utf8');
+  const m = src.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  const fm = m ? m[1] : '';
+  const body = m ? m[2] : src;
+  const get = (k) => (fm.match(new RegExp(`^${k}:\\s*"?(.*?)"?\\s*$`, 'm')) || [])[1] || '';
+  const kw = (fm.match(/^keywords:\s*\[(.*)\]\s*$/m) || [])[1] || '';
+  return {
+    slug, title: get('title'), date: get('date'), category: get('category'), description: get('description'),
+    keywords: kw ? kw.split(',').map((s) => s.trim().replace(/^"|"$/g, '')).filter(Boolean) : [],
+    headings: [...body.matchAll(/^## (.+)$/gm)].map((x) => x[1]),
+    body,
+  };
+}
+
 const yq = (s) => JSON.stringify(String(s)); // YAML の値として安全な文字列(JSON互換)
 
-function toMarkdown(a, images, today, draft) {
+function toMarkdown(a, images, today, draft, originalDate) {
   const fm = [
     '---',
     `title: ${yq(a.title)}`,
     `seoTitle: ${yq(a.seoTitle)}`,
-    `date: "${today}"`,
+    `date: "${originalDate || today}"`,
+    ...(originalDate ? [`updated: "${today}"`] : []),
     `category: ${a.category}`,
     `description: ${yq(a.description)}`,
     `lead: ${yq(a.lead)}`,
@@ -57,11 +74,19 @@ function toMarkdown(a, images, today, draft) {
 }
 
 /** 記事と画像を保存し、ビルドして push する。戻り値は公開URL */
-export async function publishArticle(article, { draft = false, onProgress = () => {} } = {}) {
+export async function publishArticle(article, { draft = false, overwriteSlug = '', onProgress = () => {} } = {}) {
   await syncRepo();
   const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10); // JST
   let slug = article.slug;
-  if (fs.existsSync(path.join(POSTS, `${slug}.md`))) slug = `${slug}-${today.replace(/-/g, '')}`;
+  let originalDate = '';
+  if (overwriteSlug) {
+    // 改稿: 同じURLを保ち、公開日は元のまま、更新日を今日にする
+    slug = overwriteSlug;
+    originalDate = readPost(slug).date || today;
+    fs.rmSync(path.join(ASSETS, slug), { recursive: true, force: true });
+  } else if (fs.existsSync(path.join(POSTS, `${slug}.md`))) {
+    slug = `${slug}-${today.replace(/-/g, '')}`;
+  }
   article.slug = slug;
 
   const dir = path.join(ASSETS, slug);
@@ -82,10 +107,10 @@ export async function publishArticle(article, { draft = false, onProgress = () =
     }
   }
 
-  fs.writeFileSync(path.join(POSTS, `${slug}.md`), toMarkdown(article, images, today, draft));
+  fs.writeFileSync(path.join(POSTS, `${slug}.md`), toMarkdown(article, images, today, draft, originalDate));
   onProgress('ページを生成中');
   await run('node', ['tools/build.mjs'], { cwd: env.repoDir });
-  await commitAndPush(`${draft ? '下書き' : 'コラム'}: ${article.title}`);
+  await commitAndPush(`${overwriteSlug ? '改稿' : draft ? '下書き' : 'コラム'}: ${article.title}`);
   return `${site.url.replace(/\/$/, '')}/column/${slug}.html`;
 }
 

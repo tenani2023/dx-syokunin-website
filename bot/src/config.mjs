@@ -27,6 +27,13 @@ export const env = {
   port: Number(process.env.PORT || 3000),
   // LOCAL_MODE=1: git の同期・commit・push をしない(手元の作業ツリーで試すとき)
   localMode: process.env.LOCAL_MODE === '1',
+  // Google 連携(任意)
+  googleKeyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS ? path.resolve(process.env.GOOGLE_APPLICATION_CREDENTIALS) : '',
+  gscSiteUrl: process.env.GSC_SITE_URL || '',
+  ga4PropertyId: process.env.GA4_PROPERTY_ID || '',
+  sheetId: process.env.SHEET_ID || '',
+  // 定期提案(cron 形式、JST)。空なら提案しない
+  suggestCron: process.env.SUGGEST_CRON || '',
 };
 
 export const site = JSON.parse(fs.readFileSync(path.join(env.repoDir, 'site.config.json'), 'utf8'));

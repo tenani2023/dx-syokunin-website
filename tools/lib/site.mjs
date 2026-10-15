@@ -122,7 +122,7 @@ export function head({ rel, title, description, canonical, ogType = 'website', i
 <link rel="icon" type="image/png" sizes="192x192" href="${rel}assets/brand/icon-192.png">
 <link rel="apple-touch-icon" href="${rel}assets/brand/apple-touch-icon.png">
 <link rel="stylesheet" href="${rel}style.css?v=${config.assetVersion}">
-<script>document.documentElement.classList.add('has-js');</script>${extra}
+<script>document.documentElement.classList.add('has-js');</script>${ga4()}${extra}
 <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 </head>
 <body>
@@ -130,6 +130,11 @@ export function head({ rel, title, description, canonical, ogType = 'website', i
 ${ICONS}
 `;
 }
+
+// GA4(site.config.json の ga4 に測定IDを入れると有効)
+export const ga4 = () => config.ga4
+  ? `\n<script async src="https://www.googletagmanager.com/gtag/js?id=${config.ga4}"></script>\n<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${config.ga4}');</script>`
+  : '';
 
 export const publisher = () => ({
   '@type': 'Organization', name: config.company.name, url: config.company.url,
