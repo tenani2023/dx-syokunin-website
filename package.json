@@ -1,0 +1,19 @@
+{
+  "name": "dx-syokunin-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DX職人サイト: コラムのMarkdownからHTML・一覧・サイトマップを生成する",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "migrate": "node tools/migrate.mjs",
+    "serve": "node tools/serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "marked": "^15.0.7"
+  }
+}

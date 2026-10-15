@@ -1,1 +1,8 @@
 .DS_Store
+
+# 商品の受け渡し用フォルダ(社内資料のため公開しない)
+_products/
+
+# Node
+node_modules/
+.env

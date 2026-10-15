@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DX職人 コラム</title>
+    <link>https://tenani2023.github.io/dx-syokunin-website/column/</link>
+    <atom:link href="https://tenani2023.github.io/dx-syokunin-website/column/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>助成金・IT導入補助金を使ってLINEのAIシステムを導入する方法、建設・不動産の現場のDX、見積・請求・日報の手間を減らすAI活用を、現場の言葉でまとめています。</description>
+    <language>ja</language>
+    <item>
+      <title>見積書の打ち直しを減らす、AIの使いどころ</title>
+      <link>https://tenani2023.github.io/dx-syokunin-website/column/mitsumori-uchinaoshi.html</link>
+      <guid isPermaLink="true">https://tenani2023.github.io/dx-syokunin-website/column/mitsumori-uchinaoshi.html</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <category>現場のAI活用</category>
+      <description>届いた見積書や請求書を台帳に打ち直す作業は、AIの「読み取り」と「整理」で軽くできます。建設・不動産の事務で、どこをAIに任せ、どこを人が確認するか。1種類の書類から始める手順と、確認のルールづくりまで解説します。</description>
+    </item>
+    <item>
+      <title>助成金を使うなら、先に確認しておきたい「計画届」のこと</title>
+      <link>https://tenani2023.github.io/dx-syokunin-website/column/joseikin-keikakutodoke.html</link>
+      <guid isPermaLink="true">https://tenani2023.github.io/dx-syokunin-website/column/joseikin-keikakutodoke.html</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <category>助成金・補助金</category>
+      <description>人材開発支援助成金を使ってAI研修を受けるなら、研修の前に「計画届」の提出が必要です。提出の期間、研修日からの逆算、支給が後払いであること、対象になる研修の条件など、申し込む前に確認しておきたいことをまとめました。</description>
+    </item>
+    <item>
+      <title>現場のメモが、日報の下書きになるまで</title>
+      <link>https://tenani2023.github.io/dx-syokunin-website/column/genba-memo-nippo.html</link>
+      <guid isPermaLink="true">https://tenani2023.github.io/dx-syokunin-website/column/genba-memo-nippo.html</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <category>現場のAI活用</category>
+      <description>現場から戻ってから日報を書く時間を短くするには、「メモを送ると下書きが返ってくる」流れをつくることです。メモの取り方、AIへの頼み方、LINEで送る仕組み、人が確認するポイントまで、建設現場の日報づくりに合わせて解説します。</description>
+    </item>
+    <item>
+      <title>AIに入力してよい情報、避けたほうがよい情報</title>
+      <link>https://tenani2023.github.io/dx-syokunin-website/column/ai-joho-toriatsukai.html</link>
+      <guid isPermaLink="true">https://tenani2023.github.io/dx-syokunin-website/column/ai-joho-toriatsukai.html</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <category>現場のAI活用</category>
+      <description>顧客情報や図面をAIに渡して大丈夫なのか。建設・不動産の業務でAIを使うときの、情報の線引きの考え方をまとめました。入れてよい情報、伏せてから渡す方法、サービスの設定確認、社内ルールのつくり方まで解説します。</description>
+    </item>
+  </channel>
+</rss>

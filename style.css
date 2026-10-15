@@ -804,3 +804,58 @@ body { padding-bottom: 76px; }
 .post__related li a { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; font-size: 14px; font-weight: 700; color: var(--navy); background: #fff; border: 1px solid var(--line); border-radius: 999px; }
 .post__related li a:hover { border-color: var(--navy); }
 @media (min-width: 1001px) { .post__hero img { border-radius: 24px; } .post__body { padding-top: 48px; } }
+
+/* コラム:カテゴリ・目次・本文画像・中間CTA・FAQ・ページ送り(自動生成ページ用) */
+.cat-tabs { margin-bottom: 28px; }
+.cat-tabs ul { display: flex; flex-wrap: wrap; gap: 8px; }
+.cat-tabs li a { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 14px; font-size: 14px; font-weight: 700; color: var(--navy); background: #fff; border: 1px solid var(--line); border-radius: 999px; }
+.cat-tabs li a span { font-size: 11px; color: var(--muted); }
+.cat-tabs li a[aria-current] { color: #fff; background: var(--navy); border-color: var(--navy); }
+.cat-tabs li a[aria-current] span { color: rgba(255, 255, 255, .7); }
+a.post-card__cat:hover { text-decoration: underline; text-underline-offset: 3px; }
+.post-grid--3 { gap: 20px; }
+.post__toc { margin-top: 24px; padding: 20px 22px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+.post__toc h2 { margin: 0 0 8px; font-size: 16px; border-top: 0; padding-top: 0; }
+.post__toc ol { counter-reset: toc; display: grid; gap: 4px; }
+.post__toc li { counter-increment: toc; display: flex; gap: 10px; font-size: 15px; line-height: 1.7; }
+.post__toc li::before { content: counter(toc, decimal-leading-zero); font-size: 12px; font-weight: 700; color: var(--green); padding-top: 3px; }
+.post__toc li a { font-weight: 700; color: var(--navy); }
+.post__toc li a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.post__body h3 { margin: 28px 0 8px; font-size: 17px; line-height: 1.6; }
+.post__body .post__fig { margin: 20px 0 24px; }
+.post__body .post__fig img { width: 100%; height: auto; border-radius: 16px; background: var(--tint); }
+.post__body .post__fig figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }
+.post__body .post__list { display: grid; gap: 8px; margin: 8px 0 20px; }
+.post__body .post__list li { position: relative; padding-left: 20px; font-size: 16px; line-height: 1.9; }
+.post__body .post__list li::before { content: ""; position: absolute; left: 4px; top: .85em; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.post__body .post__steps { counter-reset: step; display: grid; gap: 8px; margin: 8px 0 20px; }
+.post__body .post__steps li { counter-increment: step; position: relative; padding: 10px 16px 10px 48px; background: var(--paper); border-left: 3px solid var(--navy); border-radius: 0 8px 8px 0; font-size: 15px; line-height: 1.9; }
+.post__body .post__steps li::before { content: counter(step); position: absolute; left: 14px; top: 11px; display: grid; place-items: center; width: 24px; height: 24px; font-size: 12px; font-weight: 800; color: #fff; background: var(--navy); border-radius: 50%; }
+.post__body .post__table { margin: 8px 0 20px; overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+.post__body table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.7; }
+.post__body th, .post__body td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+.post__body th { background: var(--tint); font-weight: 700; white-space: nowrap; }
+.post__body tr:last-child td { border-bottom: 0; }
+.post__body .post__quote { margin: 8px 0 20px; padding: 14px 18px; border-left: 3px solid var(--green); background: #fff; border-radius: 0 8px 8px 0; color: var(--muted); }
+.post__body .post__quote p { font-size: 15px; }
+.post__body > p a, .post__body li a, .post__body td a { color: var(--navy); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.post__mid { margin: 32px 0 8px; padding: 22px 24px; color: #fff; background: var(--navy); border-radius: 16px; }
+.post__mid-label { font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--green); }
+.post__mid-heading { margin-top: 6px; font-size: 18px; font-weight: 700; line-height: 1.5; }
+.post__mid-text { margin-top: 6px; font-size: 14px; line-height: 1.8; color: rgba(255, 255, 255, .78); }
+.post__mid .cta { margin-top: 14px; }
+.post__faq { margin-top: 40px; }
+.post__faq h2 { margin: 0 0 12px; }
+.post__others .post-grid { margin: 0 0 16px; }
+.post__others .post-card h2 { font-size: 16px; }
+.pager { margin-top: 32px; }
+.pager ol { display: flex; justify-content: center; gap: 8px; }
+.pager li a { display: grid; place-items: center; min-width: 40px; height: 40px; padding: 0 12px; font-weight: 700; color: var(--navy); background: #fff; border: 1px solid var(--line); border-radius: 999px; }
+.pager li a[aria-current] { color: #fff; background: var(--navy); border-color: var(--navy); }
+@media (min-width: 600px) { .post__others .post-grid--3 { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1001px) {
+  .post-grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .post__others .post-grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .post__mid { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; }
+  .post__mid .cta { margin-top: 0; grid-row: 1 / 4; grid-column: 2; }
+}

@@ -1,0 +1,54 @@
+{
+  "url": "https://tenani2023.github.io/dx-syokunin-website",
+  "name": "DX職人",
+  "tagline": "建設・不動産のためのDX・AI活用支援",
+  "company": {
+    "name": "株式会社千和",
+    "url": "https://senwa-inc.com",
+    "address": "大阪府大阪市北区梅田1-2-2 大阪駅前第2ビル12-12",
+    "email": "info@senwa-inc.com"
+  },
+  "product": {
+    "name": "俺の事務員",
+    "url": "https://line-jimuin.link/"
+  },
+  "assetVersion": "20261016a",
+  "column": {
+    "title": "コラム｜助成金で導入できるLINEのAIシステム・建設不動産DXの読みもの｜DX職人",
+    "description": "助成金・IT導入補助金を使ってLINEのAIシステムを導入する方法、建設・不動産の現場のDX、見積・請求・日報の手間を減らすAI活用を、現場の言葉でまとめています。",
+    "heading": ["助成金で入れる、", "現場のAIシステム。"],
+    "intro": "助成金・IT導入補助金を使って、LINEから使えるAIシステムを導入する。建設・不動産の現場で、見積・請求・日報・物件対応の手間を減らす方法を、わかりやすくまとめています。",
+    "perPage": 24,
+    "defaultOgImage": "assets/column/mitsumori-uchinaoshi.jpg"
+  },
+  "categories": {
+    "joseikin": { "name": "助成金・補助金", "description": "人材開発支援助成金やIT導入補助金を使って、AIシステムやDXを進める方法。" },
+    "ai-system": { "name": "AIシステム", "description": "見積・請求・日報・物件紹介など、仕事をそのまま任せられるAIシステムの話。" },
+    "line": { "name": "LINE業務改善", "description": "いつものLINEから業務を回す。新しいアプリを覚えずに始める業務改善。" },
+    "dx": { "name": "建設・不動産DX", "description": "建設・不動産の現場で、無理なく進めるDXの考え方と手順。" },
+    "genba": { "name": "現場のAI活用", "description": "見積の打ち直し、日報、情報の扱いなど、現場で起きている手間とAIの使いどころ。" }
+  },
+  "cta": {
+    "label": "CONTACT",
+    "heading": "助成金を使って、LINEのAIシステムを入れたい",
+    "text": "どの助成金・補助金が使えるか、いまの仕事に合うシステムは何か。無料でご相談いただけます。",
+    "button": "無料で相談する",
+    "href": "contact/"
+  },
+  "ctaMid": {
+    "heading": "助成金が使えて、LINEで使えるAIシステム",
+    "text": "見積・請求・日報を、いつものLINEのトークで。導入費用は助成金・補助金の対象になる場合があります。",
+    "button": "DX職人に相談する",
+    "href": "contact/"
+  },
+  "relatedPages": [
+    { "name": "DX職人でできること", "href": "#change" },
+    { "name": "費用・助成金", "href": "#subsidy" },
+    { "name": "LINEで使えるシステム", "href": "#system" },
+    { "name": "お問い合わせ", "href": "contact/" }
+  ],
+  "staticPages": [
+    { "path": "", "changefreq": "weekly", "priority": "1.0" },
+    { "path": "contact/", "changefreq": "monthly", "priority": "0.8" }
+  ]
+}
