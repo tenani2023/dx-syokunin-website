@@ -2,14 +2,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import Anthropic from '@anthropic-ai/sdk';
 import { z } from 'zod';
-import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
+import { structured } from './llm.mjs';
 import { env, site, keywords, BOT_DIR } from './config.mjs';
 import { listPosts, readPost } from './publish.mjs';
 import { fetchSearchConsole, fetchGA4, replaceTab, appendRows, now } from './google.mjs';
 
-const client = new Anthropic();
 const plannerPrompt = fs.readFileSync(path.join(BOT_DIR, 'prompts', 'planner.md'), 'utf8');
 
 const Plan = z.object({
@@ -72,17 +70,7 @@ export async function planCandidates({ exclude = [] } = {}) {
     '上の優先順位に従って、次に書く記事を4本選んでください。',
   ].join('\n');
 
-  const stream = client.messages.stream({
-    model: env.anthropicModel,
-    max_tokens: 16000,
-    thinking: { type: 'adaptive' },
-    output_config: { effort: 'high', format: zodOutputFormat(Plan) },
-    system: [{ type: 'text', text: plannerPrompt, cache_control: { type: 'ephemeral' } }],
-    messages: [{ role: 'user', content: data }],
-  });
-  const msg = await stream.finalMessage();
-  if (msg.stop_reason === 'refusal') throw new Error('候補の生成が拒否されました');
-  const plan = Plan.parse(JSON.parse(msg.content.filter((b) => b.type === 'text').map((b) => b.text).join('')));
+  const { data: plan } = await structured({ system: plannerPrompt, user: data, schema: Plan, name: 'plan', maxTokens: 16000 });
 
   const out = plan.candidates.slice(0, 4).map((c) => {
     const id = crypto.randomBytes(3).toString('hex');

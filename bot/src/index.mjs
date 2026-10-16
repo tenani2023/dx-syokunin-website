@@ -9,6 +9,7 @@ import { publishArticle, setDraft, deletePost, listPosts, readPost, syncRepo, de
 import { planCandidates, getCandidate } from './planner.mjs';
 import { updateCandidateStatus, log } from './google.mjs';
 
+for (const k of ['LINE_CHANNEL_SECRET', 'LINE_CHANNEL_ACCESS_TOKEN', 'OPENAI_API_KEY']) if (!process.env[k]) { console.error(`環境変数 ${k} がありません(.env を確認)`); process.exit(1); }
 const line = new messagingApi.MessagingApiClient({ channelAccessToken: env.lineToken });
 const app = express();
 

@@ -1,9 +1,9 @@
 # DX職人 コラム投稿ボット(LINE)
 
-LINEでテーマを送ると、Claude が記事を書き、gpt-image が見出しごとの画像を作り、サイトのリポジトリに push して公開します。
+LINEでテーマを送ると、OpenAI(gpt-5.5)が記事を書き、gpt-image が見出しごとの画像を作り、サイトのリポジトリに push して公開します。
 
 ```
-LINE → VPS(このボット) → Claude(記事) → gpt-image(画像) → ビルドして即公開(dx-syokunin.jp) + git push(GitHub)
+LINE → VPS(このボット) → OpenAI(記事) → gpt-image(画像) → ビルドして即公開(dx-syokunin.jp) + git push(GitHub)
 ```
 
 ## 使い方(LINE側)
@@ -24,7 +24,7 @@ LINE → VPS(このボット) → Claude(記事) → gpt-image(画像) → ビ�
 候補には「改稿」も含まれます(表示は多いのに順位やCTRが伸びない記事を、同じURLのまま書き直す)。
 `SUGGEST_CRON`(既定: 毎週月曜8:00)に、登録ユーザー全員へ候補が自動で届きます。
 
-1本あたり3〜6分。費用の目安は、文章(Claude)数十円、画像(gpt-image medium 7枚)で100円前後。候補の提案は1回数十円。
+1本あたり3〜6分。費用の目安は、文章(gpt-5.5)数十円、画像(gpt-image medium 7枚)で100円前後。候補の提案は1回数十円。
 
 ## Google 連携(候補の精度を上げる・記録を残す)
 

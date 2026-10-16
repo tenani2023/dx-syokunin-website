@@ -13,10 +13,13 @@ const need = (k) => {
 };
 
 export const env = {
-  lineSecret: need('LINE_CHANNEL_SECRET'),
-  lineToken: need('LINE_CHANNEL_ACCESS_TOKEN'),
+  // LINE(サーバー起動時にだけ必須。CLI では不要)
+  lineSecret: process.env.LINE_CHANNEL_SECRET || '',
+  lineToken: process.env.LINE_CHANNEL_ACCESS_TOKEN || '',
   allowed: (process.env.ALLOWED_USER_IDS || '').split(',').map((s) => s.trim()).filter(Boolean),
-  anthropicModel: process.env.ANTHROPIC_MODEL || 'claude-opus-5-5',
+  // 文章生成(OpenAI Responses API)
+  textModel: process.env.OPENAI_TEXT_MODEL || 'gpt-5.5',
+  reasoningEffort: process.env.OPENAI_REASONING_EFFORT || 'high',
   imageModel: process.env.OPENAI_IMAGE_MODEL || 'gpt-image-1',
   imageQuality: process.env.OPENAI_IMAGE_QUALITY || 'medium',
   maxSectionImages: Number(process.env.MAX_SECTION_IMAGES || 6),
