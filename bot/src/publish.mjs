@@ -12,11 +12,26 @@ const ASSETS = path.join(env.repoDir, 'assets', 'column');
 
 const git = (...args) => run('git', args, { cwd: env.repoDir, env: { ...process.env, GIT_AUTHOR_NAME: env.gitName, GIT_AUTHOR_EMAIL: env.gitEmail, GIT_COMMITTER_NAME: env.gitName, GIT_COMMITTER_EMAIL: env.gitEmail } });
 
+// origin の最新を取り込む(fast-forward のみ。VPS側だけにあるコミットは消さない)
 export async function syncRepo() {
   if (env.localMode) return;
-  await git('fetch', 'origin', env.branch);
+  await git('fetch', '-q', 'origin', env.branch);
   await git('checkout', '-q', env.branch);
-  await git('reset', '-q', '--hard', `origin/${env.branch}`);
+  try {
+    await git('merge', '-q', '--ff-only', `origin/${env.branch}`);
+  } catch (e) {
+    throw new Error(`origin/${env.branch} と履歴が食い違っています。VPSで git status を確認してください (${e.stderr?.trim() || e.message})`);
+  }
+}
+
+export async function buildSite() {
+  await run('node', ['tools/build.mjs'], { cwd: env.repoDir });
+}
+
+// GitHub への push や手動更新のあとにサイトを最新化する(同期 → ビルド)
+export async function deploySite() {
+  await syncRepo();
+  await buildSite();
 }
 
 export function listPosts() {
@@ -109,7 +124,7 @@ export async function publishArticle(article, { draft = false, overwriteSlug = '
 
   fs.writeFileSync(path.join(POSTS, `${slug}.md`), toMarkdown(article, images, today, draft, originalDate));
   onProgress('ページを生成中');
-  await run('node', ['tools/build.mjs'], { cwd: env.repoDir });
+  await buildSite();
   await commitAndPush(`${overwriteSlug ? '改稿' : draft ? '下書き' : 'コラム'}: ${article.title}`);
   return `${site.url.replace(/\/$/, '')}/column/${slug}.html`;
 }
@@ -121,7 +136,7 @@ export async function setDraft(slug, draft) {
   let src = fs.readFileSync(file, 'utf8').replace(/^draft:.*\n/m, '');
   if (draft) src = src.replace(/^---\n([\s\S]*?)\n---/, (m, fm) => `---\n${fm}\ndraft: true\n---`);
   fs.writeFileSync(file, src);
-  await run('node', ['tools/build.mjs'], { cwd: env.repoDir });
+  await buildSite();
   await commitAndPush(`${draft ? '下書きに戻す' : '公開'}: ${slug}`);
   return `${site.url.replace(/\/$/, '')}/column/${slug}.html`;
 }
@@ -134,7 +149,7 @@ export async function deletePost(slug) {
   fs.rmSync(path.join(env.repoDir, 'column', `${slug}.html`), { force: true });
   fs.rmSync(path.join(ASSETS, slug), { recursive: true, force: true });
   fs.rmSync(path.join(ASSETS, `${slug}.jpg`), { force: true });
-  await run('node', ['tools/build.mjs'], { cwd: env.repoDir });
+  await buildSite();
   await commitAndPush(`削除: ${slug}`);
 }
 

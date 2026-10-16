@@ -3,7 +3,7 @@
 LINEでテーマを送ると、Claude が記事を書き、gpt-image が見出しごとの画像を作り、サイトのリポジトリに push して公開します。
 
 ```
-LINE → VPS(このボット) → Claude(記事) → gpt-image(画像) → git push → GitHub Pages
+LINE → VPS(このボット) → Claude(記事) → gpt-image(画像) → ビルドして即公開(dx-syokunin.jp) + git push(GitHub)
 ```
 
 ## 使い方(LINE側)
@@ -29,70 +29,62 @@ LINE → VPS(このボット) → Claude(記事) → gpt-image(画像) → git p
 ## Google 連携(候補の精度を上げる・記録を残す)
 
 無くても動きますが、つなぐと「実際に検索されている語」をもとに候補を選べます。
+サービスアカウントは tenani-project(dx-line)のものを流用: **dxline@dxline.iam.gserviceaccount.com**(GCP プロジェクト `dxline`)。鍵は VPS の `/srv/dx-syokunin-website/bot/google-key.json`(git には入らない)。
 
-1. **GA4**: プロパティを作り、測定ID(`G-…`)をリポジトリの `site.config.json` の `ga4` に入れて `npm run build`。プロパティID(数字)を `.env` の `GA4_PROPERTY_ID` に。
-2. **Search Console**: サイトのドメインをプロパティ登録(DNS で確認)。`.env` の `GSC_SITE_URL` は `sc-domain:example.jp` の形。
-3. **Google Cloud**: プロジェクトを作り、API ライブラリで **Google Search Console API / Google Analytics Data API / Google Sheets API** を有効化。サービスアカウントを作って JSON 鍵をダウンロードし、VPS の `bot/google-key.json` に置く(git には入らない)。`.env` の `GOOGLE_APPLICATION_CREDENTIALS=/srv/dx-syokunin-website/bot/google-key.json`。
-4. サービスアカウントのメールアドレスを、**Search Console のプロパティにユーザー追加(フル)**、**GA4 プロパティに閲覧者で追加**。
-5. **スプレッドシート**を新規作成し、同じメールアドレスに**編集者**で共有。URL の `/d/` と `/edit` の間の ID を `.env` の `SHEET_ID` に。タブ(記事・検索クエリ・候補・ログ)はボットが自動で作ります。
+1. **API を有効化**(プロジェクト dxline。Sheets は有効済み):
+   - Search Console API: https://console.developers.google.com/apis/api/searchconsole.googleapis.com/overview?project=dxline
+   - Analytics Data API: https://console.developers.google.com/apis/api/analyticsdata.googleapis.com/overview?project=dxline
+2. **Search Console**: `dx-syokunin.jp` をドメインプロパティで登録(DNS の TXT で確認)→ 設定 > ユーザーと権限 で上のメールを**フル**で追加。`.env` の `GSC_SITE_URL=sc-domain:dx-syokunin.jp`。
+3. **スプレッドシート**(記録用): 上のメールを**編集者**で共有。`.env` の `SHEET_ID` に URL の `/d/` と `/edit` の間の ID。タブ(記事・検索クエリ・候補・ログ)はボットが自動で作る。
+4. **GA4**: プロパティを作り、測定ID(`G-…`)をリポジトリの `site.config.json` の `ga4` に入れて `npm run build`(トップと contact は手書きなので別途タグを入れる)。プロパティID(数字)を `.env` の `GA4_PROPERTY_ID` に。管理 > プロパティのアクセス管理 で上のメールを**閲覧者**で追加。
 
-## VPSへの設置(Ubuntu想定)
+## VPS(163.44.110.129)の構成
 
-### 1. Node.js 22 とリポジトリ
+tenani-project と同じ VPS(Ubuntu 24.04、root、nginx + certbot + pm2、Node 20 は nvm)。ディレクトリだけ分けている。
+接続: `ssh -i <tenani-project/dx-line/key-2025-11-05-14-13.pem> root@163.44.110.129`
 
-```bash
-curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-sudo apt-get install -y nodejs git
-sudo useradd -m -s /bin/bash bot          # ボット専用ユーザー
-sudo -iu bot
-ssh-keygen -t ed25519 -C "dx-syokunin-bot" # Enter連打でよい
-cat ~/.ssh/id_ed25519.pub                 # → GitHub の Deploy keys に「Allow write access」で登録
-exit
-sudo mkdir -p /srv && sudo chown bot:bot /srv
-sudo -iu bot
-git clone git@github.com:tenani2023/dx-syokunin-website.git /srv/dx-syokunin-website
-cd /srv/dx-syokunin-website && npm ci     # サイトのビルド用
-cd bot && npm ci                           # ボット用
-cp .env.example .env && nano .env         # キーを入れる
+```
+dx-syokunin.jp ─ nginx ─┬─ /            → /srv/dx-syokunin-website (静的ファイルをそのまま配信)
+                        ├─ /webhook     → 127.0.0.1:3200 (LINE)
+                        └─ /deploy      → 127.0.0.1:3200 (GitHub の push 通知 → git pull → 再生成)
+pm2: dx-syokunin-bot  (cwd /srv/dx-syokunin-website/bot, src/index.mjs)
 ```
 
-GitHub側: リポジトリ > Settings > Deploy keys > Add deploy key(**Allow write access** にチェック)。
+- サイトは GitHub Pages ではなく VPS 上のリポジトリを直接配信する。ボットが記事を作ると、その場でビルドされて即反映、同時に GitHub にも push される(バックアップ兼、github.io 側も更新)。
+- PC から GitHub に push したときは、GitHub Webhook(`/deploy`)が VPS を更新する。保険として cron で 10 分おきに `git pull --ff-only && build` も回す。
+- git の origin は fetch が https(鍵不要)、push が ssh(VPS の鍵 `/root/.ssh/id_ed25519_dx_syokunin` を GitHub の Deploy keys に **Allow write access** で登録)。
 
-### 2. LINE公式アカウント(投稿専用)
-
-1. https://developers.line.biz/ でプロバイダーと **Messaging API** チャネルを作る。
-2. 「Messaging API設定」で **チャネルアクセストークン(長期)** を発行 → `.env` の `LINE_CHANNEL_ACCESS_TOKEN`。
-3. 「チャネル基本設定」の **チャネルシークレット** → `LINE_CHANNEL_SECRET`。
-4. Webhook URL に `https://<ボットのドメイン>/webhook` を設定し、「Webhookの利用」をオン。応答メッセージ(自動応答)はオフ。
-5. QRコードから自分のLINEで友だち追加して何か送る → 「登録されていません」と自分のユーザーIDが返るので、`.env` の `ALLOWED_USER_IDS` に入れる。
-
-### 3. HTTPS(Caddy が最も簡単)
-
-LINE の Webhook は HTTPS 必須です。VPSにサブドメイン(例: `bot.<ドメイン>`)のAレコードを向けてから:
+### 設置(済)の要点
 
 ```bash
-sudo apt-get install -y caddy
-sudo tee /etc/caddy/Caddyfile <<'EOF'
-bot.example.jp {
-    reverse_proxy localhost:3000
-}
-EOF
-sudo systemctl reload caddy
+git clone https://github.com/tenani2023/dx-syokunin-website.git /srv/dx-syokunin-website
+cd /srv/dx-syokunin-website && git remote set-url --push origin git@github.com:tenani2023/dx-syokunin-website.git
+npm ci && (cd bot && npm ci)
+cp /dx-line/dxline-b15eb08bb4b5.json bot/google-key.json
+cp bot/deploy/nginx-dx-syokunin-proxy.conf /etc/nginx/snippets/dx-syokunin-proxy.conf
+cp bot/deploy/nginx-dx-syokunin.jp.conf /etc/nginx/sites-available/dx-syokunin.jp
+ln -s /etc/nginx/sites-available/dx-syokunin.jp /etc/nginx/sites-enabled/
+nginx -t && systemctl reload nginx
+certbot --nginx -d dx-syokunin.jp --redirect
+pm2 start bot/deploy/ecosystem.config.cjs && pm2 save
 ```
 
-### 4. 常駐(systemd)
+### LINE 公式アカウント(投稿専用・新規チャネル)
+
+1. https://developers.line.biz/ で **Messaging API** チャネルを作る。
+2. チャネルアクセストークン(長期)→ `LINE_CHANNEL_ACCESS_TOKEN`、チャネルシークレット → `LINE_CHANNEL_SECRET`。値は手元の `bot/.env` に書き、VPS へは `scp` で送る(チャットに貼らない)。
+3. Webhook URL: `https://dx-syokunin.jp/webhook` → 検証 → 「Webhookの利用」オン。応答メッセージ・あいさつメッセージはオフ。
+4. 友だち追加して何か送る → 「登録されていません」と自分のユーザーIDが返るので `ALLOWED_USER_IDS` に入れて `pm2 restart dx-syokunin-bot`。
+
+### 動作確認・運用
 
 ```bash
-sudo cp /srv/dx-syokunin-website/bot/deploy/dx-column-bot.service /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable --now dx-column-bot
-sudo journalctl -u dx-column-bot -f      # ログ
+pm2 logs dx-syokunin-bot            # ログ
+pm2 restart dx-syokunin-bot         # .env を変えたら
+cd /srv/dx-syokunin-website/bot && npm run deploy   # 手動で pull + 再生成
 ```
 
-### 5. 動作確認
-
-LINEで「ヘルプ」と送る → コマンド一覧が返れば接続OK。
-「下書き IT導入補助金 LINE 見積」と送ると、公開せずに1本作れます。
+LINEで「ヘルプ」→ コマンド一覧が返れば接続OK。「下書き IT導入補助金 LINE 見積」で公開せずに1本作れる。
 
 ## 手元のPCで試す(LINEなし・pushしない)
 
@@ -105,13 +97,12 @@ cd bot && npm run gen -- "IT導入補助金 LINE 見積システム" --draft
 `column/posts/` に記事、`assets/column/<slug>/` に画像ができ、`column/<slug>.html` が生成されます。git には触りません。
 `npm run serve`(リポジトリ直下)で http://localhost:8080/column/ を開いて確認できます。
 
-## 更新
+## 更新(ボットのコードを変えたとき)
+
+PC から GitHub に push すれば `/deploy` で VPS に反映される。ボット本体(bot/)を変えた場合はさらに:
 
 ```bash
-sudo -iu bot
-cd /srv/dx-syokunin-website && git pull && npm ci && cd bot && npm ci
-exit
-sudo systemctl restart dx-column-bot
+ssh -i <pem> root@163.44.110.129 'cd /srv/dx-syokunin-website/bot && npm ci --omit=dev && pm2 restart dx-syokunin-bot'
 ```
 
 ## 記事の書き方を変えたいとき

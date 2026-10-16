@@ -7,7 +7,8 @@
   "main": "src/index.mjs",
   "scripts": {
     "start": "node src/index.mjs",
-    "gen": "node src/cli.mjs"
+    "gen": "node src/cli.mjs",
+    "deploy": "node src/deploy.mjs"
   },
   "engines": {
     "node": ">=20"

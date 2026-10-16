@@ -1,10 +1,11 @@
 // LINE Webhook サーバー
+import crypto from 'node:crypto';
 import express from 'express';
 import cron from 'node-cron';
 import { middleware, messagingApi } from '@line/bot-sdk';
 import { env, keywords } from './config.mjs';
 import { generateArticle } from './generate.mjs';
-import { publishArticle, setDraft, deletePost, listPosts, readPost, syncRepo } from './publish.mjs';
+import { publishArticle, setDraft, deletePost, listPosts, readPost, syncRepo, deploySite } from './publish.mjs';
 import { planCandidates, getCandidate } from './planner.mjs';
 import { updateCandidateStatus, log } from './google.mjs';
 
@@ -146,6 +147,16 @@ async function handlePostback(userId, data) {
     return enqueue(() => createAndPublish(userId, c, { draft, slugHint: hint, candidateId: id }));
   }
 }
+
+// ---------- GitHub からの push を受けてサイトを再生成(リポジトリ > Settings > Webhooks) ----------
+app.post('/deploy', express.raw({ type: '*/*', limit: '2mb' }), (req, res) => {
+  if (!env.deploySecret) return res.status(404).end();
+  const sig = String(req.get('x-hub-signature-256') || '');
+  const want = 'sha256=' + crypto.createHmac('sha256', env.deploySecret).update(req.body).digest('hex');
+  if (sig.length !== want.length || !crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(want))) return res.status(401).end();
+  res.status(202).send('deploying');
+  enqueue(() => deploySite().then(() => console.log('deploy 完了'), (e) => console.error('deploy 失敗', e.message)));
+});
 
 // ---------- Webhook ----------
 app.get('/', (_req, res) => res.send('ok'));

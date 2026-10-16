@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /column/posts/
 
-Sitemap: https://tenani2023.github.io/dx-syokunin-website/sitemap.xml
+Sitemap: https://dx-syokunin.jp/sitemap.xml

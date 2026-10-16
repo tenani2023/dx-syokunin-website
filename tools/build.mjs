@@ -390,6 +390,28 @@ for (const [k, c] of Object.entries(config.categories)) {
 write(path.join(ROOT, 'sitemap.xml'), sitemap(published));
 write(path.join(OUT_DIR, 'feed.xml'), feed(published));
 
+// 404 ページ(どの階層でも出るので、リンクは / からの絶対パス)
+{
+  const recent = published.slice(0, 3);
+  const html = head({
+    rel: '/', title: `ページが見つかりません｜${config.name}`, description: 'お探しのページは移動または削除された可能性があります。', canonical: absUrl('404.html'),
+    noindex: true, jsonld: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'ページが見つかりません' },
+  }) + header('/', '') + `
+<main id="main">
+  <section class="section">
+    <div class="wrap" style="text-align:center;padding-top:40px">
+      <span class="section-label">404 NOT FOUND</span>
+      <h1>ページが見つかりません</h1>
+      <p style="margin:16px 0 28px">お探しのページは、移動または削除された可能性があります。</p>
+      <p><a class="cta" href="/">トップへ戻る</a> <a class="cta small" href="/column/" style="margin-left:8px">コラム一覧</a></p>
+    </div>
+    ${recent.length ? `<div class="wrap"><h2 style="text-align:center;margin-top:48px">よく読まれているコラム</h2><div class="post-grid post-grid--3">${recent.map((p) => cardHtml(p, '/')).join('')}</div></div>` : ''}
+  </section>
+</main>
+` + footer('/');
+  write(path.join(ROOT, '404.html'), html);
+}
+
 const warn = posts.flatMap((p) => p.warnings.map((w) => `${p.slug}: ${w}`));
 console.log(`生成しました: 記事 ${posts.length} 本(公開 ${published.length}、下書き ${posts.length - published.length})、一覧 ${totalPages} ページ、カテゴリ ${Object.keys(config.categories).length}`);
 if (warn.length) console.log('注意:\n  ' + warn.join('\n  '));
