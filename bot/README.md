@@ -35,6 +35,12 @@ LINE → VPS(このボット) → OpenAI(記事) → gpt-image(画像) → ビ�
 - **リッチメニュー**: 管理者・スタッフにだけ個別に付ける(デフォルトにはしない)。いまは「コラム投稿」1枠。画像はデスクトップの `開発環境/canva-rich/generate_dx_syokunin_staff_richmenu.js` で作って `bot/assets/richmenu-staff.png` にコピーし、VPS で `npm run richmenu`(作り直して全員にリンク)。
 - 自分の LINE ユーザーIDを知りたいときは `コラム登録` と送る。
 
+## お客さま(友だち追加時)
+
+友だち追加されると、短いあいさつと「タップで送れる」ボタン(無料で相談したい / 助成金が使えるか / 費用を知りたい / LINEのAIシステム / 話を聞きたい)を返す。
+ボタンで送られたときだけ「担当者から連絡します + 会社名・業種・困っている作業を送ってください」と返し、あとは何もしない(返信は担当者が LINE Official Account Manager のチャットで)。
+文言は `src/index.mjs` の `GREETING` / `QUICK_ASK` / `ASK_DETAIL`。LINE Official Account Manager の「あいさつメッセージ」はオフにしておく(二重になるため)。
+
 1本あたり3〜6分。費用の目安は、文章(gpt-5.5)数十円、画像(gpt-image medium 7枚)で100円前後。候補の提案は1回数十円。
 
 ## Google 連携(候補の精度を上げる・記録を残す)

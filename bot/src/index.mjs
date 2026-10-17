@@ -203,6 +203,33 @@ const REGISTER_WORD = 'スタッフ登録';
 const ID_WORD = 'コラム登録'; // 管理者の初期設定用: 自分のIDを返すだけ
 const waitingName = new Map(); // userId → 申請開始時刻
 
+// お客さま向け(友だち追加時)。HPを見て来た人が多いので説明は短く、送りやすさだけを用意する
+const GREETING = [
+  '友だち追加ありがとうございます。DX職人です。',
+  '',
+  '助成金・補助金を使ったLINEのAIシステム導入や、見積・請求・日報の手間を減らすご相談を、このトークで受け付けています。',
+  '',
+  '下のボタンを押すだけで送れます。もちろん、そのまま文章で送っていただいても大丈夫です。',
+].join('\n');
+
+// [ボタン名(20文字以内), 送られる文章]
+const QUICK_ASK = [
+  ['無料で相談したい', '無料で相談したいです。'],
+  ['助成金が使えるか', 'うちの会社で助成金・補助金が使えるか知りたいです。'],
+  ['費用を知りたい', '費用の目安を知りたいです。'],
+  ['LINEのAIシステム', 'LINEで使えるAIシステムについて聞きたいです。'],
+  ['話を聞きたい', '電話かオンラインで話を聞きたいです。'],
+];
+
+const ASK_DETAIL = [
+  'ありがとうございます。担当者からこのトークでご連絡します。',
+  '',
+  '差し支えなければ、次も送っていただくとスムーズです。',
+  '・会社名とお名前',
+  '・業種(建設・リフォーム・不動産など)',
+  '・いま手間がかかっている作業',
+].join('\n');
+
 const reply = (ev, text, quickReply) => ev.replyToken
   ? line.replyMessage({ replyToken: ev.replyToken, messages: [{ type: 'text', text, ...(quickReply ? { quickReply } : {}) }] }).catch((e) => console.error('reply失敗', e.message))
   : push(ev.source.userId, text, quickReply);
@@ -242,7 +269,13 @@ async function handleGuest(ev, userId) {
       ] });
     }
   }
-  // それ以外(お客さまのメッセージなど)は何もしない
+  // お客さまが友だち追加したとき: あいさつ + タップで送れるボタン
+  if (ev.type === 'follow') return reply(ev, GREETING, { items: QUICK_ASK.map(([label, text]) => ({ type: 'action', action: { type: 'message', label, text } })) });
+
+  // ボタンで送られた相談 → 受け取ったことと、書いてほしいことだけ返す(返事は担当者がチャットで)
+  if (QUICK_ASK.some(([, t]) => t === text)) return reply(ev, ASK_DETAIL);
+
+  // それ以外(お客さまのメッセージなど)は何もしない。担当者が LINE Official Account Manager で返信する
 }
 
 async function notifyAdmins(userId, name, displayName) {
@@ -297,6 +330,7 @@ app.post('/webhook', middleware({ channelSecret: env.lineSecret }), (req, res) =
       if (p.get('staff')) { handleStaffDecision(userId, p).catch((e) => console.error(e)); continue; }
     }
     if (!canPost(userId)) { handleGuest(ev, userId).catch((e) => console.error(e)); continue; }
+    if (ev.type === 'follow') { push(userId, helpFor(userId)); continue; }
     if (ev.type === 'message' && ev.message?.type === 'text') {
       if (ev.message.text.trim() === REGISTER_WORD) { push(userId, isAdmin(userId) ? '管理者として登録済みです。' : 'スタッフとして登録済みです。'); continue; }
       handleText(userId, ev.message.text).catch((e) => console.error(e));
