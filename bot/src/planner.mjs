@@ -1,4 +1,4 @@
-// 次に書く記事の候補を、検索データ・既存記事・キーワード表から Claude に選ばせる
+// 次に書く記事の候補を、検索データ・既存記事・キーワード表から AI に選ばせる
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -25,8 +25,18 @@ const Plan = z.object({
   })),
 });
 
-// 提案した候補はしばらく覚えておく(ボタンのタップに対応するため)
-const store = new Map();
+// 提案した候補は覚えておく(ボタンのタップに対応するため)。
+// 再起動しても消えないよう bot/var/candidates.json にも保存する。
+const STORE_FILE = path.join(BOT_DIR, 'var', 'candidates.json');
+const STORE_MAX = 200;
+const store = new Map((() => { try { return JSON.parse(fs.readFileSync(STORE_FILE, 'utf8')); } catch { return []; } })());
+function saveStore() {
+  while (store.size > STORE_MAX) store.delete(store.keys().next().value);
+  try {
+    fs.mkdirSync(path.dirname(STORE_FILE), { recursive: true });
+    fs.writeFileSync(STORE_FILE, JSON.stringify([...store]));
+  } catch (e) { console.error('候補の保存に失敗', e.message); }
+}
 export const getCandidate = (id) => store.get(id);
 
 /** データを集め、候補を4本作って返す */
@@ -78,8 +88,7 @@ export async function planCandidates({ exclude = [] } = {}) {
     store.set(id, cand);
     return cand;
   });
-  // 古い候補は捨てる(直近40件まで)
-  while (store.size > 40) store.delete(store.keys().next().value);
+  saveStore();
   await appendRows('candidates', out.map((c) => [stamp, c.id, c.label, c.theme, c.targetKeywords.join(', '), c.type === 'rewrite' ? `改稿(${c.rewriteSlug})` : '新規', c.reason, '提案', ''])).catch(() => {});
   return { summary: plan.summary, candidates: out, hasSearchData: !!gsc };
 }

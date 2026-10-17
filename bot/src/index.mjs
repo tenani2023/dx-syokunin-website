@@ -49,8 +49,10 @@ const today = () => new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0
 // ---------- 候補の提案(クイックリプライ) ----------
 const lastProposed = new Map(); // userId → 直近に提案したテーマ(「別の候補」で除外する)
 
-async function suggest(userId, { draft = false, more = false } = {}) {
-  await push(userId, more ? '別の候補を探しています…' : '検索データと既存記事を見て、次に書くべきテーマを選んでいます(1分ほど)…');
+async function suggest(userId, { draft = false, more = false, retry = false } = {}) {
+  await push(userId, retry
+    ? 'その候補は前の提案のため使えませんでした。最新のデータで選び直しています(1分ほど)…'
+    : more ? '別の候補を探しています…' : '検索データと既存記事を見て、次に書くべきテーマを選んでいます(1分ほど)…');
   try {
     const exclude = more ? (lastProposed.get(userId) || []) : [];
     const { summary, candidates, hasSearchData } = await planCandidates({ exclude });
@@ -181,7 +183,8 @@ async function handlePostback(userId, data) {
   const id = p.get('pick');
   if (id) {
     const c = getCandidate(id);
-    if (!c) return push(userId, 'この候補は古くなっています。「候補」と送って、もう一度選んでください。');
+    // 見つからない(かなり前の提案など)ときは、選び直してボタン付きで出し直す
+    if (!c) return suggest(userId, { draft, retry: true });
     const hint = keywords.find((k) => k.theme === c.theme)?.slug;
     return enqueue(() => createAndPublish(userId, c, { draft, slugHint: hint, candidateId: id }));
   }
