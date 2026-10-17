@@ -130,11 +130,11 @@ function related(post, posts) {
   return [...same, ...rest].slice(0, 3);
 }
 
-function cardHtml(p, rel = '') {
+function cardHtml(p, rel = '', root = `${rel}../`) {
   const cat = config.categories[p.category].name;
   const excerpt = p.description.length > 80 ? p.description.slice(0, 80) + '…' : p.description;
   return `      <article class="post-card">
-        <a class="post-card__img" href="${rel}${p.slug}.html"><img src="${rel}../${ASSETS}/${p.image}" width="${p.imageSize.width}" height="${p.imageSize.height}" loading="lazy" alt="${esc(p.imageAlt)}"></a>
+        <a class="post-card__img" href="${rel}${p.slug}.html"><img src="${root}${ASSETS}/${p.image}" width="${p.imageSize.width}" height="${p.imageSize.height}" loading="lazy" alt="${esc(p.imageAlt)}"></a>
         <div class="post-card__body">
           <div class="post-card__meta"><a class="post-card__cat" href="${rel}category/${p.category}/">${esc(cat)}</a><time datetime="${p.date}">${fmtDate(p.date)}</time></div>
           <h2><a href="${rel}${p.slug}.html">${esc(p.title)}</a></h2>
@@ -405,7 +405,7 @@ write(path.join(OUT_DIR, 'feed.xml'), feed(published));
       <p style="margin:16px 0 28px">お探しのページは、移動または削除された可能性があります。</p>
       <p><a class="cta" href="/">トップへ戻る</a> <a class="cta small" href="/column/" style="margin-left:8px">コラム一覧</a></p>
     </div>
-    ${recent.length ? `<div class="wrap"><h2 style="text-align:center;margin-top:48px">よく読まれているコラム</h2><div class="post-grid post-grid--3">${recent.map((p) => cardHtml(p, '/')).join('')}</div></div>` : ''}
+    ${recent.length ? `<div class="wrap"><h2 style="text-align:center;margin-top:48px">新しいコラム</h2><div class="post-grid post-grid--3">${recent.map((p) => cardHtml(p, '/column/', '/')).join('')}</div></div>` : ''}
   </section>
 </main>
 ` + footer('/');

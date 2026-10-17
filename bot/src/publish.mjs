@@ -155,7 +155,7 @@ export async function deletePost(slug) {
 
 async function commitAndPush(message) {
   if (env.localMode) { console.log(`[LOCAL_MODE] commit/push を省略: ${message}`); return; }
-  await git('add', '-A', 'column', 'assets/column', 'sitemap.xml');
+  await git('add', '-A', 'column', 'assets/column', 'sitemap.xml', '404.html');
   const { stdout } = await git('status', '--porcelain');
   if (!stdout.trim()) return;
   await git('commit', '-q', '-m', `${message}\n\n(LINEボットから投稿)`);
