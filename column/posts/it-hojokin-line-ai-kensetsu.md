@@ -5,8 +5,8 @@ date: "2026-10-17"
 category: joseikin
 description: "建設業でLINEから使えるAIシステムにIT導入補助金を使えるか不安な方向けに、対象経費の考え方、導入前に決めること、申請から見積・日報・請求確認を始める流れを解説します。年度で変わる点もあるため、最新情報の確認先もまとめます。"
 lead: "現場写真、メモ、見積依頼、請求確認がLINEに集まり、事務所で打ち直す。そんな建設業の会社は少なくありません。この記事では、LINEで使えるAIシステムをIT導入補助金で導入する考え方、確認すべき経費、申請から利用開始までの流れを整理します。"
-image: it-hojokin-line-ai-kensetsu/hero.jpg
-imageAlt: "建設会社の社長と事務担当がスマホと補助金書類を確認しているイラスト"
+image: it-hojokin-line-ai-kensetsu/eyecatch.jpg
+imageAlt: "IT導入補助金でLINEのAIシステムを入れる流れ"
 keywords: ["IT導入補助金 建設業", "LINEで使えるAIシステム", "建設業 AIシステム", "建設業 IT導入補助金", "LINE 業務改善 建設業", "見積 日報 請求 AI", "DX職人"]
 points:
   - "LINE入口でも対象確認は必要"
