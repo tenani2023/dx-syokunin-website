@@ -10,3 +10,6 @@ node_modules/
 # Google サービスアカウント鍵
 bot/google-key.json
 *.json.key
+
+# ボットの実行時データ(スタッフ名簿・リッチメニューID)
+bot/var/

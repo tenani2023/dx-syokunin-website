@@ -8,7 +8,8 @@
   "scripts": {
     "start": "node src/index.mjs",
     "gen": "node src/cli.mjs",
-    "deploy": "node src/deploy.mjs"
+    "deploy": "node src/deploy.mjs",
+    "richmenu": "node src/setup-richmenu.mjs"
   },
   "engines": {
     "node": ">=20"

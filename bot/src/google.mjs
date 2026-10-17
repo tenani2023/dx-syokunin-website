@@ -63,6 +63,7 @@ const TABS = {
   queries: { name: '検索クエリ', header: ['クエリ', 'ページ', 'クリック', '表示回数', 'CTR%', '平均順位', '取得日'] },
   candidates: { name: '候補', header: ['提案日', 'ID', 'ラベル', 'テーマ', '狙う語', '種類', '理由', '状態', 'slug/URL'] },
   log: { name: 'ログ', header: ['日時', '内容'] },
+  staff: { name: 'スタッフ', header: ['名前', '状態', 'LINEユーザーID', 'LINE表示名', '申請日時', '承認/却下日時', '処理した管理者'] },
 };
 
 async function sheetsClient() {

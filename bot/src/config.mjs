@@ -16,6 +16,9 @@ export const env = {
   // LINE(サーバー起動時にだけ必須。CLI では不要)
   lineSecret: process.env.LINE_CHANNEL_SECRET || '',
   lineToken: process.env.LINE_CHANNEL_ACCESS_TOKEN || '',
+  // 管理者(スタッフ申請の承認・却下ができる)。カンマ区切り
+  admins: (process.env.ADMIN_USER_IDS || '').split(',').map((s) => s.trim()).filter(Boolean),
+  // 追加で投稿を許可するユーザー(旧設定。通常はスタッフ登録を使う)
   allowed: (process.env.ALLOWED_USER_IDS || '').split(',').map((s) => s.trim()).filter(Boolean),
   // 文章生成(OpenAI Responses API)
   textModel: process.env.OPENAI_TEXT_MODEL || 'gpt-5.5',
