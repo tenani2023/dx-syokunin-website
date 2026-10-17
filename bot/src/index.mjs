@@ -204,8 +204,28 @@ app.post('/deploy', express.raw({ type: '*/*', limit: '2mb' }), (req, res) => {
   const want = 'sha256=' + crypto.createHmac('sha256', env.deploySecret).update(req.body).digest('hex');
   if (sig.length !== want.length || !crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(want))) return res.status(401).end();
   res.status(202).send('deploying');
-  enqueue(() => deploySite().then(() => console.log('deploy 完了'), (e) => console.error('deploy 失敗', e.message)));
+  queueDeploy('GitHub');
 });
+
+// VPS の cron から(保険: 10分おき)。nginx は /webhook と /deploy しか通さないので外からは届かない
+app.post('/internal/deploy', (req, res) => {
+  if (!['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(req.socket.remoteAddress) || req.get('x-forwarded-for')) return res.status(404).end();
+  res.status(202).send('deploying');
+  queueDeploy('cron');
+});
+
+// 記事作成と同じ列に並べて、git の操作が重ならないようにする
+let lastDeployError = '';
+function queueDeploy(from) {
+  enqueue(() => deploySite().then(
+    () => { console.log(`deploy 完了(${from})`); lastDeployError = ''; },
+    async (e) => {
+      console.error(`deploy 失敗(${from})`, e.message);
+      if (e.message !== lastDeployError) for (const a of env.admins) await push(a, `サイトの更新に失敗しました。\n${e.message}`);
+      lastDeployError = e.message;
+    },
+  ));
+}
 
 // ---------- スタッフ登録(登録外の人) ----------
 // 公式アカウントはお客さまとのチャットと共用。登録外の人には、下の合言葉以外は一切反応しない。
@@ -362,4 +382,4 @@ app.use((err, _req, res, _next) => {
   res.status(500).end();
 });
 
-app.listen(env.port, () => console.log(`DX職人 コラムボット: http://localhost:${env.port}/webhook`));
+app.listen(env.port, '127.0.0.1', () => console.log(`DX職人 コラムボット: http://localhost:${env.port}/webhook`));

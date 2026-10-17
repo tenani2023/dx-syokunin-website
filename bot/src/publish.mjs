@@ -12,15 +12,20 @@ const ASSETS = path.join(env.repoDir, 'assets', 'column');
 
 const git = (...args) => run('git', args, { cwd: env.repoDir, env: { ...process.env, GIT_AUTHOR_NAME: env.gitName, GIT_AUTHOR_EMAIL: env.gitEmail, GIT_COMMITTER_NAME: env.gitName, GIT_COMMITTER_EMAIL: env.gitEmail } });
 
-// origin の最新を取り込む(fast-forward のみ。VPS側だけにあるコミットは消さない)
+// origin(GitHub)の最新を取り込む。
+// - 作業ツリーの未コミット分は「ビルドで作り直したファイル」だけなので捨てる(このあと再ビルドする)。
+//   ※ VPS 上のファイルを手で直接編集しないこと。
+// - VPS にだけあるコミット(push 前の記事)は、GitHub の最新の上に積み直す(rebase)。
 export async function syncRepo() {
   if (env.localMode) return;
   await git('fetch', '-q', 'origin', env.branch);
   await git('checkout', '-q', env.branch);
+  await git('reset', '-q', '--hard', 'HEAD');
   try {
-    await git('merge', '-q', '--ff-only', `origin/${env.branch}`);
+    await git('rebase', '-q', `origin/${env.branch}`);
   } catch (e) {
-    throw new Error(`origin/${env.branch} と履歴が食い違っています。VPSで git status を確認してください (${e.stderr?.trim() || e.message})`);
+    await git('rebase', '--abort').catch(() => {});
+    throw new Error(`GitHub の内容と VPS の内容が衝突しました。VPS で git status を確認してください (${e.stderr?.trim() || e.message})`);
   }
 }
 
@@ -28,10 +33,12 @@ export async function buildSite() {
   await run('node', ['tools/build.mjs'], { cwd: env.repoDir });
 }
 
-// GitHub への push や手動更新のあとにサイトを最新化する(同期 → ビルド)
+// GitHub に push されたあとにサイトを最新化する(取り込み → ビルド → 作り直したファイルをコミットして push)
 export async function deploySite() {
+  if (env.localMode) return buildSite();
   await syncRepo();
   await buildSite();
+  await commitAndPush('サイトを再生成', { bot: false });
 }
 
 export function listPosts() {
@@ -153,12 +160,31 @@ export async function deletePost(slug) {
   await commitAndPush(`削除: ${slug}`);
 }
 
-async function commitAndPush(message) {
+// ボットが書く・作り直すファイル
+const OUTPUTS = ['column', 'assets/column', 'sitemap.xml', '404.html'];
+
+async function commitIfChanged(message) {
+  await git('add', '-A', ...OUTPUTS);
+  const { stdout } = await git('diff', '--cached', '--name-only');
+  if (!stdout.trim()) return false;
+  await git('commit', '-q', '-m', message);
+  return true;
+}
+
+async function commitAndPush(message, { bot = true } = {}) {
   if (env.localMode) { console.log(`[LOCAL_MODE] commit/push を省略: ${message}`); return; }
-  await git('add', '-A', 'column', 'assets/column', 'sitemap.xml', '404.html');
-  const { stdout } = await git('status', '--porcelain');
-  if (!stdout.trim()) return;
-  await git('commit', '-q', '-m', `${message}\n\n(LINEボットから投稿)`);
+  await commitIfChanged(bot ? `${message}\n\n(LINEボットから投稿)` : message);
   if (!env.gitPush) { console.log(`[GIT_PUSH=0] GitHub への push を省略: ${message}`); return; }
-  await git('push', '-q', 'origin', env.branch);
+  const { stdout: ahead } = await git('rev-list', '--count', `origin/${env.branch}..HEAD`);
+  if (Number(ahead.trim()) === 0) return;
+  // 他のメンバーが先に push していたら、取り込んで作り直してから push し直す
+  for (let i = 0; ; i++) {
+    try { await git('push', '-q', 'origin', env.branch); return; }
+    catch (e) {
+      if (i >= 2) throw new Error(`GitHub への push に失敗しました (${e.stderr?.trim() || e.message})`);
+      await syncRepo();
+      await buildSite();
+      await commitIfChanged('サイトを再生成');
+    }
+  }
 }
