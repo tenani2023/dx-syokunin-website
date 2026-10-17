@@ -159,5 +159,6 @@ async function commitAndPush(message) {
   const { stdout } = await git('status', '--porcelain');
   if (!stdout.trim()) return;
   await git('commit', '-q', '-m', `${message}\n\n(LINEボットから投稿)`);
+  if (!env.gitPush) { console.log(`[GIT_PUSH=0] GitHub への push を省略: ${message}`); return; }
   await git('push', '-q', 'origin', env.branch);
 }

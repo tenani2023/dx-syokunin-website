@@ -33,6 +33,8 @@ export const env = {
   port: Number(process.env.PORT || 3200),
   // GitHub の Webhook(push → サイト再生成)の署名検証用シークレット。空なら /deploy は無効
   deploySecret: process.env.DEPLOY_SECRET || '',
+  // 0 にすると GitHub へ push しない(VPS 内でコミットしてサイトには即反映)
+  gitPush: process.env.GIT_PUSH !== '0',
   // LOCAL_MODE=1: git の同期・commit・push をしない(手元の作業ツリーで試すとき)
   localMode: process.env.LOCAL_MODE === '1',
   // Google 連携(任意)
