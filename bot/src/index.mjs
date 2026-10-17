@@ -35,6 +35,7 @@ const ADMIN_HELP = [
   '管理者用:',
   'スタッフ一覧 … 登録状況',
   'スタッフ停止 <名前> … 投稿できないようにする',
+  'あいさつ確認 … お客さまが友だち追加したときの案内を表示',
 ].join('\n');
 
 const helpFor = (uid) => HELP + (isAdmin(uid) ? '\n' + ADMIN_HELP : '');
@@ -86,13 +87,13 @@ async function createAndPublish(userId, brief, { draft = false, slugHint, candid
   await push(userId, `${rewriteSlug ? '改稿' : draft ? '下書き' : '記事'}を作り始めました。\nテーマ: ${theme}\n(3〜6分ほどかかります)`);
   try {
     await syncRepo();
-    const existing = listPosts().filter((p) => p.slug !== rewriteSlug).map((p) => p.title);
+    const existing = listPosts().filter((p) => p.slug !== rewriteSlug).filter((p) => !p.draft).map((p) => ({ slug: p.slug, title: p.title }));
     let rewrite;
     if (rewriteSlug) {
       const old = readPost(rewriteSlug);
       rewrite = { slug: rewriteSlug, title: old.title, body: old.body };
     }
-    const { article } = await generateArticle(brief, { existingTitles: existing, today: today(), rewrite });
+    const { article } = await generateArticle(brief, { existingPosts: existing, today: today(), rewrite });
     if (slugHint && !rewriteSlug) article.slug = slugHint;
     let last = 0;
     const url = await publishArticle(article, {
@@ -128,6 +129,12 @@ async function handleText(userId, text) {
     if (/^(キャンセル|やめる)$/.test(t)) return push(userId, 'やめました。');
   }
   if (/^(ヘルプ|help|\?)$/i.test(t)) return push(userId, helpFor(userId));
+  // お客さまの友だち追加時の案内を確認する(ボタンを押した後の返事まで同じ動きで試せる)
+  if (isAdmin(userId) && t === 'あいさつ確認') {
+    await push(userId, '【確認用】お客さまが友だち追加したときは、次のメッセージとボタンが届きます。');
+    return push(userId, GREETING, { items: QUICK_ASK.map(([label, text]) => ({ type: 'action', action: { type: 'message', label, text } })) });
+  }
+  if (QUICK_ASK.some(([, q]) => q === t)) return push(userId, ASK_DETAIL);
   if (isAdmin(userId) && t === 'スタッフ一覧') {
     const all = listStaff();
     return push(userId, all.length ? all.map((s) => `${s.status} ${s.name}${s.displayName ? `(LINE: ${s.displayName})` : ''} ${s.requestedAt}`).join('\n') : 'スタッフはまだいません。');

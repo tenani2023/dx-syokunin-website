@@ -10,7 +10,7 @@ if (!theme) { console.error('使い方: npm run gen -- "テーマ" [--draft]'); 
 await syncRepo();
 const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
 console.log('生成中:', theme);
-const { article, usage } = await generateArticle(theme, { existingTitles: listPosts().map((p) => p.title), today });
+const { article, usage } = await generateArticle(theme, { existingPosts: listPosts().filter((p) => !p.draft).map((p) => ({ slug: p.slug, title: p.title })), today });
 console.log(`タイトル: ${article.title}\nトークン: in ${usage.input_tokens} / out ${usage.output_tokens}`);
 const url = await publishArticle(article, { draft, onProgress: (s) => console.log(s) });
 console.log('公開:', url);

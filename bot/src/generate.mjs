@@ -50,7 +50,10 @@ export async function generateArticle(brief, ctx) {
     `# 条件`,
     `- 今日の日付: ${ctx.today}`,
     `- サイトのカテゴリ: ${Object.entries(site.categories).map(([k, c]) => `${k}=${c.name}`).join(', ')}`,
-    `- すでにある記事(重複しない切り口にする): ${ctx.existingTitles.slice(0, 40).join(' / ') || 'なし'}`,
+    `- すでにある記事(重複しない切り口にする。内部リンク先もここから選ぶ):`,
+    ...(ctx.existingPosts?.length
+      ? ctx.existingPosts.slice(0, 60).map((p) => `  - ${p.title}(slug: ${p.slug})`)
+      : (ctx.existingTitles || []).slice(0, 40).map((t) => `  - ${t}`)),
     ``,
     `執筆ルールに従って、記事を1本、JSONで出力してください。`,
   ].join('\n');
