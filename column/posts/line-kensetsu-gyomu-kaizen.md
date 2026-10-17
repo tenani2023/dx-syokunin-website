@@ -5,8 +5,8 @@ date: "2026-10-17"
 category: line
 description: "現場からの写真、見積依頼、日報がLINEに散らばっていませんか。建設業でLINEを業務改善の入口にし、事務所の打ち直しを減らす方法を紹介。AIで下書き・分類・台帳化する流れも解説します。小さく始める手順も分かります。"
 lead: "現場ではLINEが一番早いのに、事務所ではあとから見積書、日報、写真台帳へ打ち直している。そんな会社は多いです。この記事では、いつものLINEを入口にして、現場メモ、写真、見積依頼を集め、AIシステムで整理する方法を説明します。新しいアプリを覚える前提にしません。"
-image: line-kensetsu-gyomu-kaizen/hero.jpg
-imageAlt: "建設現場の作業員がLINEで写真や依頼を送り、事務所で整理される様子"
+image: line-kensetsu-gyomu-kaizen/eyecatch.jpg
+imageAlt: "LINEから始める建設業の業務改善"
 keywords: ["LINE 業務改善 建設業", "LINE 業務効率化 建設業", "LINEで見積依頼", "現場から事務所", "LINE 写真 現場報告", "LINE 日報", "建設業 AIシステム", "DX職人"]
 points:
   - "いつものLINEを業務の入口にする"

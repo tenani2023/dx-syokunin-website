@@ -12,8 +12,15 @@ const Article = z.object({
   lead: z.string(),
   keywords: z.array(z.string()),
   points: z.array(z.string()),
-  heroImagePrompt: z.string(),
   heroImageAlt: z.string(),
+  // アイキャッチ(統一デザイン)。文字はテンプレートで組み、右のイラストだけ画像生成
+  eyecatch: z.object({
+    badge: z.string(),
+    lines: z.array(z.string()),
+    sub: z.string().nullable(),
+    bubbles: z.array(z.string()),
+    illustrationPrompt: z.string(),
+  }),
   sections: z.array(z.object({
     heading: z.string(),
     body: z.string(),

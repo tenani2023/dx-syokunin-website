@@ -5,6 +5,22 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { env, site } from './config.mjs';
 import { generateImage } from './images.mjs';
+import { makeIllustration, renderEyecatch } from './eyecatch.mjs';
+
+// アイキャッチのファイル名(旧: hero.jpg。名前を変えてブラウザの古いキャッシュを避ける)
+const EYECATCH = 'eyecatch.jpg';
+
+/** 統一デザインのアイキャッチを dir/eyecatch.jpg に作る。イラストに失敗しても文字だけで作る */
+export async function makeEyecatch(spec, dir) {
+  const illust = path.join(dir, '_illust.png');
+  let illustration;
+  try { illustration = await makeIllustration(spec.illustrationPrompt, illust); }
+  catch (e) { console.error('イラストの生成に失敗(文字だけで作ります):', e.message); }
+  const bubbles = (spec.bubbles || []).slice(0, 2).map((b) => b.replace(/\\n/g, '\n'));
+  await renderEyecatch({ badge: spec.badge, lines: spec.lines.slice(0, 4), sub: spec.sub || '', bubbles, illustration }, path.join(dir, EYECATCH));
+  fs.rmSync(illust, { force: true });
+  return path.join(dir, EYECATCH);
+}
 
 const run = promisify(execFile);
 const POSTS = path.join(env.repoDir, 'column', 'posts');
@@ -78,7 +94,7 @@ function toMarkdown(a, images, today, draft, originalDate) {
     `category: ${a.category}`,
     `description: ${yq(a.description)}`,
     `lead: ${yq(a.lead)}`,
-    `image: ${a.slug}/hero.jpg`,
+    `image: ${a.slug}/${EYECATCH}`,
     `imageAlt: ${yq(a.heroImageAlt)}`,
     `keywords: [${a.keywords.map(yq).join(', ')}]`,
     'points:',
@@ -114,8 +130,8 @@ export async function publishArticle(article, { draft = false, overwriteSlug = '
   const dir = path.join(ASSETS, slug);
   fs.mkdirSync(dir, { recursive: true });
 
-  onProgress('画像を作成中(ヒーロー)');
-  await generateImage(article.heroImagePrompt, path.join(dir, 'hero.jpg'), 'hero');
+  onProgress('アイキャッチを作成中');
+  await makeEyecatch(article.eyecatch, dir);
   const images = [];
   const n = Math.min(article.sections.length, env.maxSectionImages);
   for (let i = 0; i < n; i++) {

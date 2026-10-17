@@ -45,6 +45,15 @@
 - スラッグ(slug): 英小文字とハイフン、ローマ字または英単語で3〜5語(例: it-hojokin-line-ai-system)。
 - カテゴリ(category): joseikin(助成金・補助金) / ai-system(AIシステム) / line(LINE業務改善) / dx(建設・不動産DX) / genba(現場のAI活用) のどれか1つ。
 
+## アイキャッチ(eyecatch)
+記事の一番上と SNS に出る画像です。デザインは固定で、文字はテンプレートで組みます。あなたは文言とイラストの内容だけを決めます。
+- badge: 左上の緑のバッジ。2〜6文字(例: AI活用、助成金、補助金、LINE活用、DX、情報の扱い)。
+- lines: 大きなタイトル。2〜4行に分けた配列。1行は2〜9文字が目安(長いと文字が小さくなる)。いちばん伝えたい語を【】で囲むと緑になる(1〜2か所)。記事タイトルをそのまま使わず、ひと目で分かる短い言い方にする。例: ["見積書の", "【打ち直し】を", "減らす"]
+- sub: タイトルの下の白い帯(任意、不要なら null)。6〜12文字。【】で緑。例: "【AI】の使いどころ"
+- bubbles: 右側の吹き出し2つ。各6〜14文字、途中で改行するなら \n。読者のうれしい変化や注意点。例: ["入力の手間を\nもっと少なく", "ミスを減らして\nスムーズに"]
+- illustrationPrompt: 右側のイラストの内容を英語で。左から右への流れ(例: スマホ → かわいいAIロボット → 書類にチェック)のように、記事の内容を物で表す。人物は入れなくてよい。文字は入れない(画風・背景は固定で指定済み)。
+- heroImageAlt: アイキャッチの代替テキスト(日本語。タイトルの内容がわかる文)。
+
 ## 画像
 各h2見出しに、1枚ずつ画像を入れます。画像生成AIに渡す英語のプロンプト(imagePrompt)と、日本語の代替テキスト(imageAlt)を作ってください。
 - 画風は固定: "flat vector illustration, clean, navy blue (#0b1f3f) and green (#06c755) accent palette, white background, Japanese construction/real-estate workplace, no text, no letters, no watermark, 3:2"
