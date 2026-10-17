@@ -74,7 +74,9 @@ pm2 start bot/deploy/ecosystem.config.cjs && pm2 save
 1. https://developers.line.biz/ で **Messaging API** チャネルを作る。
 2. チャネルアクセストークン(長期)→ `LINE_CHANNEL_ACCESS_TOKEN`、チャネルシークレット → `LINE_CHANNEL_SECRET`。値は手元の `bot/.env` に書き、VPS へは `scp` で送る(チャットに貼らない)。
 3. Webhook URL: `https://dx-syokunin.jp/webhook` → 検証 → 「Webhookの利用」オン。応答メッセージ・あいさつメッセージはオフ。
-4. 友だち追加して何か送る → 「登録されていません」と自分のユーザーIDが返るので `ALLOWED_USER_IDS` に入れて `pm2 restart dx-syokunin-bot`。
+4. 友だち追加して「コラム登録」と送る → 自分のユーザーIDが返るので `ALLOWED_USER_IDS` に入れて `pm2 restart dx-syokunin-bot`。
+
+チャネルはお問い合わせ用の公式アカウント「-公式-DX職人 お問合せ」(@385peiyb)と共用。ボットは登録したユーザー以外には一切反応しない(合言葉「コラム登録」を除く)ので、お客さまとのチャットはこれまでどおり LINE Official Account Manager で行える。
 
 ### 動作確認・運用
 

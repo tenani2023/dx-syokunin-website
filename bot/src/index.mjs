@@ -160,6 +160,7 @@ app.post('/deploy', express.raw({ type: '*/*', limit: '2mb' }), (req, res) => {
 });
 
 // ---------- Webhook ----------
+const REGISTER_WORD = 'コラム登録';
 app.get('/', (_req, res) => res.send('ok'));
 app.post('/webhook', middleware({ channelSecret: env.lineSecret }), (req, res) => {
   res.status(200).end(); // LINE には先に返す
@@ -167,8 +168,13 @@ app.post('/webhook', middleware({ channelSecret: env.lineSecret }), (req, res) =
     const userId = ev.source?.userId;
     if (!userId) continue;
     if (!env.allowed.includes(userId)) {
-      console.log('未許可のユーザー:', userId);
-      if (ev.replyToken) line.replyMessage({ replyToken: ev.replyToken, messages: [{ type: 'text', text: `このアカウントは登録されていません。\n管理者に次のIDを伝えてください:\n${userId}` }] }).catch(() => {});
+      // お問い合わせ用の公式アカウントと共用しているため、登録外の人(お客さま)には一切反応しない。
+      // 管理者の登録時だけ、合言葉「コラム登録」で自分のIDを返す。
+      const text = ev.type === 'message' && ev.message?.type === 'text' ? ev.message.text.trim() : '';
+      if (text === REGISTER_WORD) {
+        console.log('登録申請:', userId);
+        if (ev.replyToken) line.replyMessage({ replyToken: ev.replyToken, messages: [{ type: 'text', text: `コラム投稿ボットの登録用IDです。\n${userId}` }] }).catch(() => {});
+      }
       continue;
     }
     if (ev.type === 'message' && ev.message?.type === 'text') handleText(userId, ev.message.text).catch((e) => console.error(e));
@@ -182,5 +188,12 @@ if (env.suggestCron && env.allowed.length) {
   if (!cron.validate(env.suggestCron)) console.error('SUGGEST_CRON の形式が不正です:', env.suggestCron);
   else cron.schedule(env.suggestCron, () => { for (const uid of env.allowed) suggest(uid); }, { timezone: 'Asia/Tokyo' });
 }
+
+// 署名不正などは 401 で静かに返す(スタックトレースを出さない)
+app.use((err, _req, res, _next) => {
+  if (err?.name === 'SignatureValidationFailed' || err?.name === 'JSONParseError') return res.status(401).end();
+  console.error(err);
+  res.status(500).end();
+});
 
 app.listen(env.port, () => console.log(`DX職人 コラムボット: http://localhost:${env.port}/webhook`));
