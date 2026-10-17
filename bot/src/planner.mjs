@@ -80,7 +80,7 @@ export async function planCandidates({ exclude = [] } = {}) {
     '上の優先順位に従って、次に書く記事を4本選んでください。',
   ].join('\n');
 
-  const { data: plan } = await structured({ system: plannerPrompt, user: data, schema: Plan, name: 'plan', maxTokens: 16000 });
+  const { data: plan } = await structured({ system: plannerPrompt, user: data, schema: Plan, name: 'plan', maxTokens: 40000 });
 
   const out = plan.candidates.slice(0, 4).map((c) => {
     const id = crypto.randomBytes(3).toString('hex');

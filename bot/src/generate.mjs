@@ -65,7 +65,7 @@ export async function generateArticle(brief, ctx) {
     `執筆ルールに従って、記事を1本、JSONで出力してください。`,
   ].join('\n');
 
-  const { data: article, usage } = await structured({ system: systemPrompt, user, schema: Article, name: 'article', maxTokens: 32000 });
+  const { data: article, usage } = await structured({ system: systemPrompt, user, schema: Article, name: 'article', maxTokens: 64000 });
 
   // slug の正規化(英小文字・数字・ハイフンのみ)
   article.slug = article.slug.toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || `post-${Date.now()}`;
