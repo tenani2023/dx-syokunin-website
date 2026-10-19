@@ -9,6 +9,7 @@
 
   function setMenu(open) {
     nav.classList.toggle('is-open', open);
+    if (open) nav.closest('.site-header').classList.remove('is-hidden');
     menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     menuBtn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
   }
@@ -49,6 +50,26 @@
     });
   }
 
+  /* ---------- スマホ: 下スクロール中はヘッダーを退避(見出しが隠れないように) ---------- */
+  var header = document.querySelector('.site-header');
+  var lastY = window.pageYOffset;
+  var mobileMq = window.matchMedia ? window.matchMedia('(max-width: 1000px)') : null;
+
+  function updateHeader() {
+    if (!header) return;
+    var y = Math.max(0, window.pageYOffset);
+    var isMobile = !mobileMq || mobileMq.matches;
+    var menuOpen = menuBtn && menuBtn.getAttribute('aria-expanded') === 'true';
+    if (!isMobile || menuOpen || y <= 80) {
+      header.classList.remove('is-hidden');
+    } else if (y > lastY + 6) {
+      header.classList.add('is-hidden');
+    } else if (y < lastY - 6) {
+      header.classList.remove('is-hidden');
+    }
+    lastY = y;
+  }
+
   /* ---------- モバイル固定CTA(相談エリアでは隠す) ---------- */
   var mobileCta = document.getElementById('mobileCta');
   var contact = document.getElementById('contact');
@@ -61,7 +82,7 @@
   }
 
   window.addEventListener('scroll', function () {
-    if (!ticking) { ticking = true; window.requestAnimationFrame(function () { updateCurrent(); updateDock(); }); }
+    if (!ticking) { ticking = true; window.requestAnimationFrame(function () { updateCurrent(); updateDock(); updateHeader(); }); }
   }, { passive: true });
   window.addEventListener('resize', function () { updateCurrent(); updateDock(); });
   updateCurrent();
