@@ -37,6 +37,7 @@ const ADMIN_HELP = [
   'スタッフ一覧 … 登録状況',
   'スタッフ停止 <名前> … 投稿できないようにする',
   'あいさつ確認 … お客さまが友だち追加したときの案内を表示',
+  'お客さまテスト … 自分をお客さま扱いにして返事を試す(「テスト終了」で戻る)',
 ].join('\n');
 
 const helpFor = (uid) => HELP + (isAdmin(uid) ? '\n' + ADMIN_HELP : '');
@@ -134,6 +135,12 @@ async function handleText(userId, text) {
   if (isAdmin(userId) && t === 'あいさつ確認') {
     await push(userId, '【確認用】お客さまが友だち追加したときは、次のメッセージとボタンが届きます。');
     return push(userId, GREETING, { items: QUICK_ASK.map(([label, text]) => ({ type: 'action', action: { type: 'message', label, text } })) });
+  }
+  // 管理者が自分をお客さま扱いにして試す(「テスト終了」まで。再起動でも戻る)
+  if (isAdmin(userId) && t === 'お客さまテスト') {
+    guestTest.add(userId);
+    resetGuest(userId);
+    return push(userId, '【テスト】ここからはお客さまと同じ扱いになります(初めてのお客さまの状態)。\n文章を送ると、最初の1回だけ返事が届きます。\n戻るときは「テスト終了」と送ってください。');
   }
   if (QUICK_ASK.some(([, q]) => q === t)) return push(userId, ASK_DETAIL);
   if (isAdmin(userId) && t === 'スタッフ一覧') {
@@ -233,6 +240,7 @@ function queueDeploy(from) {
 const REGISTER_WORD = 'スタッフ登録';
 const ID_WORD = 'コラム登録'; // 管理者の初期設定用: 自分のIDを返すだけ
 const waitingName = new Map(); // userId → 申請開始時刻
+const guestTest = new Set(); // 「お客さまテスト」中の管理者
 
 // お客さま向け(友だち追加時)。HPを見て来た人が多いので説明は短く、送りやすさだけを用意する
 const GREETING = [
@@ -372,6 +380,14 @@ app.post('/webhook', middleware({ channelSecret: env.lineSecret }), (req, res) =
     if (ev.type === 'postback' && isAdmin(userId)) {
       const p = new URLSearchParams(ev.postback.data);
       if (p.get('staff')) { handleStaffDecision(userId, p).catch((e) => console.error(e)); continue; }
+    }
+    if (guestTest.has(userId)) {
+      if (ev.type === 'message' && ev.message?.text?.trim() === 'テスト終了') {
+        guestTest.delete(userId);
+        resetGuest(userId);
+        push(userId, '【テスト】終了しました。管理者に戻りました。');
+      } else handleGuest(ev, userId).catch((e) => console.error(e));
+      continue;
     }
     if (!canPost(userId)) { handleGuest(ev, userId).catch((e) => console.error(e)); continue; }
     if (ev.type === 'follow') { push(userId, helpFor(userId)); continue; }
