@@ -10,6 +10,7 @@ import { planCandidates, getCandidate } from './planner.mjs';
 import { updateCandidateStatus, log } from './google.mjs';
 import { isAdmin, canPost, getStaff, listStaff, request as requestStaff, decide, stop as stopStaff } from './staff.mjs';
 import { linkStaffMenu, unlinkStaffMenu } from './richmenu.mjs';
+import { shouldAck, markAcked, resetGuest } from './guests.mjs';
 
 for (const k of ['LINE_CHANNEL_SECRET', 'LINE_CHANNEL_ACCESS_TOKEN', 'OPENAI_API_KEY']) if (!process.env[k]) { console.error(`環境変数 ${k} がありません(.env を確認)`); process.exit(1); }
 const line = new messagingApi.MessagingApiClient({ channelAccessToken: env.lineToken });
@@ -261,6 +262,12 @@ const ASK_DETAIL = [
   '・いま手間がかかっている作業',
 ].join('\n');
 
+// ボタンを使わずに送ってきたお客さまへ(最初の1回だけ。あとは担当者とそのままやりとり)
+const ACK = [
+  'メッセージありがとうございます。',
+  '内容を確認して、担当者からご連絡します。少しお待ちください。',
+].join('\n');
+
 const reply = (ev, text, quickReply) => ev.replyToken
   ? line.replyMessage({ replyToken: ev.replyToken, messages: [{ type: 'text', text, ...(quickReply ? { quickReply } : {}) }] }).catch((e) => console.error('reply失敗', e.message))
   : push(ev.source.userId, text, quickReply);
@@ -301,12 +308,18 @@ async function handleGuest(ev, userId) {
     }
   }
   // お客さまが友だち追加したとき: あいさつ + タップで送れるボタン
-  if (ev.type === 'follow') return reply(ev, GREETING, { items: QUICK_ASK.map(([label, text]) => ({ type: 'action', action: { type: 'message', label, text } })) });
+  if (ev.type === 'follow') {
+    resetGuest(userId);
+    return reply(ev, GREETING, { items: QUICK_ASK.map(([label, text]) => ({ type: 'action', action: { type: 'message', label, text } })) });
+  }
 
   // ボタンで送られた相談 → 受け取ったことと、書いてほしいことだけ返す(返事は担当者がチャットで)
-  if (QUICK_ASK.some(([, t]) => t === text)) return reply(ev, ASK_DETAIL);
+  if (QUICK_ASK.some(([, t]) => t === text)) { markAcked(userId); return reply(ev, ASK_DETAIL); }
 
-  // それ以外(お客さまのメッセージなど)は何もしない。担当者が LINE Official Account Manager で返信する
+  // それ以外のメッセージ(文章・スタンプ・写真など)は、最初の1回だけ「担当者から連絡します」と返す。
+  // あとは何もしない。担当者が LINE Official Account Manager で返信する
+  // (スタッフ申請中・却下・停止の人はお客さまではないので返さない)
+  if (ev.type === 'message' && !getStaff(userId) && shouldAck(userId)) return reply(ev, ACK);
 }
 
 async function notifyAdmins(userId, name, displayName) {
