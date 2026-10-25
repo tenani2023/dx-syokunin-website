@@ -1,4 +1,4 @@
-/* テナニ 支払管理(仮称) LP: 社長がスマホで承認する流れの再現(文言は製品の画面の原文) */
+/* 俺の金庫番 LP: 社長がスマホで承認する流れの再現(文言は製品の画面の原文) */
 (function () {
   'use strict';
 
@@ -32,8 +32,8 @@
   function clearTimers() { timers.forEach(clearTimeout); timers = []; }
 
   function bar(on) {
-    if (!on) return '<div class="sk-app__bar"><p class="sk-app__title">TENANi 支払管理</p></div>';
-    return '<div class="sk-app__bar"><p class="sk-app__title">TENANi 支払管理</p><p class="sk-app__nav">' +
+    if (!on) return '<div class="sk-app__bar"><p class="sk-app__title">俺の金庫番</p></div>';
+    return '<div class="sk-app__bar"><p class="sk-app__title">俺の金庫番</p><p class="sk-app__nav">' +
       NAV.map(function (n) { return '<span' + (n === on ? ' class="is-on"' : '') + '>' + n + '</span>'; }).join('') + '</p></div>';
   }
 
@@ -57,7 +57,7 @@
   function login() {
     render(bar() +
       '<div class="sk-app__body"><div class="sk-app__center">' +
-        '<h4>TENANi 支払管理</h4>' +
+        '<h4>俺の金庫番</h4>' +
         '<div class="sk-app__box">' +
           '<span class="sk-app__label">会社コード</span><span class="sk-app__input">kakuu-koumuten</span>' +
           '<span class="sk-app__label">メールアドレス</span><span class="sk-app__input">taro@example.jp</span>' +
