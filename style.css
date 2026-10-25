@@ -286,6 +286,15 @@ h2.center, .intro.center { text-align: center; }
 .card h3 { margin-top: 16px; font-size: 18px; line-height: 1.5; }
 .card p { margin-top: 10px; font-size: 14px; line-height: 1.9; color: var(--muted); }
 .card .text-link { margin-top: 8px; }
+/* 商品カードを横に並べる(説明と特長は上の段に) */
+.system-layout { gap: 24px; margin-top: 24px; }
+.system-layout .intro, .system-layout .feature-list { margin-top: 0; }
+.system-products { display: grid; gap: 24px; margin-top: 40px; }
+.system-products .product-card { display: flex; flex-direction: column; }
+.system-products .product-card__tag { align-self: flex-start; }
+.system-products .product-card .cta { margin-top: auto; }
+@media (min-width: 600px) { .system-products .product-card .cta { align-self: flex-start; } }
+@media (min-width: 1001px) { .system-products { grid-template-columns: 1fr 1fr; } }
 
 /* ---------- 9. case ---------- */
 .case { background: var(--paper); }

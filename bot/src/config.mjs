@@ -23,7 +23,7 @@ export const env = {
   // 文章生成(OpenAI Responses API)
   textModel: process.env.OPENAI_TEXT_MODEL || 'gpt-5.5',
   reasoningEffort: process.env.OPENAI_REASONING_EFFORT || 'high',
-  imageModel: process.env.OPENAI_IMAGE_MODEL || 'gpt-image-1',
+  imageModel: process.env.OPENAI_IMAGE_MODEL || 'gpt-image-2.5-sunburst',
   imageQuality: process.env.OPENAI_IMAGE_QUALITY || 'medium',
   maxSectionImages: Number(process.env.MAX_SECTION_IMAGES || 6),
   repoDir: path.resolve(need('REPO_DIR')),
