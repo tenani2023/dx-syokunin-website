@@ -27,7 +27,7 @@
 .sk-crumb { margin-bottom: 22px; }
 .sk-crumb ol { color: rgba(255, 255, 255, .62); }
 .sk-crumb a { text-decoration-color: rgba(255, 255, 255, .3); }
-.sk-eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 4px 14px 4px 4px; font-size: 12px; font-weight: 700; letter-spacing: .06em; color: #fff; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .2); border-radius: 999px; }
+.sk-eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; font-size: 12px; font-weight: 700; letter-spacing: .06em; color: #fff; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .2); border-radius: 999px; }
 .sk-soon { padding: 3px 10px; color: #0b2152; background: #ffd25c; border-radius: 999px; }
 .sk-name { margin-top: 18px; font-size: 15px; font-weight: 700; color: #cfe0ff; }
 .sk-name small { margin-left: 4px; font-size: 12px; font-weight: 700; }
