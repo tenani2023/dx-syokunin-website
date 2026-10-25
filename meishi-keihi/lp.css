@@ -297,3 +297,47 @@
 .mk-card__flex { position: absolute; right: 8px; bottom: 0; box-shadow: 0 24px 50px rgba(11, 31, 63, .22); border: 1px solid var(--line); }
 @media (min-width: 1001px) { .mk-card__visual { padding-bottom: 120px; } .mk-card__flex { right: 32px; } }
 .mk-phone--hero .mk-phone__screen { -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%); mask-image: linear-gradient(to bottom, #000 82%, transparent 100%); }
+
+.mk { --lp-accent: #07a047; }
+
+/* ---------- かんたん版の部品(困りごと3つ・3ステップ・便利なところ・2人) ---------- */
+.lp-pain3 { display: grid; gap: 12px; margin-top: 32px; }
+.lp-pain3 article { display: flex; align-items: center; gap: 16px; padding: 22px 22px; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; }
+.lp-pain3__icon { display: grid; place-items: center; width: 52px; height: 52px; flex: none; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 50%; }
+.lp-pain3 h3 { font-size: 18px; line-height: 1.55; color: var(--navy); }
+.lp-answer { margin-top: 28px; font-size: clamp(18px, 2.4vw, 24px); font-weight: 700; line-height: 1.7; color: var(--navy); }
+.lp-answer strong { color: var(--lp-accent); }
+.lp-steps { display: grid; gap: 14px; margin-top: 36px; }
+.lp-steps li { position: relative; padding: 30px 24px 26px; background: #fff; border: 1px solid var(--line); border-radius: 22px; text-align: center; }
+.lp-steps__no { position: absolute; left: 18px; top: 14px; font-size: 13px; font-weight: 800; letter-spacing: .1em; color: var(--lp-accent); }
+.lp-steps__no::before { content: "STEP "; }
+.lp-steps__icon { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 auto; color: #fff; background: var(--lp-accent); border-radius: 20px; }
+.lp-steps__icon .icon { width: 30px; height: 30px; }
+.lp-steps h3 { margin-top: 16px; font-size: 20px; line-height: 1.5; color: var(--navy); }
+.lp-steps p { margin-top: 8px; font-size: 14.5px; line-height: 1.85; color: var(--muted); }
+.lp-fine { margin-top: 16px; font-size: 12.5px; line-height: 1.8; color: var(--muted); }
+.lp-merit-sec { background: #fff; }
+.lp-merit { display: grid; gap: 14px; margin-top: 36px; }
+.lp-merit article { padding: 26px 24px; background: var(--paper); border: 1px solid var(--line); border-radius: 22px; }
+.lp-merit .icon { width: 44px; height: 44px; padding: 10px; color: #fff; background: var(--lp-accent); border-radius: 14px; }
+.lp-merit h3 { margin-top: 14px; font-size: 19px; line-height: 1.5; color: var(--navy); }
+.lp-merit p { margin-top: 6px; font-size: 14px; line-height: 1.85; color: var(--muted); }
+.lp-two { display: grid; gap: 14px; margin-top: 32px; }
+.lp-two article { display: flex; align-items: center; gap: 18px; padding: 24px; background: #fff; border: 1px solid var(--line); border-radius: 22px; }
+.lp-two__icon { display: grid; place-items: center; width: 56px; height: 56px; flex: none; color: #fff; background: var(--navy); border-radius: 16px; }
+.lp-two h3 { font-size: 20px; color: var(--navy); }
+.lp-two p { margin-top: 4px; font-size: 14.5px; line-height: 1.8; color: var(--muted); }
+@media (min-width: 600px) {
+  .lp-merit, .lp-two { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1001px) {
+  .lp-pain3, .lp-steps, .lp-merit { grid-template-columns: repeat(3, 1fr); }
+  .lp-pain3 article { flex-direction: column; text-align: center; padding: 30px 22px; }
+  .lp-answer { text-align: center; }
+  .sk-how .lp-fine, .sk-who-sec .lp-fine { text-align: center; }
+  .lp-two { max-width: 860px; margin-inline: auto; }
+}
+.mk-admin { background: var(--paper); }
+.mk-admin .mk-feature { margin-top: 0; }
+.mk-plan { background: #fff; }
+.mk .faq { background: var(--paper); }
