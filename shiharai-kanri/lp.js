@@ -1,4 +1,4 @@
-/* 俺の金庫番 LP: 社長がスマホで承認する流れの再現(文言は製品の画面の原文) */
+/* 俺の金庫番 LP: 社長がスマホで承認する流れ(画面はイメージ) */
 (function () {
   'use strict';
 
@@ -9,16 +9,16 @@
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var timers = [];
 
-  // 架空のデータ
+  // サンプルのデータ
   var PLANS = {
     toso: {
-      name: '架空塗装 株式会社', amount: '192,500 円', date: '2026-10-29 (木)', dateShort: '2026-10-29',
-      bankShort: '架空銀行 東支店', bankFull: '架空銀行 (9999) 東支店 (210) 普通', last4: '7777', holder: 'ｶ)ｶｸｳﾄｿｳ', ver: 2,
+      name: '丸山塗装 株式会社', amount: '192,500 円', date: '2026-10-29 (木)', dateShort: '2026-10-29',
+      bankShort: 'あおば銀行 東支店', bankFull: 'あおば銀行 (9999) 東支店 (210) 普通', last4: '7777', holder: 'ｶ)ﾏﾙﾔﾏﾄｿｳ', ver: 2,
       bill: '2026-1108', billDate: '2026-10-06', due: '2026-11-20', file: 'seikyu-2026-1108.pdf (PDF・1 KB)', changed: true
     },
     setsubi: {
-      name: '架空設備工業 株式会社', amount: '1,210,000 円', date: '2026-10-29 (木)', dateShort: '2026-10-29',
-      bankShort: '架空銀行 中央支店', bankFull: '架空銀行 (9999) 中央支店 (102) 当座', last4: '2222', holder: 'ｶ)ｶｸｳｾﾂﾋﾞｺｳｷﾞﾖｳ', ver: 1,
+      name: '東和設備工業 株式会社', amount: '1,210,000 円', date: '2026-10-29 (木)', dateShort: '2026-10-29',
+      bankShort: 'あおば銀行 中央支店', bankFull: 'あおば銀行 (9999) 中央支店 (102) 当座', last4: '2222', holder: 'ｶ)ﾄｳﾜｾﾂﾋﾞｺｳｷﾞﾖｳ', ver: 1,
       bill: '2026-1107', billDate: '2026-10-06', due: '2026-11-20', file: 'seikyu-2026-1107.pdf (PDF・1 KB)', changed: false
     }
   };
@@ -123,7 +123,7 @@
         '<dt>予定日</dt><dd>' + p.date + '</dd>' +
         '<dt>振込先</dt><dd>' + p.bankShort + '<br>下 4 桁 <b>' + p.last4 + '</b> / ' + p.holder + '</dd>' +
         '<dt>何の支払か</dt><dd>請求 ' + p.bill + ' (期日 ' + p.due + ')<br>請求額 ' + p.amount + ' / 未払残 ' + p.amount + ' / 原本 1 件</dd>' +
-        '<dt>作成者</dt><dd>架空 花子</dd>' +
+        '<dt>作成者</dt><dd>佐藤 花子</dd>' +
       '</dl>' +
       '<button type="button" class="sk-app__btn" data-off>内容を確認する</button>' +
     '</div>';
@@ -154,7 +154,7 @@
       '<dt>予定日</dt><dd>' + p.date + '</dd>' +
       '<dt>請求</dt><dd>' + p.bill + ' / 請求日 ' + p.billDate + ' / 請求額 ' + p.amount + ' / 支払期日 ' + p.due + '<br>未払残 ' + p.amount + ' / 予約中 0 円</dd>' +
       '<dt>原本</dt><dd><span class="sk-app__link" data-off>' + p.file + '</span></dd>' +
-      '<dt>予定の作成者</dt><dd>架空 花子 (版 1)</dd>' +
+      '<dt>予定の作成者</dt><dd>佐藤 花子 (版 1)</dd>' +
       '<dt>状態</dt><dd>承認待ち</dd>' +
     '</dl>';
   }
@@ -227,7 +227,7 @@
       '<div class="sk-app__body">' +
         '<p class="sk-app__done">承認しました。経理担当が「今回の支払を準備する」から準備できます。</p>' +
         '<p>承認待ちの支払予定は、ほかにありません。</p>' +
-        '<p class="sk-app__small">判断: 承認 (架空 太郎)</p>' +
+        '<p class="sk-app__small">判断: 承認 (田中 太郎)</p>' +
         '<div class="sk-app__box">' +
           '<p class="sk-app__small">承認した内容に誤りがあった場合は、出力前なら承認を取り消せます。取り消した承認では準備を確定・出力できません。承認の記録は残ります。</p>' +
           '<p style="margin-top:8px"><button type="button" class="sk-app__btn sk-app__btn--line" data-off>承認を取り消す</button></p>' +
