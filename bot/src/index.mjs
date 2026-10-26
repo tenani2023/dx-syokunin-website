@@ -1,7 +1,6 @@
 // LINE Webhook サーバー
 import crypto from 'node:crypto';
 import express from 'express';
-import cron from 'node-cron';
 import { middleware, messagingApi } from '@line/bot-sdk';
 import { env, keywords } from './config.mjs';
 import { generateArticle } from './generate.mjs';
@@ -397,12 +396,6 @@ app.post('/webhook', middleware({ channelSecret: env.lineSecret }), (req, res) =
     } else if (ev.type === 'postback') handlePostback(userId, ev.postback.data).catch((e) => console.error(e));
   }
 });
-
-// ---------- 定期提案(例: 毎週月曜 8:00)。管理者にだけ届く ----------
-if (env.suggestCron && env.admins.length) {
-  if (!cron.validate(env.suggestCron)) console.error('SUGGEST_CRON の形式が不正です:', env.suggestCron);
-  else cron.schedule(env.suggestCron, () => { for (const uid of env.admins) suggest(uid); }, { timezone: 'Asia/Tokyo' });
-}
 
 // 署名不正などは 401 で静かに返す(スタックトレースを出さない)
 app.use((err, _req, res, _next) => {

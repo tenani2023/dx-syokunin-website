@@ -42,8 +42,6 @@ export const env = {
   gscSiteUrl: process.env.GSC_SITE_URL || '',
   ga4PropertyId: process.env.GA4_PROPERTY_ID || '',
   sheetId: process.env.SHEET_ID || '',
-  // 定期提案(cron 形式、JST)。空なら提案しない
-  suggestCron: process.env.SUGGEST_CRON || '',
 };
 
 export const site = JSON.parse(fs.readFileSync(path.join(env.repoDir, 'site.config.json'), 'utf8'));
