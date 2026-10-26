@@ -306,6 +306,10 @@ h2.center, .intro.center { text-align: center; }
 .product-card--web .check-list .icon { color: var(--web-blue); }
 .product-card--web .cta { background: var(--web-blue); border-color: var(--web-blue); color: #fff; }
 .product-card--web .cta:hover { background: #174b9c; border-color: #174b9c; color: #fff; }
+.product-card--teal { --web-blue: #0e7c74; }
+.product-card--teal .product-card__tag { background: #e6f5f3; }
+.product-card--teal .cta:hover { background: #0b625c; border-color: #0b625c; }
+.system-web .product-card + .product-card { margin-top: 24px; }
 @media (min-width: 1001px) {
   .product-card--web { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
   .product-card--web .product-card__hero { margin: 0; border-radius: 14px; }
