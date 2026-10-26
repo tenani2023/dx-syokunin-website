@@ -52,7 +52,6 @@
     { "path": "", "changefreq": "weekly", "priority": "1.0" },
     { "path": "contact/", "changefreq": "monthly", "priority": "0.8" },
     { "path": "meishi-keihi/", "changefreq": "monthly", "priority": "0.8" },
-    { "path": "shiharai-kanri/", "changefreq": "monthly", "priority": "0.7" },
-    { "path": "gyomu-daicho/", "changefreq": "monthly", "priority": "0.7" }
+    { "path": "shiharai-kanri/", "changefreq": "monthly", "priority": "0.7" }
   ]
 }
