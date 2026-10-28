@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://dx-syokunin.jp/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://dx-syokunin.jp/contact/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dx-syokunin.jp/meishi-keihi/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dx-syokunin.jp/shiharai-kanri/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dx-syokunin.jp/column/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dx-syokunin.jp/column/category/joseikin/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://dx-syokunin.jp/</loc><lastmod>2026-10-28</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://dx-syokunin.jp/contact/</loc><lastmod>2026-10-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dx-syokunin.jp/meishi-keihi/</loc><lastmod>2026-10-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dx-syokunin.jp/shiharai-kanri/</loc><lastmod>2026-10-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://dx-syokunin.jp/column/</loc><lastmod>2026-10-28</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dx-syokunin.jp/column/category/joseikin/</loc><lastmod>2026-10-28</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dx-syokunin.jp/column/category/ai-system/</loc><lastmod>2026-10-19</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dx-syokunin.jp/column/category/line/</loc><lastmod>2026-10-17</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dx-syokunin.jp/column/category/dx/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dx-syokunin.jp/column/category/genba/</loc><lastmod>2026-10-08</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://dx-syokunin.jp/column/sekisan-software-hojokin-kensetsu.html</loc><lastmod>2026-10-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dx-syokunin.jp/column/fudosan-dx-line-ai.html</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dx-syokunin.jp/column/it-hojokin-hitori-oyakata-mitsumori.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dx-syokunin.jp/column/joseikin-ai-system-donyu-kensetsu.html</loc><lastmod>2026-10-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
