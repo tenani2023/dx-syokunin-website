@@ -7,6 +7,14 @@
     <description>助成金・IT導入補助金を使ってLINEのAIシステムを導入する方法、建設・不動産の現場のDX、見積・請求・日報の手間を減らすAI活用を、現場の言葉でまとめています。</description>
     <language>ja</language>
     <item>
+      <title>不動産FAX物件入力をAIとLINEで減らす実務確認手順</title>
+      <link>https://dx-syokunin.jp/column/fudosan-fax-input-ai-line.html</link>
+      <guid isPermaLink="true">https://dx-syokunin.jp/column/fudosan-fax-input-ai-line.html</guid>
+      <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
+      <category>建設・不動産DX</category>
+      <description>FAXで届く物件情報をポータルや資料へ打ち直す時間が重い不動産会社向けに、LINEで送ってAIが物件概要・紹介文・返信文の下書きを作る流れを解説。誤読チェック、個人情報の扱い、助成金・補助金の確認点も分かります。</description>
+    </item>
+    <item>
       <title>IT導入補助金を不動産業のAIシステム導入に使う事前確認点</title>
       <link>https://dx-syokunin.jp/column/it-hojokin-fudosan-ai.html</link>
       <guid isPermaLink="true">https://dx-syokunin.jp/column/it-hojokin-fudosan-ai.html</guid>
